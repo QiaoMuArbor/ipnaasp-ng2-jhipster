@@ -1,0 +1,208 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="row">
+    <div class="col-lg-12">
+      <ol class="breadcrumb">
+        <li>{{_policyService.policyType}}</li>
+        <li *ngIf = "_policyService._curTypeFlag" style="display: inline-block;">{{_policyService.curType}}</li>
+        <li class="active">
+          <a data-toggle="modal" data-target="#myAddPolicyModal" class="btn btn-success btn-banner-oper">新建投资策略</a>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-5">
+      <div class="row-query" >
+        <div>
+          <input type="text" class="form-control" placeholder="策略单号">
+        </div>
+        <div>
+          <input type="text" class="form-control" placeholder="策略类别">
+        </div>
+        <div>
+          <input type="text" class="form-control" placeholder="所属老师">
+        </div>
+        <div>
+          <input type="text" class="form-control" placeholder="所属团队">
+        </div>
+
+        <div>
+          <button type="button" class="form-control"><i class="fa fa-search" title="过滤"></i></button>
+        </div>
+      </div>
+      <!--<div class="alarm-list" *ngFor="let alarmInfo of alarmsInfo">-->
+      <div class="alarm-list">
+        <div class="alarm-query-item itemBorder">
+          <div class="list-item clearfix" (click)="clickStrategyList(StrategyInfo)">
+            <div class="warn-topLine">
+              <div class="pull-right warn-inline">
+                <span>
+                  <label style="background-color: #42a8ef;font-size: 16px;color: black">黄金</label>
+                  <label style="background-color: #42a8ef;font-size: 16px;color: black">多</label>
+                  <label style="background-color: #42a8ef;font-size: 16px;color: black">12分钟前</label>
+                </span>
+              </div>
+            </div>
+            <div class="item-left">
+              <div class="activeAlarm">策略单号: 11</div>
+              <div class="activeAlarm">策略类别: 11</div>
+              <div class="activeAlarm">所属老师: 111</div>
+              <div class="activeAlarm">所属团队: 111</div>
+            </div>
+            <div class="item-right" ngSwitch="待入场">
+              <template ngSwitchCase="待入场">
+                <a (click) ="enter('入场')"><i class="fa fa-fw fa-user grey" title="入场"
+                                                   data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
+                <a (click) ="exit('退场')"><i class="fa fa-share-square-o grey"  title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+              </template>
+              <template ngSwitchCase="已入场">
+                <a (click) ="enter('入场')"><i class="fa fa-fw fa-user grey" title="入场"
+                                                   data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
+                <a (click) ="exit('退场')"><i class="fa fa-share-square-o grey"  title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+              </template>
+              <template ngSwitchCase="已退场">
+                <a (click) ="enter('入场')"><i class="fa fa-fw fa-user grey" title="入场"
+                                                   data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
+                <a (click) ="exit('退场')"><i class="fa fa-share-square-o grey"  title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+              </template>
+              <template ngSwitchDefault>
+                <p style="font-size: 12px;color:red">状态？</p>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <div class="whitebg" style="min-height: 763px;">
+        <table class="qm-table">
+          <thead>
+          <th>策略单号</th>
+          <th>新建时间</th>
+          <th>入场点位</th>
+          <th>入场时间</th>
+          <th>出场点位</th>
+          <th>出场时间</th>
+          </thead>
+          <tbody>
+          <tr>
+            <td style="text-align:center ">1</td>
+            <td style="text-align:center ">1</td>
+            <td style="text-align:center ">1</td>
+            <td style="text-align:center ">1</td>
+            <td style="text-align:center ">1</td>
+            <td style="text-align:center ">1</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="escalation-wrap">
+          <p>策略理由</p>
+          <div class="escalation-list">
+            <div class="escalation-item">111</div>
+          </div>
+        </div>
+        <div class="history-wrap">
+          <p>记录</p>
+          <div class="form-group clearfix">
+            <input type="text" class="form-control" placeholder="填写记录信息(0-100)" (keyup)="curentAlarmOnKey($event)" [value]="currentRecordingInfo">
+            <button class="modal-btn-confirm pull-right" (click)="currentAlarmRecordingInfo()">记录</button>
+            <button class="modal-btn-confirm pull-right" (click)="clearCurrentAlarmRecordingInfo()">清除</button>
+          </div>
+          <!--<div class="historyList" *ngFor="let recordInfo of currentClickAlarmInfo.recording">-->
+          <div class="historyList">
+            <div class="history-item"><span style="margin-right:20px;">111</span>
+              <span>111，并记录：111</span>
+              <span class="time pull-right">1111</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="modal fade" id="myAddPolicyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+       data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">新建投资策略</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form" style="width:60%;margin: auto">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">策略类别</label>
+              <div class="col-sm-10">
+                <select name="policyType" ngModel class="form-control" style="width:35%">
+                  <option value="" selected>请选择</option>
+                  <option *ngFor="let type of policyTypesArray" [value]="type.nameEn">{{type.nameZh}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">策略方向</label>
+              <div class="col-sm-10">
+                <select name="policyDirection" ngModel class="form-control" style="width:35%">
+                  <option value="" selected>请选择</option>
+                  <option *ngFor="let type of policyDirectionArray" [value]="type.nameEn">{{type.nameZh}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">策略状态</label>
+              <div class="col-sm-10">
+                <select name="policyStatus" ngModel class="form-control" style="width:35%">
+                  <option value="" selected>请选择</option>
+                  <option *ngFor="let type of policyStatusArray" [value]="type.nameEn">{{type.nameZh}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">入场点位</label>
+              <div class="col-sm-10">
+                <input type="text" (keyup)="policyEntryPointOnKey($event)" class="form-control" placeholder="请输入当前策略类别的入场点">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">出场点位</label>
+              <div class="col-sm-10">
+                <input type="text" (keyup)="policyExitPointOnKey($event)" class="form-control" placeholder="请输入当前策略类别的出场点">
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:35px;">
+                  <button type="submit" class="modal-btn-confirm" (click)="clickCreatePolicyBtn()">创建</button>
+                  <button class="modal-btn-confirm" data-dismiss="modal">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="modal fade" id="enterPolicyInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+       data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">记录信息 | {{clickButtonType}}</h4>
+        </div>
+        <div class="modal-body">
+
+          <label style="margin: 10px 10px;">接收人员: </label>
+          <input type="text" style="height:30px;width:250px;margin: 10px 10px;" placeholder="填写接收人" (keyup)="onReciveMemberKey($event)" [value]="reciveMember">
+          <input type="text" class="form-control" style="padding-top: 15px;" placeholder="填写记录信息(0-100)" (keyup)="onKey($event)" [value]="recordingInfo">
+          <button class="modal-btn-confirm pull-right" (click)="clearRecordingInfo()">清除</button>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn-confirm" data-dismiss="modal" (click)="confirm(clickButtonType)">确定</button>
+          <button class="modal-btn-confirm" data-dismiss="modal" >关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,4 @@
+{
+    "proxy": "http://proxysh.zte.com.cn/",
+    "rejectUnauthorized": false
+}

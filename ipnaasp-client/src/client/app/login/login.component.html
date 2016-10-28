@@ -1,0 +1,38 @@
+<div class="login">
+  <img class="login-logo" src="../../app/images/login-logo.svg" alt="OpenPalette"/>
+  <div class="item-line">
+    <div class="alert alert-danger" style="text-align: center;vertical-align: middle;width: 50%;margin: auto"  *ngIf="vm.authenticationError">
+      <strong>Failed to sign in!</strong> Please check your credentials and try again.
+    </div>
+  </div>
+  <form class="login-form" #loginForm="ngForm" (ngSubmit)="login()">
+    <div class="item-line">
+      <input type="text" [(ngModel)]="vm.username" id="username" minlength="3" required name="username" #username="ngModel" placeholder="用户名"/>
+      <i class="fa fa-check-circle form-ic-success" *ngIf="username.valid"></i>
+      <label *ngIf="((loginForm.submitted||username.dirty||!username.untouched)&&!username.valid)" class="form-error">
+        <i class="fa fa-times-circle form-ic-error" aria-hidden="true"></i>
+        <span *ngIf="username.errors.minlength">用户名不少于三个字符</span>
+        <span *ngIf="username.errors.required">用户名不能为空</span>
+      </label>
+    </div>
+    <div class="item-line">
+      <input type="password" [(ngModel)]="vm.password" required name="password" #password="ngModel" placeholder="密码"/>
+      <i class="fa fa-check-circle form-ic-success" *ngIf="password.valid"></i>
+      <label *ngIf="((loginForm.submitted||password.dirty||!password.untouched)&&!password.valid)" class="form-error">
+        <i class="fa fa-times-circle form-ic-error" aria-hidden="true"></i>
+        <span *ngIf="password.errors.required">密码不能为空</span>
+      </label>
+    </div>
+    <div class="item-line">
+      <label for="rememberMe">
+        <input type="checkbox" id="rememberMe" ng-model="vm.rememberMe" checked>
+        <span>Remember me</span>
+      </label>
+    </div>
+    <div class="btn-area">
+      <button type="submit" class="modal-btn-confirm login-btn" *ngIf="!logining">登&nbsp;&nbsp;&nbsp;录</button>
+      <button type="submit" class="modal-btn-confirm login-btn" *ngIf="logining" [disabled]="logining">登&nbsp;&nbsp;&nbsp;录&nbsp;&nbsp;&nbsp;中</button>
+    </div>
+  </form>
+  <div class="register">没有帐号？立即<a href="javascript:;" (click)="gotoRegist()">注册</a>成为OpenPalette用户</div>
+</div>

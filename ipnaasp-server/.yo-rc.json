@@ -1,0 +1,26 @@
+{
+  "generator-jhipster": {
+    "jhipsterVersion": "3.9.1",
+    "baseName": "ipnaasp",
+    "packageName": "com.qm.ipnaasp",
+    "packageFolder": "com/qm/ipnaasp",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "buildTool": "maven",
+    "enableSocialSignIn": false,
+    "jwtSecretKey": "1bdcd2aa3bc9be014345a59bd047884b32b0dffe",
+    "enableTranslation": false,
+    "serviceDiscoveryType": false,
+    "useSass": false,
+    "applicationType": "monolith",
+    "jhiPrefix": "jhi"
+  }
+}

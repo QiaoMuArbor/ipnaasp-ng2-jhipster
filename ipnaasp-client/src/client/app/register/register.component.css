@@ -1,0 +1,36 @@
+.cursorNotAllowed {
+  cursor: not-allowed
+}
+
+div.login {
+  width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 6%;
+}
+img.login-logo{
+  width: 300px;
+}
+.login h1{
+  font-size: 48px;
+  color: #1898EB;
+  margin-bottom: 30px;
+}
+.login-form i.form-ic-success,
+.login-form label.form-error{
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 6px;
+}
+a.cancel-btn,
+button.login-btn{
+  width: 125px;
+  height: 32px;
+  margin-right: 0;
+  font-size: 16px;
+  margin-left: 4px;
+}
+a.cancel-btn{
+  display: inline-block;
+  margin-left: 50px;
+}

@@ -1,0 +1,34 @@
+div.login {
+  width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10%;
+}
+img.login-logo{
+  width: 264px;
+  margin-bottom: 10px;
+}
+.login h1{
+  font-size: 48px;
+  color: #1898EB;
+  margin-bottom: 30px;
+}
+.login-form i.form-ic-success,
+.login-form label.form-error{
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 6px;
+}
+button.login-btn{
+  width: 300px;
+  height: 32px;
+  margin-right: 0;
+  font-size: 16px;
+  margin-top: 10px;
+}
+div.register{
+  margin-top: 10px;
+}
+div.register a{
+  font-size: 16px;
+}

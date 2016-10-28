@@ -1,0 +1,81 @@
+.header {
+    height: 50px;
+    background-color: #f7f8fd;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #ddd;
+}
+
+.header .content {
+    display: block;
+}
+
+.logo,
+.projects,
+.cur-user {
+    float: right;
+    width: 38px;
+    color: #666;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 50px;
+    height: 50px;
+}
+
+.logo{
+    float: left;
+    width: 200px;
+    background-image: url('../../app/images/watchdog_logo.png');
+    background-position-y: center;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #ddd;
+    background-size: 80%;
+}
+.projects a:hover{
+  border-bottom: 3px solid red;
+}
+.projects a.active {
+  border-bottom: 3px solid blue;
+}
+.projects a.disabled {
+  color: gray;
+  border: medium solid gray;
+}
+.projects,
+.cur-user {
+    width: initial;
+    margin-right: 20px;
+}
+
+.projects {
+    margin-left: 20px;
+    float: left;
+}
+
+.cur-user {
+  margin-right: 60px;
+  /*float: left;*/
+}
+
+.projects a,
+.cur-user a {
+    color: #666;
+    font-size: 15px;
+}
+
+.projects ul.dropdown-menu,
+.cur-user ul.dropdown-menu {
+    margin-top: 0px;
+}
+
+.cur-user ul.dropdown-menu {
+    margin-left: -80px;
+}
+
+.projects:hover ul.dropdown-menu,
+.cur-user:hover ul.dropdown-menu {
+    display: block;
+}

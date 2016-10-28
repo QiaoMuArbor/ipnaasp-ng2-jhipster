@@ -1,0 +1,113 @@
+.divider {
+  height: 1px;
+  overflow: hidden;
+  background-color: #1B2633;
+}
+a.active {
+  border:1px solid #334874;
+}
+.sideBar > .project,
+.sideBar > .menu{
+  position: fixed;
+  width: 160px;
+  background-color: #334874;
+  color: #8daee4;
+}
+
+.sideBar > .project {
+  top: 50px;
+  height: 120px;
+  background-color: #334874;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
+  text-align: center;
+}
+
+.sideBar > .menu {
+  top: 160px;
+  bottom: 0;
+  overflow: auto;
+}
+
+.sideBar > .project .icon {
+  margin: 20px 0 0 0;
+  background-color: #70b2ff;
+  color: #555;
+  line-height: 64px;
+  width: 64px;
+  height: 64px;
+  text-align: center;
+  display: inline-block;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.sideBar > .project .name {
+  font-size: 18px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+ul.menu {
+  padding: 0;
+}
+ul.menu li a {
+  color: #8daee4;
+  text-decoration:none;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 10px;
+  padding-left: 20px;
+  line-height: 35px;
+  height: 35px;
+  display: block;
+  width: 100%;
+  font-size: 14px;
+}
+
+ul.menu li a:hover {
+  background-color: #3b558c;
+  cursor: pointer;
+}
+
+ul.menu li.active {
+  background-color: #3b558c;
+}
+
+ul.menu li a.active {
+  border-left: 1px solid #3890ff;
+}
+.alarm_span  {
+  /*float: right;*/
+  border-radius:4px;
+  padding: 0px 10px;
+  margin-right: 2px;
+  background-color:#18232F;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* 这是针对缺省样式 (必须的) */
+
+::-webkit-scrollbar-track {
+  background-color: rgba(1, 1, 1, 0.3);
+}
+/* 滚动条的滑轨背景颜色 */
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(200, 200, 200, 0.3);
+}
+/* 滑块颜色 */
+
+::-webkit-scrollbar-button {
+  background-color: rgba(1, 1, 1, 0.3);
+}
+/* 滑轨两头的监听按钮颜色 */
+
+::-webkit-scrollbar-corner {
+  /* background-color: #da0d0d; */
+}
+/* 横向滚动条和纵向滚动条相交处尖角的颜色 */

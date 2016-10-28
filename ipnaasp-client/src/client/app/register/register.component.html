@@ -1,0 +1,64 @@
+<div class="login">
+  <img class="login-logo" src="../../app/images/login-logo.svg" alt="OpenPalette"/>
+  <div class="item-line">
+    <div class="alert alert-success" style="text-align: center;vertical-align: middle;width: 50%;margin: auto"  *ngIf="vm.success">
+      <strong>注册成功!</strong> 请登录您的邮箱激活.
+    </div>
+    <div class="alert alert-success" style="text-align: center;vertical-align: middle;width: 50%;margin: auto"  *ngIf="vm.error">
+      <strong>注册失败!</strong> 请过会再注册.
+    </div>
+    <div class="alert alert-success" style="text-align: center;vertical-align: middle;width: 50%;margin: auto"  *ngIf="vm.errorUserExists">
+      <strong>用户名已存在!</strong> 请选择其他的用户名.
+    </div>
+    <div class="alert alert-success" style="text-align: center;vertical-align: middle;width: 50%;margin: auto"  *ngIf="vm.errorEmailExists">
+      <strong>电子邮箱已存在!</strong> 请选择其他的电子邮箱.
+    </div>
+    <div class="alert alert-success" style="text-align: center;vertical-align: middle;width: 50%;margin: auto"  *ngIf="vm.doNotMatch">
+      <strong>密码不一致!</strong> 两次输入的密码不相同，请重新输入.
+    </div>
+  </div>
+  <form class="login-form" #loginForm="ngForm" (ngSubmit)="register()">
+    <div class="item-line">
+      <input type="text" [(ngModel)]="vm.registerAccount.login" minlength="1" maxlength="50" id="login" required name="login" #login="ngModel" placeholder="用户名"/>
+      <i class="fa fa-check-circle form-ic-success" *ngIf="login.valid"></i>
+      <label *ngIf="((loginForm.submitted||login.dirty||!login.untouched)&&!login.valid)" class="form-error">
+        <i class="fa fa-times-circle form-ic-error" aria-hidden="true"></i>
+        <span *ngIf="login.errors.minlength">用户名长度为1-50个字符</span>
+        <span *ngIf="login.errors.required">用户名不能为空</span>
+      </label>
+    </div>
+    <div class="item-line">
+      <input type="email" [(ngModel)]="vm.registerAccount.email" minlength="5" maxlength="100" required name="email" #email="ngModel" pattern="^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]*[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$" placeholder="电子邮箱"/>
+      <i class="fa fa-check-circle form-ic-success" *ngIf="email.dirty&&email.valid"></i>
+      <label *ngIf="((loginForm.submitted||email.dirty||!email.untouched)&&!email.valid)" class="form-error">
+        <i class="fa fa-times-circle form-ic-error" aria-hidden="true"></i>
+        <span *ngIf="email.errors.pattern">电子邮箱格式错误</span>
+        <span *ngIf="email.errors.minlength">用户名长度为5-100个字符</span>
+        <span *ngIf="email.errors.required">电子邮箱不能为空</span>
+      </label>
+    </div>
+    <div class="item-line">
+      <input type="password" [(ngModel)]="vm.registerAccount.password" minlength="4" maxlength="50" required name="password" #password="ngModel" placeholder="密码"/>
+      <i class="fa fa-check-circle form-ic-success" *ngIf="password.valid"></i>
+      <label *ngIf="((loginForm.submitted||password.dirty||!password.untouched)&&!password.valid)" class="form-error">
+        <i class="fa fa-times-circle form-ic-error" aria-hidden="true"></i>
+        <span *ngIf="password.errors.minlength">密码长度为4-50个字符</span>
+        <span *ngIf="password.errors.required">密码不能为空</span>
+      </label>
+    </div>
+    <div class="item-line">
+      <input type="password" [(ngModel)]="vm.confirmPassword" minlength="4" maxlength="50" required name="confirmPassword" #confirmPassword="ngModel" placeholder="确认密码"/>
+      <i class="fa fa-check-circle form-ic-success" *ngIf="confirmPassword.valid"></i>
+      <label *ngIf="((loginForm.submitted||confirmPassword.dirty||!confirmPassword.untouched)&&!confirmPassword.valid)" class="form-error">
+        <i class="fa fa-times-circle form-ic-error" aria-hidden="true"></i>
+        <span *ngIf="confirmPassword.errors.minlength">密码长度为4-50个字符</span>
+        <span *ngIf="confirmPassword.errors.required">密码不能为空</span>
+      </label>
+    </div>
+    <div class="btn-area">
+      <button type="submit" class="modal-btn-confirm login-btn" [class.cursorNotAllowed] = "!loginForm.valid" [disabled]="!loginForm.valid"  *ngIf="!registing">注&nbsp;&nbsp;&nbsp;册</button>
+      <button type="submit" class="modal-btn-confirm login-btn" *ngIf="logining" [disabled]="registing">注&nbsp;&nbsp;&nbsp;册&nbsp;&nbsp;&nbsp;中</button>
+      <a href="javascript:;" (click)="gotoLogin()" class="cancel-btn" *ngIf="!registing">已&nbsp;有&nbsp;账&nbsp;号</a>
+    </div>
+  </form>
+</div>
