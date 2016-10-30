@@ -136,6 +136,3 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-/.idea/
-/node_modules/
-/target/

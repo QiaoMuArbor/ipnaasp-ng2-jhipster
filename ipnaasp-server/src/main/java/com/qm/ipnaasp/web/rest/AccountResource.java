@@ -117,11 +117,9 @@ public class AccountResource {
     @GetMapping("/account")
     @Timed
     public ResponseEntity<UserDTO> getAccount() {
-        ResponseEntity<UserDTO> u = Optional.ofNullable(userService.getUserWithAuthorities())
+        return Optional.ofNullable(userService.getUserWithAuthorities())
             .map(user -> new ResponseEntity<>(new UserDTO(user), HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
-        System.out.println(u);
-        return  u;
     }
 
     /**
