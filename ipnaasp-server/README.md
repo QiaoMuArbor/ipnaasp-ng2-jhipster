@@ -57,6 +57,11 @@ Unit tests are run by [Karma][] and written with [Jasmine][]. They're located in
     gulp test
 
 
+### Other tests
+
+Performance tests are run by [Gatling][] and written in Scala. They're located in `src/test/gatling` and can be run with:
+
+    ./mvnw gatling:execute
 
 For more information, refer to the [Running tests page][].
 
@@ -95,7 +100,7 @@ To set up a CI environment, consult the [Setting up Continuous Integration][] pa
 [Running tests page]: https://jhipster.github.io/documentation-archive/v3.9.1/running-tests/
 [Setting up Continuous Integration]: https://jhipster.github.io/documentation-archive/v3.9.1/setting-up-ci/
 
-
+[Gatling]: http://gatling.io/
 [Node.js]: https://nodejs.org/
 [Bower]: http://bower.io/
 [Gulp]: http://gulpjs.com/

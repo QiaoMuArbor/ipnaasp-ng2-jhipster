@@ -8,7 +8,7 @@ describe('Directive Tests', function () {
     beforeEach(inject(function($compile, $rootScope, $injector) {
         $httpBackend = $injector.get('$httpBackend');
 
-        var html = '<password-strength-bar password-to-check="password"></password-strength-bar>';
+        var html = '<password-strength-bar [password-to-check]="password"></password-strength-bar>';
         scope = $rootScope.$new();
         elm = angular.element(html);
         $compile(elm)(scope);

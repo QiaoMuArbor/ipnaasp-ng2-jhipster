@@ -1,4 +1,4 @@
-// Generated on 2016-10-30 using generator-jhipster 3.9.1
+// Generated on 2016-10-31 using generator-jhipster 3.9.1
 'use strict';
 
 var gulp = require('gulp'),
@@ -15,7 +15,10 @@ var gulp = require('gulp'),
     KarmaServer = require('karma').Server,
     plumber = require('gulp-plumber'),
     changed = require('gulp-changed'),
-    gulpIf = require('gulp-if');
+    gulpIf = require('gulp-if'),
+    ts = require('gulp-typescript'),
+    sourcemaps = require('gulp-sourcemaps'),
+    tslint = require('gulp-tslint');
 
 var handleErrors = require('./gulp/handle-errors'),
     serve = require('./gulp/serve'),
@@ -24,13 +27,16 @@ var handleErrors = require('./gulp/handle-errors'),
     inject = require('./gulp/inject'),
     build = require('./gulp/build');
 
+var tsProject = ts.createProject('tsconfig.json');
 var config = require('./gulp/config');
 
 gulp.task('clean', function () {
     return del([config.dist], { dot: true });
 });
 
-gulp.task('copy', ['copy:fonts', 'copy:common']);
+gulp.task('copy', ['copy:fonts', 'copy:html', 'copy:common', 'copy:deps']);
+
+gulp.task('copy:html', copy.html);
 
 gulp.task('copy:fonts', copy.fonts);
 
@@ -38,7 +44,15 @@ gulp.task('copy:common', copy.common);
 
 gulp.task('copy:swagger', copy.swagger);
 
-gulp.task('copy:images', copy.images);
+//copy npm dependencies to vendor folder
+gulp.task('copy:deps', copy.deps);
+
+gulp.task('copy:temp', function () {
+    return gulp.src([config.app + '/**/*', '!' + config.app + '/**/*.ts', '!' + config.sassSrc])
+        .pipe(plumber({errorHandler: handleErrors}))
+        .pipe(changed(config.dist))
+        .pipe(gulp.dest(config.dist));
+});
 
 gulp.task('images', function () {
     return gulp.src(config.app + 'content/images/**')
@@ -61,13 +75,18 @@ gulp.task('styles', [], function () {
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('inject', function() {
-    runSequence('inject:dep', 'inject:app');
+gulp.task('tscompile', function(cb){
+    return gulp.src([config.app + 'app/**/*.ts'])
+        .pipe(sourcemaps.init())
+        .pipe(tsProject())
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(config.dist  + 'app'))
+        .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('inject:dep', ['inject:test', 'inject:vendor']);
+gulp.task('inject', ['tscompile','inject:dep']);
 
-gulp.task('inject:app', inject.app);
+gulp.task('inject:dep', ['inject:test', 'inject:vendor']);
 
 gulp.task('inject:vendor', inject.vendor);
 
@@ -75,7 +94,7 @@ gulp.task('inject:test', inject.test);
 
 gulp.task('inject:troubleshoot', inject.troubleshoot);
 
-gulp.task('assets:prod', ['images', 'styles', 'html', 'copy:swagger', 'copy:images'], build);
+gulp.task('assets:prod', ['images', 'styles', 'html', 'copy:swagger'], build);
 
 gulp.task('html', function () {
     return gulp.src(config.app + 'app/**/*.html')
@@ -90,7 +109,7 @@ gulp.task('html', function () {
 
 gulp.task('ngconstant:dev', function () {
     return ngConstant({
-        name: 'ipnaaspApp',
+        name: 'ipnaaspApp.common',
         constants: {
             VERSION: util.parseVersion(),
             DEBUG_INFO_ENABLED: true
@@ -98,13 +117,13 @@ gulp.task('ngconstant:dev', function () {
         template: config.constantTemplate,
         stream: true
     })
-    .pipe(rename('app.constants.js'))
+    .pipe(rename('app.constants.ts'))
     .pipe(gulp.dest(config.app + 'app/'));
 });
 
 gulp.task('ngconstant:prod', function () {
     return ngConstant({
-        name: 'ipnaaspApp',
+        name: 'ipnaaspApp.common',
         constants: {
             VERSION: util.parseVersion(),
             DEBUG_INFO_ENABLED: false
@@ -112,7 +131,7 @@ gulp.task('ngconstant:prod', function () {
         template: config.constantTemplate,
         stream: true
     })
-    .pipe(rename('app.constants.js'))
+    .pipe(rename('app.constants.ts'))
     .pipe(gulp.dest(config.app + 'app/'));
 });
 
@@ -136,6 +155,13 @@ gulp.task('eslint:fix', function () {
         .pipe(gulpIf(util.isLintFixed, gulp.dest(config.app + 'app')));
 });
 
+// check app for any tslint errors
+gulp.task('tslint', function() {
+    return gulp.src('app/**/*.ts')
+        .pipe(tslint())
+        .pipe(tslint.report('verbose'));
+});
+
 gulp.task('test', ['inject:test', 'ngconstant:dev'], function (done) {
     new KarmaServer({
         configFile: __dirname + '/' + config.test + 'karma.conf.js',
@@ -149,18 +175,20 @@ gulp.task('watch', function () {
     gulp.watch(['gulpfile.js', 'pom.xml'], ['ngconstant:dev']);
     gulp.watch(config.app + 'content/css/**/*.css', ['styles']);
     gulp.watch(config.app + 'content/images/**', ['images']);
-    gulp.watch(config.app + 'app/**/*.js', ['inject:app']);
-    gulp.watch([config.app + '*.html', config.app + 'app/**', config.app + 'i18n/**']).on('change', browserSync.reload);
+    gulp.watch(config.app + 'app/**/*.ts', ['tscompile']);
+    gulp.watch(config.app + 'app/**/*.html', ['copy:html']);
+    gulp.watch(config.app + 'i18n/**/*.json', ['copy:i18n']);
+    gulp.watch([config.dist + '*.html', config.dist + 'app/**', config.dist + 'i18n/**']).on('change', browserSync.reload);
 });
 
-gulp.task('install', function () {
-    runSequence(['inject:dep', 'ngconstant:dev'], 'inject:app', 'inject:troubleshoot');
+gulp.task('install', ['clean'], function () {
+    runSequence('copy:temp', ['inject:dep', 'ngconstant:dev', 'copy:deps'], 'tscompile', 'inject:troubleshoot');
 });
 
 gulp.task('serve', ['install'], serve);
 
 gulp.task('build', ['clean'], function (cb) {
-    runSequence(['copy', 'inject:vendor', 'ngconstant:prod'], 'inject:app', 'inject:troubleshoot', 'assets:prod', cb);
+    runSequence(['copy', 'inject:vendor', 'ngconstant:prod'], 'tscompile', 'inject:troubleshoot', 'assets:prod', cb);
 });
 
 gulp.task('default', ['serve']);

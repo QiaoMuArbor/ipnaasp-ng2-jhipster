@@ -1,30 +1,30 @@
 <div>
-    <h2>Health Checks</h2>
+    <h2 translate="health.title">Health Checks</h2>
 
     <p>
-        <button type="button" class="btn btn-primary" ng-click="vm.refresh()"><span class="glyphicon glyphicon-refresh"></span>&nbsp;<span>Refresh</span>
+        <button type="button" class="btn btn-primary" (click)="refresh()"><span class="glyphicon glyphicon-refresh"></span>&nbsp;<span translate="health.refresh.button">Refresh</span>
         </button>
     </p>
 
     <table id="healthCheck" class="table table-striped">
         <thead>
             <tr>
-                <th class="col-md-7">Service Name</th>
-                <th class="col-md-2 text-center">Status</th>
-                <th class="col-md-2 text-center">Details</th>
-
+                <th class="col-md-7" translate="health.table.service">Service Name</th>
+                <th class="col-md-2 text-center" translate="health.table.status">Status</th>
+                <th class="col-md-2 text-center" translate="health.details.details">Details</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="health in vm.healthData">
-                <td><span class="text-capitalize">{{ vm.baseName(health.name) }}</span> {{vm.subSystemName(health.name)}}</td>
+            <tr *ngFor="let health of healthData">
+                <!-- TODO: Add translation for service name -->
+                <td><span class="text-capitalize">{{ baseName(health.name) }}</span> {{subSystemName(health.name)}}</td>
                 <td class="text-center">
-                    <span class="label" ng-class="vm.getLabelClass(health.status)">
-                        {{ health.status }}
+                    <span class="label" [ngClass]="getLabelClass(health.status)" translate="{{'health.status.' + health.status}}">
+                        {{health.status}}
                     </span>
                 </td>
                 <td class="text-center">
-                    <a class="hand" ng-click="vm.showHealth(health)" ng-show="health.details || health.error">
+                    <a class="hand" (click)="showHealth(health)" *ngIf="health.details || health.error">
                         <i class="glyphicon glyphicon-eye-open"></i>
                     </a>
                 </td>

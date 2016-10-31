@@ -38,18 +38,11 @@ spring:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: false
             hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
-
     mail:
-        host: smtp.mail.yahoo.com
-        port: 587
-        username: ipnaasp@yahoo.com
-        password: Clp900217
-        protocol: smtp
-        tls: true
-        properties.mail.smtp:
-            auth: true
-            starttls.enable: true
-            ssl.trust: smtp.mail.yahoo.com
+        host: localhost
+        port: 25
+        username:
+        password:
     thymeleaf:
         cache: true
 
@@ -77,11 +70,11 @@ jhipster:
     security:
         authentication:
             jwt:
-                secret: 1bdcd2aa3bc9be014345a59bd047884b32b0dffe
+                secret: 4b913a665b79854b13399c98d5b7beceae506765
                 # Token is valid 24 hours
                 tokenValidityInSeconds: 86400
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: ipnaasp@yahoo.com
+        from: ipnaasp@localhost
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         spark:

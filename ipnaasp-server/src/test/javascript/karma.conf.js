@@ -23,43 +23,20 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             // bower:js
-            'src/main/webapp/bower_components/jquery/dist/jquery.js',
-            'src/main/webapp/bower_components/json3/lib/json3.js',
-            'src/main/webapp/bower_components/messageformat/messageformat.js',
-            'src/main/webapp/bower_components/esutils/lib/utils.js',
-            'src/main/webapp/bower_components/isarray/index.js',
-            'src/main/webapp/bower_components/lodash/lodash.js',
-            'src/main/webapp/bower_components/marked/lib/marked.js',
-            'src/main/webapp/bower_components/get-caller-file/index.js',
-            'src/main/webapp/bower_components/graceful-fs/graceful-fs.js',
-            'src/main/webapp/bower_components/is-utf8/is-utf8.js',
-            'src/main/webapp/bower_components/hosted-git-info/index.js',
-            'src/main/webapp/bower_components/semver/semver.js',
-            'src/main/webapp/bower_components/require-directory/index.js',
-            'src/main/webapp/bower_components/require-main-filename/index.js',
-            'src/main/webapp/bower_components/set-blocking/index.js',
-            'src/main/webapp/bower_components/which-module/index.js',
-            'src/main/webapp/bower_components/window-size/index.js',
-            'src/main/webapp/bower_components/y18n/index.js',
             'src/main/webapp/bower_components/angular/angular.js',
             'src/main/webapp/bower_components/angular-aria/angular-aria.js',
             'src/main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'src/main/webapp/bower_components/angular-cache-buster/angular-cache-buster.js',
             'src/main/webapp/bower_components/angular-cookies/angular-cookies.js',
-            'src/main/webapp/bower_components/ngstorage/ngStorage.js',
             'src/main/webapp/bower_components/angular-loading-bar/build/loading-bar.js',
             'src/main/webapp/bower_components/angular-resource/angular-resource.js',
             'src/main/webapp/bower_components/angular-sanitize/angular-sanitize.js',
-            'src/main/webapp/bower_components/angular-ui-router/release/angular-ui-router.js',
-            'src/main/webapp/bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js',
-            'src/main/webapp/bower_components/doctrine/lib/doctrine.js',
-            'src/main/webapp/bower_components/cliui/index.js',
-            'src/main/webapp/bower_components/normalize-package-data/lib/normalize.js',
-            'src/main/webapp/bower_components/yargs-parser/index.js',
+            'src/main/webapp/bower_components/jquery/dist/jquery.js',
+            'src/main/webapp/bower_components/json3/lib/json3.js',
+            'src/main/webapp/bower_components/messageformat/messageformat.js',
             'src/main/webapp/bower_components/ng-file-upload/ng-file-upload.js',
             'src/main/webapp/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
             'src/main/webapp/bower_components/angular-mocks/angular-mocks.js',
-            'src/main/webapp/bower_components/yargs/index.js',
             // endbower
             'src/main/webapp/app/app.module.js',
             'src/main/webapp/app/app.state.js',
@@ -81,7 +58,7 @@ module.exports = function (config) {
         reporters: ['dots', 'junit', 'coverage', 'progress'],
 
         junitReporter: {
-            outputFile: '../target/test-results/karma/TESTS-results.xml'
+            outputFile: 'target/test-results/karma/TESTS-results.xml'
         },
 
         coverageReporter: {
