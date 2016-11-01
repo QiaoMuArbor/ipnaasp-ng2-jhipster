@@ -1,0 +1,105 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "team",
+            "otherEntityName": "team",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "recording",
+            "otherEntityName": "recording",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "policy"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "PolicyType",
+            "fieldValues": "gold,silver",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "direction",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "PolicyStatus",
+            "fieldValues": "waitPolicy,enterPolicy,exitPolicy",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createTime",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "entryTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "exitTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "entryPoint",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "exitPoint",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "reason",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "push",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "realEntryPoint",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "realExitPoint",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20161101153109",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "policy",
+    "pagination": "no"
+}

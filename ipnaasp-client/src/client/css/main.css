@@ -397,50 +397,9 @@ textarea::-webkit-input-placeholder {
   cursor: pointer;
 }
 
-.list-header {
-  font-family: "Microsoft YaHei";
-  background: #f0f2f5;
-  color: #333;
-  margin-top: 18px;
-  font-size: 14px;
-  width: 100%;
-  line-height: 35px;
-  height: 35px;
-  margin-right: 0px;
-  margin-left: 0px;
-}
-
-.list-item {
-  margin-top: 11px;
-  height: 80px;
-  line-height: 80px;
-  width: 100%;
-  border: 1px solid #eee;
-  margin-right: 0px;
-  margin-left: 0px;
-}
 
 .text-center {
   text-align: center;
-}
-
-.list-item .icon {
-  background-color: #E3F2FD;
-  color: #555;
-  line-height: 46px;
-  width: 46px;
-  height: 46px;
-  text-align: center;
-  display: inline-block;
-
-  margin: 0 5px;
-}
-
-.list-item .summary {
-  display: block;
-  line-height: 1em;
-  margin-top: -25px;
-  color: #999;
 }
 
 /*zd_form.css*/
