@@ -10,6 +10,7 @@ export * from './auth/auth.service';
 export * from './auth/principal.service';
 export * from './auth/has-any-authority.directive';
 export * from './auth/has-authority.directive';
+export * from './tracker/tracker.service';
 export * from './login/login.component';
 export * from './login/login.service';
 export * from './login/login-modal.service';

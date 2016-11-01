@@ -23,7 +23,7 @@ import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
 import { NotificationInterceptor } from './blocks/interceptor/notification.interceptor';
 
-import { JhiLoginModalComponent } from "./shared";
+import { JhiLoginModalComponent, JhiTrackerService } from "./shared";
 
 angular
     .module('ipnaaspApp.app', [
@@ -55,6 +55,7 @@ angular
     .factory('ErrorHandlerInterceptor', ErrorHandlerInterceptor)
     .factory('NotificationInterceptor', NotificationInterceptor)
     .factory('StateHandler',StateHandler)
+    .factory('TrackerService', upgradeAdapter.downgradeNg2Provider(JhiTrackerService))
     .directive('pageRibbon',  <angular.IDirectiveFactory> upgradeAdapter.downgradeNg2Component(PageRibbonComponent))
     .factory('NgbModal', upgradeAdapter.downgradeNg2Provider(NgbModal))
     .run(run);

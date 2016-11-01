@@ -9,9 +9,11 @@ import {AuthHttp} from '../http/index';
 export class AccountService  {
     constructor(public authHttp:AuthHttp) { }
 
-    get(): Observable<any> {
-      return this.authHttp.get(MockCfg.baseUrl+MockCfg.accountUrl );
-    }
+  get(): Observable<any> {
+    let myHeader = new Headers();
+    myHeader.append('Content-Type', 'application/json');
+    return this.authHttp.get('api/account', { headers: myHeader }).map((res: Response) => res.json());
+  }
 
     save(account: any): Observable<Response> {
         return this.authHttp.post(MockCfg.baseUrl+MockCfg.accountUrl, account);

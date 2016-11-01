@@ -19,17 +19,16 @@
   function module() {}
   </script>
 
-
   <!-- shims:js -->
   <!-- endinject -->
 
-  <% if (ENV === 'dev') { %>
+  <% if (BUILD_TYPE === 'dev') { %>
   <script src="<%= APP_BASE %>app/system-config.js"></script>
   <% } %>
 
   <!-- libs:js -->
   <!-- endinject -->
-  <% if (ENV === 'dev') { %>
+  <% if (BUILD_TYPE === 'dev') { %>
   <script>
     System.config(<%= JSON.stringify(SYSTEM_CONFIG, null, 2) %>)
   </script>
@@ -37,12 +36,12 @@
   <!-- inject:js -->
   <!-- endinject -->
 
-  <% if (ENV === 'dev') { %>
+  <% if (BUILD_TYPE === 'dev') { %>
   <script>
   System.import('<%= BOOTSTRAP_MODULE %>')
     .catch(function (e) {
-      console.error(e,
-        'Report this error at https://github.com/mgechev/angular2-seed/issues');
+      console.error(e.stack || e,
+        'Not expecting this error? Report it at https://github.com/mgechev/angular2-seed/issues');
     });
   </script>
   <% } %>

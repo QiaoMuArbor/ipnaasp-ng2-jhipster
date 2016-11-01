@@ -53,6 +53,10 @@ public class JWTFilter extends GenericFilterBean {
             String jwt = bearerToken.substring(7, bearerToken.length());
             return jwt;
         }
+        String jwt = request.getParameter(JWTConfigurer.AUTHORIZATION_TOKEN);
+        if (StringUtils.hasText(jwt)) {
+            return jwt;
+        }
         return null;
     }
 }

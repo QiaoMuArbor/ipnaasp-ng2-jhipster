@@ -13,7 +13,7 @@ import { registerComponent } from './register/index';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/home',
     pathMatch:'full'
   },
   {
@@ -27,29 +27,29 @@ export const routes: Routes = [
   {
     path: 'register',
     component: registerComponent
+  },
+  {
+    path: 'policy',
+    component: PolicyComponent
+  },
+  {
+    path: 'socialCircle',
+    component: SocialCircleComponent
+  },
+  {
+    path: 'analysis',
+    component: AnalysisComponent
+  },
+  {
+    path: 'information',
+    component: InformationComponent
+  },
+  {
+    path: 'platformMarket',
+    component: PlatformMarketComponent
+  },
+  {
+    path: 'more',
+    component: MoreComponent
   }
-  // {
-  //   path: 'policy',
-  //   component: PolicyComponent
-  // },
-  // {
-  //   path: 'socialCircle',
-  //   component: SocialCircleComponent
-  // },
-  // {
-  //   path: 'analysis',
-  //   component: AnalysisComponent
-  // },
-  // {
-  //   path: 'information',
-  //   component: InformationComponent
-  // },
-  // {
-  //   path: 'platformMarket',
-  //   component: PlatformMarketComponent
-  // },
-  // {
-  //   path: 'more',
-  //   component: MoreComponent
-  // }
 ];
