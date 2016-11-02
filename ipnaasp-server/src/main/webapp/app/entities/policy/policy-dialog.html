@@ -1,0 +1,160 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myPolicyLabel">Create or edit a Policy</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.policy.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.policy.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_policyType">Policy Type</label>
+            <select class="form-control" name="policyType" ng-model="vm.policy.policyType" id="field_policyType" required>
+                <option value="waitPolicy">waitPolicy</option>
+                <option value="enterPolicy">enterPolicy</option>
+                <option value="exitPolicy">exitPolicy</option>
+            </select>
+            <div ng-show="editForm.policyType.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.policyType.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_createTime">Create Time</label>
+                <div class="input-group">
+                    <input id="field_createTime" type="text" class="form-control" name="createTime" datetime-picker="{{dateformat}}" ng-model="vm.policy.createTime" is-open="vm.datePickerOpenStatus.createTime"
+                    required  />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.createTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.createTime.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.createTime.$error.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_entryTime">Entry Time</label>
+                <div class="input-group">
+                    <input id="field_entryTime" type="text" class="form-control" name="entryTime" datetime-picker="{{dateformat}}" ng-model="vm.policy.entryTime" is-open="vm.datePickerOpenStatus.entryTime"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('entryTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_exitTime">Exit Time</label>
+                <div class="input-group">
+                    <input id="field_exitTime" type="text" class="form-control" name="exitTime" datetime-picker="{{dateformat}}" ng-model="vm.policy.exitTime" is-open="vm.datePickerOpenStatus.exitTime"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('exitTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_entryPoint">Entry Point</label>
+            <input type="number" class="form-control" name="entryPoint" id="field_entryPoint"
+                    ng-model="vm.policy.entryPoint"
+                    required />
+            <div ng-show="editForm.entryPoint.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.entryPoint.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.entryPoint.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_exitPoint">Exit Point</label>
+            <input type="number" class="form-control" name="exitPoint" id="field_exitPoint"
+                    ng-model="vm.policy.exitPoint"
+                    required />
+            <div ng-show="editForm.exitPoint.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.exitPoint.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.exitPoint.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_reason">Reason</label>
+            <input type="text" class="form-control" name="reason" id="field_reason"
+                    ng-model="vm.policy.reason"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_push">Push</label>
+            <input type="checkbox" class="form-control" name="push" id="field_push"
+                    ng-model="vm.policy.push"
+                     />
+            <div ng-show="editForm.push.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.push.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_realEntryPoint">Real Entry Point</label>
+            <input type="number" class="form-control" name="realEntryPoint" id="field_realEntryPoint"
+                    ng-model="vm.policy.realEntryPoint"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_realExitPoint">Real Exit Point</label>
+            <input type="number" class="form-control" name="realExitPoint" id="field_realExitPoint"
+                    ng-model="vm.policy.realExitPoint"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_teacher">Teacher</label>
+            <select class="form-control" id="field_teacher" name="teacher" ng-model="vm.policy.teacher" ng-options="user as user.id for user in vm.users track by user.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.teacher.$invalid">
+            <p class="help-block"
+                ng-show="editForm.teacher.$error.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="field_team">Team</label>
+            <select class="form-control" id="field_team" name="team" ng-model="vm.policy.team" ng-options="team as team.id for team in vm.teams track by team.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

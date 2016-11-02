@@ -1,0 +1,80 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myRecordingLabel">Create or edit a Recording</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.recording.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.recording.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_recordingType">Recording Type</label>
+            <select class="form-control" name="recordingType" ng-model="vm.recording.recordingType" id="field_recordingType" required>
+                <option value="other">other</option>
+                <option value="addPolicy">addPolicy</option>
+                <option value="entryPolicy">entryPolicy</option>
+                <option value="exitPolicy">exitPolicy</option>
+                <option value="sysClosePolicy">sysClosePolicy</option>
+            </select>
+            <div ng-show="editForm.recordingType.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.recordingType.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_content">Content</label>
+            <input type="text" class="form-control" name="content" id="field_content"
+                    ng-model="vm.recording.content"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_recordingTime">Recording Time</label>
+                <div class="input-group">
+                    <input id="field_recordingTime" type="text" class="form-control" name="recordingTime" datetime-picker="{{dateformat}}" ng-model="vm.recording.recordingTime" is-open="vm.datePickerOpenStatus.recordingTime"
+                    required  />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('recordingTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.recordingTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.recordingTime.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.recordingTime.$error.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_policy">Policy</label>
+            <select class="form-control" id="field_policy" name="policy" ng-model="vm.recording.policy" ng-options="policy as policy.id for policy in vm.policies track by policy.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.policy.$invalid">
+            <p class="help-block"
+                ng-show="editForm.policy.$error.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
