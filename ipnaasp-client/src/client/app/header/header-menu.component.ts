@@ -1,8 +1,9 @@
 import {Directive, ElementRef,Component,Input,Output} from '@angular/core';
 import {Router} from '@angular/router';
-import { AuthServerProvider,Account, Principal } from '../shared/index'
+import { AuthServerProvider, Principal } from '../shared/index';
 import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
+import { LoginService } from '../login/login.service';
 
 @Directive({ selector: '[autoFocus]' })
 class AutoFocusDirective {
@@ -19,28 +20,22 @@ class AutoFocusDirective {
     selector:'header-menu',
     templateUrl:'header-menu.component.html',
     styleUrls:['header-menu.component.css'],
-    providers: [AuthServerProvider,JwtHelper]
+    providers: [AuthServerProvider,JwtHelper,LoginService]
 })
 
 export class HeaderMenuComponent {
-    // private projects:Array<any>;
-    private userName:string;
-    // private userId:string;
-    // private activeProject:string;
     sidebarTypeArray:Array = ["home","policy","socialCircle","analysis","information","platformMarket","more"];
     isOn:Array = [true,false,false,false,false,false,false];
-    showLoginRegisterFlag:boolean = true;
+
     constructor(
       private _router: Router,
       private principal: Principal,
-      private jwtHelper: JwtHelper,
       private $localStorage: LocalStorageService,
       private $sessionStorage: SessionStorageService,
-      private authServerProvider: AuthServerProvider
     ) {}
 
     ngOnInit() {
-      this.getCurrentAccount();
+
     }
 
     register() {
@@ -50,52 +45,13 @@ export class HeaderMenuComponent {
       this._router.navigate(['/login']);
     }
     logout(){
+      console.log("logout");
+      this.principal.authenticated = false;
       this.$localStorage.clear('authenticationToken');
       this.$sessionStorage.clear('authenticationToken');
-      this.showLoginRegisterFlag = true;
-
+      window.localStorage.removeItem('authenticationToken');
     }
-    getCurrentAccount(){
-      // if(this.authServerProvider.getToken()){
-      //     console.log("HeaderMenuComponent token:"+this.authServerProvider.getToken());
-      //     this.principal.identity().then((account) => {
-      //       console.log(account);
-      //       // account
-      //       if(account) {
-      //         // 健全成功，当前用户是登录状态，显示退出登录按钮，disable注册按钮
-      //       }
-      //       else {
-      //         // 健全失败，未获取到当前登录用户，显示登录按钮，注册按钮
-      //       }
-      //     }).catch(() => {
-      //       // 本地未保存用户token，显示登录按钮，注册按钮
-      //     });
-      // } else {
-      //   console.log("HeaderMenuComponent token:"+this.authServerProvider.getToken())
-      // }
-        let token:any = this.authServerProvider.getToken();
 
-
-        // let tokenNotExpiredFlag:boolean = tokenNotExpired(null, token);
-        if(token && !this.jwtHelper.isTokenExpired(token)) {
-          console.log("HeaderMenuComponent token:"+this.authServerProvider.getToken());
-          console.log(
-            this.jwtHelper.decodeToken(token),
-            this.jwtHelper.getTokenExpirationDate(token),
-            this.jwtHelper.isTokenExpired(token)
-          );
-
-          // 当前用户是登录状态，disable注册按钮
-          this.showLoginRegisterFlag = false;
-          this.userName = this.jwtHelper.decodeToken(token).sub;
-          console.log(this.userName);
-        }
-        else {
-          // 未获取到当前登录用户，显示登录按钮，注册按钮
-          this.showLoginRegisterFlag = true;
-        }
-
-    }
     changeHeaderMenu(type:string){
       this.isOn = [false,false,false,false,false,false,false];
       let i:number = 0;

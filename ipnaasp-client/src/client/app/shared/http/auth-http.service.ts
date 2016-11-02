@@ -43,7 +43,7 @@ export class AuthHttp {
     var sharableResponse = response.share();
     sharableResponse.subscribe(null, (err) => {
       if (this.isUnauthorized(err.status)) {
-        this.router.navigate(['/login']);
+        // this.router.navigate(['/login']);
       }
       // Other error handling may be added here, such as refresh token …
     });

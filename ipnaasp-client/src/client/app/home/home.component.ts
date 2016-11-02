@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Account, Principal } from "../shared/index";
+import { LoginService } from '../login/login.service';
+
 /**
  * This class represents the lazy loaded HomeComponent.
  */
@@ -25,8 +27,9 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-    let token:any = window.localStorage.getItem('authenticationToken');
-    console.log("HomeComponent token:"+token);
+    this.principal.identity().then((account) => {
+      this.account = account;
+    });
   }
 
 }

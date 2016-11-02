@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { PolicyService } from '../shared/index';
 import { Component, Renderer, ElementRef } from '@angular/core';
 import { LoginService } from '../login/login.service';
-import { AuthServerProvider } from'../shared/index';
+import { AuthServerProvider,Account } from'../shared/index';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +14,7 @@ import { AuthServerProvider } from'../shared/index';
 
 export class LoginComponent {
   private logining: boolean;
-
+  account: Account;
   private vm:any = {
     authenticationError:false,
     password:'',
@@ -27,10 +27,10 @@ export class LoginComponent {
               private loginService: LoginService,
               private elementRef: ElementRef,
               private renderer: Renderer,
-              private router: Router,
-              private authServerProvider: AuthServerProvider
+              private router: Router
               ) {
     this.logining = false;
+    this.vm.rememberMe = true;
   }
 
   ngOnInit(){
@@ -51,30 +51,17 @@ export class LoginComponent {
   login() {
     let that = this;
     this.logining = true;
-    this.authServerProvider.login({
-        username: this.vm.username,
-        password: this.vm.password,
-        rememberMe: this.vm.rememberMe
-      }).subscribe(data => {
-        console.log("data:"+data);
-        this.logining = false;
-        this.vm.authenticationError = false;
-        this.router.navigate(['/home']);
-      }, err => {
-        this.vm.authenticationError = true;
-        this.logining = false;
-      });
-    // this.loginService.login({
-    //   username: this.vm.username,
-    //   password: this.vm.password,
-    //   rememberMe: this.vm.rememberMe
-    // }).then(() => {
-    //   this.logining = false;
-    //   this.vm.authenticationError = false;
-    //   this.router.navigate(['/home']);
-    // }).catch(() => {
-    //   this.vm.authenticationError = true;
-    //   this.logining = false;
-    // });
+    this.loginService.login({
+      username: this.vm.username,
+      password: this.vm.password,
+      rememberMe: this.vm.rememberMe
+    }).then(() => {
+      this.logining = false;
+      this.vm.authenticationError = false;
+      this.router.navigate(['/home']);
+    }).catch(() => {
+      this.vm.authenticationError = true;
+      this.logining = false;
+    });
   }
 }

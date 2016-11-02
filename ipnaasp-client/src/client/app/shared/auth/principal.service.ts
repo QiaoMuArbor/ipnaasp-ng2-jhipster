@@ -1,10 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
 import { AccountService } from './account.service';
+import { Account } from '../model/account.model';
 
 @Injectable()
 export class Principal {
     private _identity: any;
-    private authenticated: boolean = false;
+    public authenticated: boolean = false;
 
     constructor(
         private account: AccountService

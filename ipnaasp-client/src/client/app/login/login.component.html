@@ -23,12 +23,12 @@
         <span *ngIf="password.errors.required">密码不能为空</span>
       </label>
     </div>
-    <div class="item-line">
-      <label for="rememberMe">
-        <input type="checkbox" id="rememberMe" ng-model="vm.rememberMe" checked>
-        <span>Remember me</span>
-      </label>
-    </div>
+    <!--<div class="item-line">-->
+      <!--<label for="rememberMe">-->
+        <!--<input type="checkbox" id="rememberMe" ng-model="vm.rememberMe" checked>-->
+        <!--<span>Remember me</span>-->
+      <!--</label>-->
+    <!--</div>-->
     <div class="btn-area">
       <button type="submit" class="modal-btn-confirm login-btn" *ngIf="!logining">登&nbsp;&nbsp;&nbsp;录</button>
       <button type="submit" class="modal-btn-confirm login-btn" *ngIf="logining" [disabled]="logining">登&nbsp;&nbsp;&nbsp;录&nbsp;&nbsp;&nbsp;中</button>

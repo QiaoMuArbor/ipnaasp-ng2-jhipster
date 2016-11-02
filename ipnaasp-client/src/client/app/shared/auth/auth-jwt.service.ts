@@ -37,6 +37,7 @@ export class AuthServerProvider {
     }
   }
   storeAuthenticationToken(jwt, rememberMe) {
+    window.localStorage.setItem('authenticationToken', jwt);
     if(rememberMe){
       this.$localStorage.store('authenticationToken', jwt);
     } else {
@@ -48,6 +49,7 @@ export class AuthServerProvider {
       console.log("logout");
       this.$localStorage.clear('authenticationToken');
       this.$sessionStorage.clear('authenticationToken');
+      window.localStorage.removeItem('authenticationToken');
       observer.complete();
     });
   }

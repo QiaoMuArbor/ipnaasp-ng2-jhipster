@@ -1,6 +1,6 @@
 {
   "generator-jhipster": {
-    "jhipsterVersion": "3.9.1",
+    "jhipsterVersion": "3.10.0",
     "baseName": "ipnaasp",
     "packageName": "com.qm.ipnaasp",
     "packageFolder": "com/qm/ipnaasp",
@@ -16,15 +16,7 @@
     "messageBroker": false,
     "buildTool": "maven",
     "enableSocialSignIn": false,
-    "jwtSecretKey": "86be564af3cf766851cea6af26b527236d55798f",
-    "useSass": false,
-    "applicationType": "monolith",
-    "angularVersion": "angular2",
-    "testFrameworks": [
-      "gatling"
-    ],
-    "jhiPrefix": "jhi",
-    "enableTranslation": false,
-    "serviceDiscoveryType": false
+    "jwtSecretKey": "452d87ca5c27285ea1ca6551bdc1309a5a5c5384",
+    "enableTranslation": false
   }
 }

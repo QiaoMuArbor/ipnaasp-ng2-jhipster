@@ -5,11 +5,10 @@ import { Principal,AuthServerProvider } from'../shared/index';
 
 @Injectable()
 export class LoginService {
-
-    constructor (
-        private principal: Principal,
-        private authServerProvider: AuthServerProvider
-    ) {}
+  constructor (
+      private principal: Principal,
+      private authServerProvider: AuthServerProvider
+  ) {}
 
     login (credentials, callback?) {
         var cb = callback || function(){};
@@ -17,7 +16,9 @@ export class LoginService {
         return new Promise((resolve, reject) => {
             this.authServerProvider.login(credentials).subscribe(data => {
                 this.principal.identity(true).then(account => {
-                    console.log("account:"+account);
+                    console.log("======account========");
+                    console.log(account);
+                    console.log("======account========");
                     resolve(data);
                 });
                 return cb();

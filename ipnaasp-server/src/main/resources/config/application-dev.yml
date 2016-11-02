@@ -49,6 +49,7 @@ spring:
         cache-seconds: 1
     thymeleaf:
         cache: false
+
 liquibase:
     contexts: dev
 

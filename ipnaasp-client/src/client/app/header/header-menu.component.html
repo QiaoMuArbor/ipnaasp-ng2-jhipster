@@ -23,8 +23,8 @@
           <a [ngClass]="{active: isOn[6], disabled: false}" (click)="clickToMore()">更多</a>
         </div>
 
-        <div class="btn-group cur-user" *ngIf="!showLoginRegisterFlag">
-            <a>{{userName}} <span class="caret"></span></a>
+        <div class="btn-group cur-user" *ngIf="principal.authenticated">
+            <a>{{1111}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a>个人中心</a></li>
                 <li><a>账户设置</a></li>
@@ -36,7 +36,7 @@
                 <li><a (click)="logout()">安全退出</a></li>
             </ul>
         </div>
-        <div class="btn-group cur-user" *ngIf="showLoginRegisterFlag">
+        <div class="btn-group cur-user" *ngIf="!principal.authenticated">
           <a (click)="login()">登录</a>
           <a  style="margin-left: 20px;" (click)="register()">注册</a>
         </div>
