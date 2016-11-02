@@ -3,7 +3,7 @@
  */
 export * from './http/index';
 export * from './config/env.config';
-export * from './services/user/user.service';
+// export * from './services/user/user.service';
 export * from './services/policy/policy.service';
 export * from './services/common/localstorage.service';
 

@@ -8,7 +8,7 @@ import { PolicyService } from './services/policy/policy.service';
 import { Principal,AuthServerProvider,AccountService,StateStorageService } from'./index';
 
 
-import { UserService } from './services/user/user.service';
+// import { UserService } from './services/user/user.service';
 
 import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
 
@@ -33,7 +33,7 @@ export class SharedModule {
         AuthServerProvider,
         LocalStorageService,
         SessionStorageService,
-        UserService
+        // UserService
       ]
     };
   }

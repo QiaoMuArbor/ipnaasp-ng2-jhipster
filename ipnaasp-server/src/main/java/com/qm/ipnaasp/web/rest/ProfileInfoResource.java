@@ -3,7 +3,10 @@ package com.qm.ipnaasp.web.rest;
 import com.qm.ipnaasp.config.DefaultProfileUtil;
 import com.qm.ipnaasp.config.JHipsterProperties;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -20,7 +23,9 @@ public class ProfileInfoResource {
     @Inject
     private JHipsterProperties jHipsterProperties;
 
-    @GetMapping("/profile-info")
+    @RequestMapping(value = "/profile-info",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     public ProfileInfoResponse getActiveProfiles() {
         return new ProfileInfoResponse(DefaultProfileUtil.getActiveProfiles(env), getRibbonEnv());
     }
