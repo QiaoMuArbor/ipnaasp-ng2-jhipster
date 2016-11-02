@@ -138,3 +138,4 @@ Desktop.ini
 .eslintcache
 /node_modules/
 /target/
+/.idea/
