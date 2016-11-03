@@ -1,0 +1,50 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "recorder",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "policy",
+            "otherEntityName": "policy",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "RecordingType",
+            "fieldValues": "other,addPolicy,entryPolicy,exitPolicy,sysClosePolicy",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "recordingTime",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20161103115415",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "recording",
+    "pagination": "no"
+}

@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('Recording Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockRecording, MockPolicy;
+        var MockEntity, MockPreviousState, MockRecording, MockUser, MockPolicy;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,6 +13,7 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockRecording = jasmine.createSpy('MockRecording');
+            MockUser = jasmine.createSpy('MockUser');
             MockPolicy = jasmine.createSpy('MockPolicy');
             
 
@@ -22,6 +23,7 @@ describe('Controller Tests', function() {
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
                 'Recording': MockRecording,
+                'User': MockUser,
                 'Policy': MockPolicy
             };
             createController = function() {

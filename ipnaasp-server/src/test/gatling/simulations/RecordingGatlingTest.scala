@@ -68,7 +68,7 @@ class RecordingGatlingTest extends Simulation {
             .exec(http("Create new recording")
             .post("/api/recordings")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "recordingType":null, "content":"SAMPLE_TEXT", "recordingTime":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "type":null, "content":"SAMPLE_TEXT", "recordingTime":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_recording_url"))).exitHereIfFailed
             .pause(10)

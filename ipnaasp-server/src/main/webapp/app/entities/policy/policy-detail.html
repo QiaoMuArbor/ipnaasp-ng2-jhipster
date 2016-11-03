@@ -1,0 +1,75 @@
+
+<div>
+    <h2><span>Policy</span> {{vm.policy.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Type</span></dt>
+        <dd>
+            <span>{{vm.policy.type}}</span>
+        </dd>
+        <dt><span>Direction</span></dt>
+        <dd>
+            <span>{{vm.policy.direction}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{vm.policy.status}}</span>
+        </dd>
+        <dt><span>Create Time</span></dt>
+        <dd>
+            <span>{{vm.policy.createTime | date:'medium'}}</span>
+        </dd>
+        <dt><span>Entry Time</span></dt>
+        <dd>
+            <span>{{vm.policy.entryTime | date:'medium'}}</span>
+        </dd>
+        <dt><span>Exit Time</span></dt>
+        <dd>
+            <span>{{vm.policy.exitTime | date:'medium'}}</span>
+        </dd>
+        <dt><span>Entry Point</span></dt>
+        <dd>
+            <span>{{vm.policy.entryPoint}}</span>
+        </dd>
+        <dt><span>Exit Point</span></dt>
+        <dd>
+            <span>{{vm.policy.exitPoint}}</span>
+        </dd>
+        <dt><span>Reason</span></dt>
+        <dd>
+            <span>{{vm.policy.reason}}</span>
+        </dd>
+        <dt><span>Push</span></dt>
+        <dd>
+            <span>{{vm.policy.push}}</span>
+        </dd>
+        <dt><span>Real Entry Point</span></dt>
+        <dd>
+            <span>{{vm.policy.realEntryPoint}}</span>
+        </dd>
+        <dt><span>Real Exit Point</span></dt>
+        <dd>
+            <span>{{vm.policy.realExitPoint}}</span>
+        </dd>
+        <dt><span>Creator</span></dt>
+        <dd>
+            {{vm.policy.creator.id}}
+        </dd>
+        <dt><span>Team</span></dt>
+        <dd>
+            <a ui-sref="team-detail({id:vm.policy.team.id})">{{vm.policy.team.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="policy-detail.edit({id:vm.policy.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

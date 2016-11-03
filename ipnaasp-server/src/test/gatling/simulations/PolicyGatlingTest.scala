@@ -68,7 +68,7 @@ class PolicyGatlingTest extends Simulation {
             .exec(http("Create new policy")
             .post("/api/policies")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "policyType":null, "createTime":"2020-01-01T00:00:00.000Z", "entryTime":"2020-01-01T00:00:00.000Z", "exitTime":"2020-01-01T00:00:00.000Z", "entryPoint":null, "exitPoint":null, "reason":"SAMPLE_TEXT", "push":null, "realEntryPoint":null, "realExitPoint":null}""")).asJSON
+            .body(StringBody("""{"id":null, "type":null, "direction":null, "status":null, "createTime":"2020-01-01T00:00:00.000Z", "entryTime":"2020-01-01T00:00:00.000Z", "exitTime":"2020-01-01T00:00:00.000Z", "entryPoint":null, "exitPoint":null, "reason":"SAMPLE_TEXT", "push":null, "realEntryPoint":null, "realExitPoint":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_policy_url"))).exitHereIfFailed
             .pause(10)
