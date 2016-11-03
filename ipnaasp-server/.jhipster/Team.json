@@ -1,0 +1,39 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "leader",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "members",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-many",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "introduction",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "slogan",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20161103114038",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "team",
+    "pagination": "no"
+}

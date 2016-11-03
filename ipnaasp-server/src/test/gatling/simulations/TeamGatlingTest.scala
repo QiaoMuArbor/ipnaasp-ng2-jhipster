@@ -68,7 +68,7 @@ class TeamGatlingTest extends Simulation {
             .exec(http("Create new team")
             .post("/api/teams")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "teamName":"SAMPLE_TEXT", "introduction":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "introduction":"SAMPLE_TEXT", "slogan":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_team_url"))).exitHereIfFailed
             .pause(10)
