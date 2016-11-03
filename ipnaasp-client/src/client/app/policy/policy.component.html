@@ -134,29 +134,20 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">策略类别</label>
               <div class="col-sm-10">
-                <select name="policyType" ngModel class="form-control" style="width:35%">
-                  <option value="" selected>请选择</option>
-                  <option *ngFor="let type of policyTypesArray" [value]="type.nameEn">{{type.nameZh}}</option>
+                <select name="policyType" ngModel="policyType" class="form-control" style="width:35%">
+                  <option *ngFor="let type of policyTypes" [value]="type">{{type}}</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">策略方向</label>
               <div class="col-sm-10">
-                <select name="policyDirection" ngModel class="form-control" style="width:35%">
-                  <option value="" selected>请选择</option>
-                  <option *ngFor="let type of policyDirectionArray" [value]="type.nameEn">{{type.nameZh}}</option>
-                </select>
+
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">策略状态</label>
-              <div class="col-sm-10">
-                <select name="policyStatus" ngModel class="form-control" style="width:35%">
-                  <option value="" selected>请选择</option>
-                  <option *ngFor="let type of policyStatusArray" [value]="type.nameEn">{{type.nameZh}}</option>
-                </select>
-              </div>
+
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">入场点位</label>

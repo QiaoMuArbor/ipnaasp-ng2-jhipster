@@ -4,7 +4,7 @@ import { Account } from '../model/account.model';
 
 @Injectable()
 export class Principal {
-    private _identity: any;
+    public _identity: any;
     public authenticated: boolean = false;
 
     constructor(

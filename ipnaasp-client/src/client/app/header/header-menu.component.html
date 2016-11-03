@@ -24,7 +24,7 @@
         </div>
 
         <div class="btn-group cur-user" *ngIf="principal.authenticated">
-            <a>{{1111}} <span class="caret"></span></a>
+            <a>{{principal._identity.login}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a>个人中心</a></li>
                 <li><a>账户设置</a></li>

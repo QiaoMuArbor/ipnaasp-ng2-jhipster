@@ -12,17 +12,7 @@ export class PolicyComponent {
   // 策略类别
   policyTypesArray:Array<any>=[];
   policyType:string;
-  policyTypes:string =
-    '[' +
-      '{ ' +
-      '"nameZh": "黄金",' +
-      '"nameEn": "gold"' +
-      '},' +
-      '{' +
-      '"nameZh": "白银",' +
-      '"nameEn": "silver"' +
-      '}' +
-    ']';
+  policyTypes:Array<string> = ["黄金","白银"];
   // 策略方向
   policyDirectionArray:Array<any>=[];
   policyDirection:number;
@@ -54,11 +44,10 @@ export class PolicyComponent {
   policyEntryPointValue:string;
   policyEixtPointValue:string;
   constructor(private _policyService: PolicyService) {
-    this.policyTypesArray = JSON.parse(this.policyTypes);
-    this.policyDirectionArray = JSON.parse(this.policyDirections);
-    this.policyStatusArray = JSON.parse(this.policyStatus_);
+    this.policyType = "黄金";
     this.policyEntryPointValue = "";
     this.policyEixtPointValue = "";
+    this.policyDirection = 0;
   }
   ngOnInit(){
     this._policyService.isClickPolicyFlag = true;
