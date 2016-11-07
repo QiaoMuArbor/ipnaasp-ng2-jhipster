@@ -1,3 +1,4 @@
+/*loginRegister*/
 div.login {
   width: 600px;
   margin: 0 auto;
@@ -32,3 +33,64 @@ div.register{
 div.register a{
   font-size: 16px;
 }
+.item-line {
+  color: #999;
+  margin: 10px 0;
+  position: relative;
+}
+.item-line > .name{
+  width: 120px;
+  display: inline-block;
+  vertical-align: top;
+}
+.form-item {
+  margin: 0 30px;
+  font-size: 14px;
+}
+.form-item form>table input {
+  width: 100%;
+}
+.form-item form>table select {
+  width: 100%;
+}
+.form-item.btnaction{
+  text-align: center;
+  margin-top: 30px;
+}
+.must-input {
+  color: red;
+}
+.item-line {
+  color: #999;
+  margin: 10px 0;
+  position: relative;
+}
+.item-line > .name{
+  width: 120px;
+  display: inline-block;
+  vertical-align: top;
+}
+.item-line .form-ic-success {
+  font-size: 16px;
+  color: #5cb85c;
+  margin-left: 10px;
+}
+.form-error {
+  font-size: 12px;
+  color: #f76661;
+}
+input {
+  line-height: 30px;
+  width: 50%;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  padding-left: 10px;
+}
+input[type=checkbox],
+input[type=radio] {
+  width: auto;
+  vertical-align: baseline;
+  line-height: 30px;
+  margin-right: 10px;
+}
+/*loginRegister*/

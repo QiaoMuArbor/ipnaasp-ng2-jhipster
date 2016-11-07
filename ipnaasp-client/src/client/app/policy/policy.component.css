@@ -1,152 +1,7 @@
-.divider {
-  height: 1px;
-  overflow: hidden;
-  background-color: #1B2633;
-}
-
-a.active {
-  border:1px solid #334874;
-}
-
-.sideBar > .project,
-.sideBar > .menu{
-  position: fixed;
-  width: 160px;
-  background-color: #334874;
-  color: #8daee4;
-}
-
-.sideBar > .project {
-  top: 50px;
-  height: 120px;
-  background-color: #334874;
-  border-bottom: 1px solid rgba(255, 255, 255, .2);
-  text-align: center;
-}
-
-.sideBar > .menu {
-  top: 180px;
-  bottom: 0;
-  overflow: auto;
-}
-
-.sideBar > .project .icon {
-  margin: 20px 0 0 0;
-  background-color: #70b2ff;
-  color: #555;
-  line-height: 64px;
-  width: 64px;
-  height: 64px;
-  text-align: center;
-  display: inline-block;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  border-radius: 50%;
-}
-
-.sideBar > .project .name {
-  font-size: 18px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-ul.menu {
-  padding: 0;
-}
-
-ul.menu li a {
-  color: #8daee4;
-  text-decoration:none;
-  background-repeat: no-repeat;
-  background-position-y: center;
-  background-position-x: 10px;
-  padding-left: 30px;
-  line-height: 50px;
-  height: 50px;
-  display: block;
-  width: 100%;
-  font-size: 14px;
-}
-
-ul.menu li a:hover {
-  background-color: #3b558c;
-}
-
-ul.menu li a.active {
-  background-color: #3b558c;
-  color: #fff;
-}
-
-ul.menu li a.active {
-  border-left: 1px solid #3890ff;
-}
-
-.alarm_span  {
-  /*float: right;*/
-  border-radius:4px;
-  padding: 0px 10px;
-  margin-right: 2px;
-  background-color:#18232F;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-/* 这是针对缺省样式 (必须的) */
-
-::-webkit-scrollbar-track {
-  background-color: rgba(1, 1, 1, 0.3);
-}
-/* 滚动条的滑轨背景颜色 */
-
-::-webkit-scrollbar-thumb {
-  background-color: rgba(200, 200, 200, 0.3);
-}
-/* 滑块颜色 */
-
-::-webkit-scrollbar-button {
-  background-color: rgba(1, 1, 1, 0.3);
-}
-/* 滑轨两头的监听按钮颜色 */
-
-::-webkit-scrollbar-corner {
-  /* background-color: #da0d0d; */
-}
-/* 横向滚动条和纵向滚动条相交处尖角的颜色 */
-
-
-.pos-abs-left20 {
-  position: absolute;
-  width: 20px;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  padding-left: 3px;
-  display: inline-block;
-  line-height: 95px;
-  cursor: pointer;
-}
-
-.alarm-title {
-  background-color: #ffffff;
-  /*zqupdate*/
-  height:2px;
-  border-width:1px 1px 0px 1px;
-  border-style:solid;
-  border-color:#d9d9d9;
-}
-
 .alarm-list {
   border-width:0px 1px 1px 1px;
   border-style:solid;
   border-color:#d9d9d9;
-}
-
-.side-nav li a:hover span, .side-nav li a:focus span, .side-nav li a.active span {
-  border:1px solid #ffffff;
 }
 
 .alarm-list .list-item,.edit-list-item {
@@ -183,7 +38,6 @@ ul.menu li a.active {
 .item-left {
   display:inline-block;
   position: relative;
-  /*padding-left: 10px;*/
   width: auto;
   float:left;
 }
@@ -205,28 +59,13 @@ ul.menu li a.active {
   margin-top: 0px;
 }
 
-.warn-topLine label ,.item-left .activeAlarm ,.warn-topLine .appService {
+.warn-topLine label ,.item-left .activePolicy ,.warn-topLine {
   font-weight:normal;
   color:#A9A9A9;
   font-size:12px;
 }
 
-.appService ,.warn-inline {
-  display:inline-block;
-}
-
-.entityName {
-  font-size:16px;
-  font-weight:bold;
-}
-
-.alarmName {
-  word-break: break-all;
-  padding-right: 15px;
-  margin-top:5px;
-}
-
-.activeAlarm {
+.activePolicy {
   margin-top:5px;
   margin-left: 5px;
   width: 180px;
@@ -240,66 +79,18 @@ ul.menu li a.active {
   border: 1px solid #d9d9d9;
 }
 
-.nodata {
-  background:url('../../assets/images/doc.png') no-repeat;
-  width:46px;
-  height:64px;
-  margin:110px auto 30px auto;
-}
-
-.whitebg h4 {
-  text-align: center;
-  font-family: å¾®è½¯é›…é»‘;
-  color: #B0BAC5;
-}
-
-.noalarm {
-  background: url('../../assets/images/nothing.png') no-repeat;
-  width: 240px;
-  height: 96px;
-  padding-left: 110px;
-  padding-top: 25px;
-  margin: 110px auto 30px auto;
-}
-
-.tableContent {
-  overflow: hidden;
-  cursor: pointer;
-  color: #196bd1;
-  padding-left:10px;
-  overflow:hidden;
-}
-
-.tableContent:hover {
-  text-decoration:underline;
-}
-
-.fa-scale {
-  font-size: 12px;
-  transform:scale(0.5);
-}
-
-.text-center {
-  text-align:center;
-}
-
-.whitebg .alarm-table {
+.whitebg .qm-table {
   border-width:1px 0px;
   border-style: solid;
   border-color: #dddddd;
   margin-top:5px!important;
 }
 
-.alarm-id {
-  /* border: 1px solid #a9a9a9; */
-  border-radius: 8px;
-  padding: 0 5px;
-}
 
 .escalation-wrap {
   padding-top:10px;
   padding-left:10px;
-  /*width:80%;*/
+/*  width:80%;*/
 }
 
 .escalation-wrap p {
@@ -327,16 +118,6 @@ ul.menu li a.active {
   margin-bottom:10px;
 }
 
-.btn-green {
-  background-color:#59A805;
-  color:#ffffff;
-}
-
-.btn-green:hover ,.btn-green:focus {
-  background-color:#4C8C09;
-  color:#ffffff;
-}
-
 .history-item {
   padding: 5px 0;
   border-width: 1px 0px 0px 0px;
@@ -355,62 +136,7 @@ ul.menu li a.active {
   color:#A9A9A9;
 }
 
-.popwrapper {
-  border: 1px solid #d9d9d9;
-  min-width:244px;
-}
 
-.poptitle {
-  padding: 3px 10px;
-  background-color: #F9F9F9;
-  border-width: 1px 0px;
-  border-style: solid;
-  border-color: #d9d9d9;
-  font-weight:bold;
-}
-
-.poptitle:first-child {
-  border-top-width:0px;
-}
-
-.popcontent {
-  padding: 3px 10px;
-  word-wrap: break-word;
-  word-break: break-all;
-}
-
-.alertInfo {
-  display: inline-block;
-  /* width: 120px; */
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  cursor:pointer;
-  vertical-align:middle;
-}
-
-.pos-abs-left20{
-  position:absolute;
-  width:20px;
-  top:0;
-  bottom:0;
-  left:0;
-  padding-left:3px;
-  display:inline-block;
-  line-height:95px;
-  cursor:pointer;
-}
-.pos-abs-right20{
-  position:absolute;
-  width:20px;
-  top:0;
-  bottom:0;
-  right:0;
-  padding-left:3px;
-  display:inline-block;
-  line-height:95px;
-  cursor:pointer;
-}
 .row-query{
   display: -webkit-box;
   display: -moz-box;
@@ -505,5 +231,45 @@ ul.menu li a.active {
   background-color: #eee;
 }
 
+
+/* table css start */
+
+.qm-table {
+  clear: left;
+  margin-top: 14px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.qm-table thead th {
+  background-color: #eee;
+  color: #000;
+  font-size: 12px;
+  font-weight: normal;
+  height: 40px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.qm-table thead th:first-child {
+  border-left: none;
+}
+
+.qm-table tbody tr td {
+  background-color: #fff;
+  color: #666;
+  font-size: 12px;
+  text-align: left;
+  height: 40px;
+  padding: 0 20px;
+}
+
+.qm-table tbody tr:nth-child(2n) td {
+  background-color: #f9f9f9;
+}
+
+.qm-table .qm-btn {
+  font-size: 12px;
+}
 
 

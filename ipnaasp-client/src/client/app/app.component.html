@@ -1,9 +1,9 @@
-<!--<header-menu *ngIf="_policyService.isShowHeaderMenuFlag"></header-menu>-->
-<!--<sidebar-full *ngIf="_policyService.isClickPolicyFlag"></sidebar-full>-->
-<!--<div [ngClass]="{mianContent: _policyService.isShowHeaderMenuFlag, mianContentNo: !_policyService.isShowHeaderMenuFlag}">-->
-  <!---->
-<!--</div>-->
-<router-outlet></router-outlet>
+<header-menu *ngIf="_policyService.isShowHeaderMenuFlag"></header-menu>
+<sidebar-full *ngIf="_policyService.isClickPolicyFlag"></sidebar-full>
+<div [ngClass]="{mianContent: _policyService.isShowHeaderMenuFlag, mianContentNo: !_policyService.isShowHeaderMenuFlag}">
+  <router-outlet></router-outlet>
+</div>
+
 
 
 

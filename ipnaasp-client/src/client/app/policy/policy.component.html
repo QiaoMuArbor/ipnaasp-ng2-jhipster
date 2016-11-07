@@ -26,7 +26,6 @@
         <div>
           <input type="text" class="form-control" placeholder="所属团队">
         </div>
-
         <div>
           <button type="button" class="form-control"><i class="fa fa-search" title="过滤"></i></button>
         </div>
@@ -45,10 +44,10 @@
               </div>
             </div>
             <div class="item-left">
-              <div class="activeAlarm">策略单号: 11</div>
-              <div class="activeAlarm">策略类别: 11</div>
-              <div class="activeAlarm">所属老师: 111</div>
-              <div class="activeAlarm">所属团队: 111</div>
+              <div class="activePolicy">策略单号: 11</div>
+              <div class="activePolicy">策略类别: 11</div>
+              <div class="activePolicy">所属老师: 111</div>
+              <div class="activePolicy">所属团队: 111</div>
             </div>
             <div class="item-right" ngSwitch="待入场">
               <template ngSwitchCase="待入场">
@@ -187,8 +186,8 @@
           <button class="modal-btn-confirm pull-right" (click)="clearRecordingInfo()">清除</button>
         </div>
         <div class="modal-footer">
-          <button class="modal-btn-confirm" data-dismiss="modal" (click)="confirm(clickButtonType)">确定</button>
-          <button class="modal-btn-confirm" data-dismiss="modal" >关闭</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="confirm(clickButtonType)">确定</button>
+          <button class="modal-btn-cancel" data-dismiss="modal" >关闭</button>
         </div>
       </div>
     </div>
