@@ -37,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.qm.ipnaasp.domain.enumeration.PolicyType;
 import com.qm.ipnaasp.domain.enumeration.PolicyStatus;
+import com.qm.ipnaasp.domain.enumeration.PolicyCycle;
 /**
  * Test class for the PolicyResource REST controller.
  *
@@ -79,11 +80,8 @@ public class PolicyResourceIntTest {
     private static final Boolean DEFAULT_PUSH = false;
     private static final Boolean UPDATED_PUSH = true;
 
-    private static final Float DEFAULT_REAL_ENTRY_POINT = 1F;
-    private static final Float UPDATED_REAL_ENTRY_POINT = 2F;
-
-    private static final Float DEFAULT_REAL_EXIT_POINT = 1F;
-    private static final Float UPDATED_REAL_EXIT_POINT = 2F;
+    private static final PolicyCycle DEFAULT_CYCLE = PolicyCycle.UshortTermO;
+    private static final PolicyCycle UPDATED_CYCLE = PolicyCycle.ShortTermO;
 
     @Inject
     private PolicyRepository policyRepository;
@@ -132,8 +130,7 @@ public class PolicyResourceIntTest {
                 .exitPoint(DEFAULT_EXIT_POINT)
                 .reason(DEFAULT_REASON)
                 .push(DEFAULT_PUSH)
-                .realEntryPoint(DEFAULT_REAL_ENTRY_POINT)
-                .realExitPoint(DEFAULT_REAL_EXIT_POINT);
+                .cycle(DEFAULT_CYCLE);
         // Add required entity
         User creator = UserResourceIntTest.createEntity(em);
         em.persist(creator);
@@ -173,8 +170,7 @@ public class PolicyResourceIntTest {
         assertThat(testPolicy.getExitPoint()).isEqualTo(DEFAULT_EXIT_POINT);
         assertThat(testPolicy.getReason()).isEqualTo(DEFAULT_REASON);
         assertThat(testPolicy.isPush()).isEqualTo(DEFAULT_PUSH);
-        assertThat(testPolicy.getRealEntryPoint()).isEqualTo(DEFAULT_REAL_ENTRY_POINT);
-        assertThat(testPolicy.getRealExitPoint()).isEqualTo(DEFAULT_REAL_EXIT_POINT);
+        assertThat(testPolicy.getCycle()).isEqualTo(DEFAULT_CYCLE);
     }
 
     @Test
@@ -305,6 +301,24 @@ public class PolicyResourceIntTest {
 
     @Test
     @Transactional
+    public void checkCycleIsRequired() throws Exception {
+        int databaseSizeBeforeTest = policyRepository.findAll().size();
+        // set the field null
+        policy.setCycle(null);
+
+        // Create the Policy, which fails.
+
+        restPolicyMockMvc.perform(post("/api/policies")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(policy)))
+                .andExpect(status().isBadRequest());
+
+        List<Policy> policies = policyRepository.findAll();
+        assertThat(policies).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPolicies() throws Exception {
         // Initialize the database
         policyRepository.saveAndFlush(policy);
@@ -324,8 +338,7 @@ public class PolicyResourceIntTest {
                 .andExpect(jsonPath("$.[*].exitPoint").value(hasItem(DEFAULT_EXIT_POINT.doubleValue())))
                 .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON.toString())))
                 .andExpect(jsonPath("$.[*].push").value(hasItem(DEFAULT_PUSH.booleanValue())))
-                .andExpect(jsonPath("$.[*].realEntryPoint").value(hasItem(DEFAULT_REAL_ENTRY_POINT.doubleValue())))
-                .andExpect(jsonPath("$.[*].realExitPoint").value(hasItem(DEFAULT_REAL_EXIT_POINT.doubleValue())));
+                .andExpect(jsonPath("$.[*].cycle").value(hasItem(DEFAULT_CYCLE.toString())));
     }
 
     @Test
@@ -349,8 +362,7 @@ public class PolicyResourceIntTest {
             .andExpect(jsonPath("$.exitPoint").value(DEFAULT_EXIT_POINT.doubleValue()))
             .andExpect(jsonPath("$.reason").value(DEFAULT_REASON.toString()))
             .andExpect(jsonPath("$.push").value(DEFAULT_PUSH.booleanValue()))
-            .andExpect(jsonPath("$.realEntryPoint").value(DEFAULT_REAL_ENTRY_POINT.doubleValue()))
-            .andExpect(jsonPath("$.realExitPoint").value(DEFAULT_REAL_EXIT_POINT.doubleValue()));
+            .andExpect(jsonPath("$.cycle").value(DEFAULT_CYCLE.toString()));
     }
 
     @Test
@@ -382,8 +394,7 @@ public class PolicyResourceIntTest {
                 .exitPoint(UPDATED_EXIT_POINT)
                 .reason(UPDATED_REASON)
                 .push(UPDATED_PUSH)
-                .realEntryPoint(UPDATED_REAL_ENTRY_POINT)
-                .realExitPoint(UPDATED_REAL_EXIT_POINT);
+                .cycle(UPDATED_CYCLE);
 
         restPolicyMockMvc.perform(put("/api/policies")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -404,8 +415,7 @@ public class PolicyResourceIntTest {
         assertThat(testPolicy.getExitPoint()).isEqualTo(UPDATED_EXIT_POINT);
         assertThat(testPolicy.getReason()).isEqualTo(UPDATED_REASON);
         assertThat(testPolicy.isPush()).isEqualTo(UPDATED_PUSH);
-        assertThat(testPolicy.getRealEntryPoint()).isEqualTo(UPDATED_REAL_ENTRY_POINT);
-        assertThat(testPolicy.getRealExitPoint()).isEqualTo(UPDATED_REAL_EXIT_POINT);
+        assertThat(testPolicy.getCycle()).isEqualTo(UPDATED_CYCLE);
     }
 
     @Test

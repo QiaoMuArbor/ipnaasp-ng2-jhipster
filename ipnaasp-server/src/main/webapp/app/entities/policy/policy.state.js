@@ -105,8 +105,7 @@
                                 exitPoint: null,
                                 reason: null,
                                 push: false,
-                                realEntryPoint: null,
-                                realExitPoint: null,
+                                cycle: null,
                                 id: null
                             };
                         }

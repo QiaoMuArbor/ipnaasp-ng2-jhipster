@@ -10,44 +10,27 @@ import { PolicyService } from '../shared/index';
 
 export class PolicyComponent {
   // 策略类别
-  policyTypesArray:Array<any>=[];
-  policyType:string;
   policyTypes:Array<string> = ["黄金","白银"];
+  policyType:string = "黄金";
+  // 策略周期
+  PolicyCycles:Array<string> = ["超短线","短线","中线"，"长线"];
+  policyCycle:string = "短线";
   // 策略方向
-  policyDirectionArray:Array<any>=[];
-  policyDirection:number;
-  policyDirections:string =
-    '[' +
-    '{ ' +
-    '"nameZh": "空",' +
-    '"nameEn": 0' +
-    '},' +
-    '{' +
-    '"nameZh": "多",' +
-    '"nameEn": 1' +
-    '}' +
-    ']';
+  policyDirections:Array<string> = ["空","多"];
+  policyDirection:string = "空";
   // 策略状态
-  policyStatusArray:Array<any>=[];
-  policyStatus:number;
-  policyStatus_:string =
-    '[' +
-    '{ ' +
-    '"nameZh": "待入场",' +
-    '"nameEn": "waitPolicy"' +
-    '},' +
-    '{' +
-    '"nameZh": "已入场",' +
-    '"nameEn": "entryPolicy"' +
-    '}' +
-    ']';
+  PolicyStatuses:Array<string> = ["待入场","已入场"];
+  policyStatus:string = "待入场";
+
   policyEntryPointValue:string;
   policyEixtPointValue:string;
+  policyReasonValue:string;
+  pushPolicyFlag:boolean;
   constructor(private _policyService: PolicyService) {
-    this.policyType = "黄金";
     this.policyEntryPointValue = "";
     this.policyEixtPointValue = "";
-    this.policyDirection = 0;
+    this.policyReasonValue = "";
+    this.pushPolicyFlag = false;
   }
   ngOnInit(){
     this._policyService.isClickPolicyFlag = true;
@@ -62,6 +45,10 @@ export class PolicyComponent {
   policyExitPointOnKey(event:any){
     this.policyEixtPointValue = event.target.value;
     console.log(this.policyEixtPointValue);
+  }
+  policyReasonOnKey(event:any){
+    this.policyReasonValue = event.target.value;
+    console.log(this.policyReasonValue);
   }
   clickCreatePolicyBtn(){
 

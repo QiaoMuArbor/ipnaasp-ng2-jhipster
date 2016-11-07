@@ -143,16 +143,19 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_realEntryPoint">Real Entry Point</label>
-            <input type="number" class="form-control" name="realEntryPoint" id="field_realEntryPoint"
-                    ng-model="vm.policy.realEntryPoint"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_realExitPoint">Real Exit Point</label>
-            <input type="number" class="form-control" name="realExitPoint" id="field_realExitPoint"
-                    ng-model="vm.policy.realExitPoint"
-                     />
+            <label class="control-label" for="field_cycle">Cycle</label>
+            <select class="form-control" name="cycle" ng-model="vm.policy.cycle" id="field_cycle" required>
+                <option value="UshortTermO">UshortTermO</option>
+                <option value="ShortTermO">ShortTermO</option>
+                <option value="CenterlineO">CenterlineO</option>
+                <option value="LongTermO">LongTermO</option>
+            </select>
+            <div ng-show="editForm.cycle.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.cycle.$error.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
 
         <div class="form-group">

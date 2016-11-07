@@ -89,12 +89,12 @@
             ]
         },
         {
-            "fieldName": "realEntryPoint",
-            "fieldType": "Float"
-        },
-        {
-            "fieldName": "realExitPoint",
-            "fieldType": "Float"
+            "fieldName": "cycle",
+            "fieldType": "PolicyCycle",
+            "fieldValues": "UshortTermO,ShortTermO,CenterlineO,LongTermO",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20161103121200",

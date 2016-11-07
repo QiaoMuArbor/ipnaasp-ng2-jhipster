@@ -61,12 +61,8 @@
                 <constraints nullable="false" />
             </column>
             
-            <column name="real_entry_point" type="${floatType}">
-                <constraints nullable="true" />
-            </column>
-            
-            <column name="real_exit_point" type="${floatType}">
-                <constraints nullable="true" />
+            <column name="cycle" type="varchar(255)">
+                <constraints nullable="false" />
             </column>
             
             <column name="creator_id" type="bigint">

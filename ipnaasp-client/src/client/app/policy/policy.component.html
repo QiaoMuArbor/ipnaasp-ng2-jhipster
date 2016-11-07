@@ -45,8 +45,9 @@
             </div>
             <div class="item-left">
               <div class="activePolicy">策略单号: 11</div>
-              <div class="activePolicy">策略类别: 11</div>
-              <div class="activePolicy">所属老师: 111</div>
+              <div class="activePolicy">策略周期: 短线交易</div>
+              <div class="activePolicy">入场点位: 11</div>
+              <div class="activePolicy">出场点位: 111</div>
               <div class="activePolicy">所属团队: 111</div>
             </div>
             <div class="item-right" ngSwitch="待入场">
@@ -78,20 +79,20 @@
         <table class="qm-table">
           <thead>
           <th>策略单号</th>
-          <th>新建时间</th>
+          <th>策略类别</th>
+          <th>策略周期</th>
           <th>入场点位</th>
-          <th>入场时间</th>
           <th>出场点位</th>
-          <th>出场时间</th>
+          <th>所属老师</th>
+          <th>所属团队</th>
           </thead>
           <tbody>
           <tr>
             <td style="text-align:center ">1</td>
-            <td style="text-align:center ">1</td>
-            <td style="text-align:center ">1</td>
-            <td style="text-align:center ">1</td>
-            <td style="text-align:center ">1</td>
-            <td style="text-align:center ">1</td>
+            <td style="text-align:center ">1/1</td>
+            <td style="text-align:center ">1/1</td>
+            <td style="text-align:center ">1/1</td>
+            <td style="text-align:center ">1/1</td>
           </tr>
           </tbody>
         </table>
@@ -132,32 +133,53 @@
           <form class="form-horizontal" role="form" style="width:60%;margin: auto">
             <div class="form-group">
               <label class="col-sm-2 control-label">策略类别</label>
-              <div class="col-sm-10">
-                <select name="policyType" ngModel="policyType" class="form-control" style="width:35%">
+              <div class="col-sm-4">
+                <select name="policyType" [(ngModel)]="policyType" class="form-control">
                   <option *ngFor="let type of policyTypes" [value]="type">{{type}}</option>
+                </select>
+              </div>
+              <label class="col-sm-2 control-label">策略周期</label>
+              <div class="col-sm-4">
+                <select name="policyCycle" [(ngModel)]="policyCycle" class="form-control">
+                  <option *ngFor="let cycle of PolicyCycles" [value]="cycle">{{cycle}}</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">策略方向</label>
-              <div class="col-sm-10">
-
+              <div class="col-sm-4">
+                <select name="policyDirection" [(ngModel)]="policyDirection" class="form-control">
+                  <option *ngFor="let pdirection of policyDirections" [value]="pdirection">{{pdirection}}</option>
+                </select>
               </div>
-            </div>
-            <div class="form-group">
               <label class="col-sm-2 control-label">策略状态</label>
-
+              <div class="col-sm-4">
+                <select name="policyStatus" [(ngModel)]="policyStatus" class="form-control">
+                  <option *ngFor="let status of PolicyStatuses" [value]="status">{{status}}</option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">入场点位</label>
-              <div class="col-sm-10">
-                <input type="text" (keyup)="policyEntryPointOnKey($event)" class="form-control" placeholder="请输入当前策略类别的入场点">
+              <div class="col-sm-4">
+                <input type="text" (keyup)="policyEntryPointOnKey($event)" class="form-control" placeholder="请输入入场点">
+              </div>
+              <label class="col-sm-2 control-label">出场点位</label>
+              <div class="col-sm-4">
+                <input type="text" (keyup)="policyExitPointOnKey($event)" class="form-control" placeholder="请输入出场点">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-2 control-label">出场点位</label>
+              <label class="col-sm-2 control-label">策略理由</label>
               <div class="col-sm-10">
-                <input type="text" (keyup)="policyExitPointOnKey($event)" class="form-control" placeholder="请输入当前策略类别的出场点">
+                <input type="text" (keyup)="policyReasonOnKey($event)" class="form-control" placeholder="请输入策略理由!">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-12">
+                <label >
+                  <input type="checkbox" id="pushPolicyFlag" [(ngModel)]="pushPolicyFlag" name="pushPolicyFlag"> 推送策略
+                </label>
               </div>
             </div>
             <div class="form-group" style="margin-top:35px;">

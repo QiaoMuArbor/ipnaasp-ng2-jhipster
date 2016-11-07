@@ -5,8 +5,6 @@
 }
 
 .alarm-list .list-item,.edit-list-item {
-  /*border-left-width:5px;*/
-  /*border-left-style:solid;*/
   height:auto;
   background-color:#ffffff;
   min-height:95px;
@@ -90,7 +88,7 @@
 .escalation-wrap {
   padding-top:10px;
   padding-left:10px;
-/*  width:80%;*/
+  /*width:80%;*/
 }
 
 .escalation-wrap p {
@@ -111,7 +109,7 @@
 .history-wrap {
   padding-top:35px;
   padding-left:10px;
-  width:100%;
+  /*width:100%;*/
 }
 
 .form-control {

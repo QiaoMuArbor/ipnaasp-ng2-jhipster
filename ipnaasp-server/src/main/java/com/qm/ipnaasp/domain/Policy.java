@@ -16,6 +16,8 @@ import com.qm.ipnaasp.domain.enumeration.PolicyType;
 
 import com.qm.ipnaasp.domain.enumeration.PolicyStatus;
 
+import com.qm.ipnaasp.domain.enumeration.PolicyCycle;
+
 /**
  * A Policy.
  */
@@ -69,11 +71,10 @@ public class Policy implements Serializable {
     @Column(name = "push", nullable = false)
     private Boolean push;
 
-    @Column(name = "real_entry_point")
-    private Float realEntryPoint;
-
-    @Column(name = "real_exit_point")
-    private Float realExitPoint;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "cycle", nullable = false)
+    private PolicyCycle cycle;
 
     @ManyToOne
     @NotNull
@@ -225,30 +226,17 @@ public class Policy implements Serializable {
         this.push = push;
     }
 
-    public Float getRealEntryPoint() {
-        return realEntryPoint;
+    public PolicyCycle getCycle() {
+        return cycle;
     }
 
-    public Policy realEntryPoint(Float realEntryPoint) {
-        this.realEntryPoint = realEntryPoint;
+    public Policy cycle(PolicyCycle cycle) {
+        this.cycle = cycle;
         return this;
     }
 
-    public void setRealEntryPoint(Float realEntryPoint) {
-        this.realEntryPoint = realEntryPoint;
-    }
-
-    public Float getRealExitPoint() {
-        return realExitPoint;
-    }
-
-    public Policy realExitPoint(Float realExitPoint) {
-        this.realExitPoint = realExitPoint;
-        return this;
-    }
-
-    public void setRealExitPoint(Float realExitPoint) {
-        this.realExitPoint = realExitPoint;
+    public void setCycle(PolicyCycle cycle) {
+        this.cycle = cycle;
     }
 
     public User getCreator() {
@@ -336,8 +324,7 @@ public class Policy implements Serializable {
             ", exitPoint='" + exitPoint + "'" +
             ", reason='" + reason + "'" +
             ", push='" + push + "'" +
-            ", realEntryPoint='" + realEntryPoint + "'" +
-            ", realExitPoint='" + realExitPoint + "'" +
+            ", cycle='" + cycle + "'" +
             '}';
     }
 }
