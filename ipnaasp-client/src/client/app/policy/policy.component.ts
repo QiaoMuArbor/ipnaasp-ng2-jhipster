@@ -46,25 +46,9 @@ export class PolicyComponent {
   }
   ngOnInit() {
     this._policyService.isClickPolicyFlag = true;
-    console.log("ngOnInit");
-    let freshTimer = setInterval(() => {
-      console.log("my-alarms 定时器正在运行....");
-      this._policyService.queryMyPolicies();
-    }, 5000);
-    this.freshTimersInfo.set('my-policy', freshTimer);
-    console.log("my-policy 定时器启动");
-  }
-
-  private closeFresh(type:string) {
-    if (this.freshTimersInfo.get(type)) {
-      clearInterval(this.freshTimersInfo.get(type));
-      console.log(type + " 定时器关闭");
-    }
   }
   ngOnDestroy() {
     this._policyService.isClickPolicyFlag = false;
-    console.log("ngOnDestroy");
-    this.closeFresh("my-policy");
   }
 
   policyEntryPointOnKey(event: any) {
