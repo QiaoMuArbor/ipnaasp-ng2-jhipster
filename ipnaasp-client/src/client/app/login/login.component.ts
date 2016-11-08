@@ -2,7 +2,6 @@ import { Router } from '@angular/router';
 import { PolicyService } from '../shared/index';
 import { Component, Renderer, ElementRef } from '@angular/core';
 import { LoginService } from '../login/login.service';
-import { AuthServerProvider,Account } from'../shared/index';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +13,6 @@ import { AuthServerProvider,Account } from'../shared/index';
 
 export class LoginComponent {
   private logining: boolean;
-  account: Account;
   private vm:any = {
     authenticationError:false,
     password:'',

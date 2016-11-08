@@ -19,7 +19,7 @@ import { MoreComponentModule } from './more/index';
 import { LoginComponentModule } from './login/index';
 import { registerComponentModule } from './register/index';
 import { AUTH_PROVIDERS,provideAuth } from 'angular2-jwt';
-import { AuthHttp } from './shared/http/auth-http.service';
+
 
 @NgModule({
   imports: [BrowserModule, HttpModule, RouterModule.forRoot(routes), SharedModule.forRoot()
@@ -39,7 +39,6 @@ import { AuthHttp } from './shared/http/auth-http.service';
 
   providers: [
     AUTH_PROVIDERS,
-    AuthHttp,
     provideAuth({
       headerName: "authorization",
       headerPrefix: "Bearer",

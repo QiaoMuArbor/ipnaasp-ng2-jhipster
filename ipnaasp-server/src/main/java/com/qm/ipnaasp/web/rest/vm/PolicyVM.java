@@ -18,42 +18,59 @@ import java.time.ZonedDateTime;
  */
 public class PolicyVM {
 
-    private PolicyType type;
-    private Boolean direction;
-    private PolicyStatus status;
+    private Long id;
+    private PolicyType policyType;
+    private PolicyCycle policyCycle;
+    private Boolean policyDirection;
+    private PolicyStatus policyStatus;
     private ZonedDateTime createTime;
     private ZonedDateTime entryTime;
     private ZonedDateTime exitTime;
     private Float entryPoint;
     private Float exitPoint;
     private String reason;
-    private Boolean push;
-    private PolicyCycle cycle;
-    private String login;
-//    private Team team;
+    private Boolean pushPolicyFlag;
+    private String creator;
+    private String team;
 
-    public PolicyType getType() {
-        return type;
+    public Long getId() {
+        return id;
     }
 
-    public void setType(PolicyType type) {
-        this.type = type;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Boolean getDirection() {
-        return direction;
+    public PolicyType getPolicyType() {
+        return policyType;
     }
 
-    public void setDirection(Boolean direction) {
-        this.direction = direction;
+    public void setPolicyType(PolicyType policyType) {
+        this.policyType = policyType;
     }
 
-    public PolicyStatus getStatus() {
-        return status;
+    public PolicyCycle getPolicyCycle() {
+        return policyCycle;
     }
 
-    public void setStatus(PolicyStatus status) {
-        this.status = status;
+    public void setPolicyCycle(PolicyCycle policyCycle) {
+        this.policyCycle = policyCycle;
+    }
+
+    public Boolean getPolicyDirection() {
+        return policyDirection;
+    }
+
+    public void setPolicyDirection(Boolean policyDirection) {
+        this.policyDirection = policyDirection;
+    }
+
+    public PolicyStatus getPolicyStatus() {
+        return policyStatus;
+    }
+
+    public void setPolicyStatus(PolicyStatus policyStatus) {
+        this.policyStatus = policyStatus;
     }
 
     public ZonedDateTime getCreateTime() {
@@ -104,45 +121,47 @@ public class PolicyVM {
         this.reason = reason;
     }
 
-    public Boolean getPush() {
-        return push;
+    public Boolean getPushPolicyFlag() {
+        return pushPolicyFlag;
     }
 
-    public void setPush(Boolean push) {
-        this.push = push;
+    public void setPushPolicyFlag(Boolean pushPolicyFlag) {
+        this.pushPolicyFlag = pushPolicyFlag;
     }
 
-    public PolicyCycle getCycle() {
-        return cycle;
+    public String getCreator() {
+        return creator;
     }
 
-    public void setCycle(PolicyCycle cycle) {
-        this.cycle = cycle;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
-    public String getLogin() {
-        return login;
+    public String getTeam() {
+        return team;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setTeam(String team) {
+        this.team = team;
     }
 
     @Override
     public String toString() {
         return "PolicyVM{" +
-            "type=" + type +
-            ", direction=" + direction +
-            ", status=" + status +
+            "id=" + id +
+            ", policyType=" + policyType +
+            ", policyCycle=" + policyCycle +
+            ", policyDirection=" + policyDirection +
+            ", policyStatus=" + policyStatus +
             ", createTime=" + createTime +
             ", entryTime=" + entryTime +
             ", exitTime=" + exitTime +
             ", entryPoint=" + entryPoint +
             ", exitPoint=" + exitPoint +
             ", reason='" + reason + '\'' +
-            ", push=" + push +
-            ", cycle=" + cycle +
-            ", login='" + login + '\'' +
+            ", pushPolicyFlag=" + pushPolicyFlag +
+            ", creator='" + creator + '\'' +
+            ", team='" + team + '\'' +
             '}';
     }
 }

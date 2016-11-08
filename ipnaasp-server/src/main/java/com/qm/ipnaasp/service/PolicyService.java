@@ -4,6 +4,7 @@ import com.qm.ipnaasp.domain.Policy;
 import com.qm.ipnaasp.domain.User;
 import com.qm.ipnaasp.repository.PolicyRepository;
 import com.qm.ipnaasp.repository.UserRepository;
+import com.qm.ipnaasp.security.SecurityUtils;
 import com.qm.ipnaasp.web.rest.vm.PolicyVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,15 +45,18 @@ public class PolicyService {
 
     public Policy createPolicy(PolicyVM PolicyVM) {
         Policy policy = new Policy();
-        policy.setType(PolicyVM.getType());
-        policy.setCycle(PolicyVM.getCycle());
-        policy.setDirection(PolicyVM.getDirection());
-        policy.setStatus(PolicyVM.getStatus());
+        policy.setType(PolicyVM.getPolicyType());
+        policy.setCycle(PolicyVM.getPolicyCycle());
+        policy.setDirection(PolicyVM.getPolicyDirection());
+        policy.setStatus(PolicyVM.getPolicyStatus());
         policy.setEntryPoint(PolicyVM.getEntryPoint());
         policy.setExitPoint(PolicyVM.getExitPoint());
         policy.setReason(PolicyVM.getReason());
-        policy.setPush(PolicyVM.getPush());
-//        Optional<User> login = userRepository.findOneByLogin(PolicyVM.getLogin().toLowerCase()).isPresent());
+        policy.setPush(PolicyVM.getPushPolicyFlag());
+        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
+            policy.setCreator(u);
+            log.debug("get current user: {}", u);
+        });
         policy.setCreateTime(ZonedDateTime.now());
         Policy result = policyRepository.save(policy);
         log.debug("Created Information for User: {}", policy);

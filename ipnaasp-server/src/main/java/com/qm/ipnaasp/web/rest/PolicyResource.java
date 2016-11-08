@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.qm.ipnaasp.domain.Policy;
 import com.qm.ipnaasp.service.PolicyService;
 import com.qm.ipnaasp.web.rest.util.HeaderUtil;
+import com.qm.ipnaasp.web.rest.vm.PolicyVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -26,34 +27,45 @@ import java.util.Optional;
 public class PolicyResource {
 
     private final Logger log = LoggerFactory.getLogger(PolicyResource.class);
-        
+
     @Inject
     private PolicyService policyService;
 
     /**
      * POST  /policies : Create a new policy.
      *
-     * @param policy the policy to create
+     * @param policyVM the policy to create
      * @return the ResponseEntity with status 201 (Created) and with body the new policy, or with status 400 (Bad Request) if the policy has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/policies")
     @Timed
-    public ResponseEntity<Policy> createPolicy(@Valid @RequestBody Policy policy) throws URISyntaxException {
-        log.debug("REST request to save Policy : {}", policy);
-        if (policy.getId() != null) {
+    public ResponseEntity<Policy> createPolicy(@Valid @RequestBody PolicyVM policyVM) throws URISyntaxException {
+        log.debug("REST request to save Policy : {}", policyVM);
+        if (policyVM.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("policy", "idexists", "A new policy cannot already have an ID")).body(null);
         }
-        Policy result = policyService.save(policy);
+        Policy result = policyService.createPolicy(policyVM);
         return ResponseEntity.created(new URI("/api/policies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("policy", result.getId().toString()))
             .body(result);
     }
+//    public ResponseEntity<Policy> createPolicy(@Valid @RequestBody Policy policy) throws URISyntaxException {
+//        log.debug("REST request to save Policy : {}", policy);
+//        if (policy.getId() != null) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("policy", "idexists", "A new policy cannot already have an ID")).body(null);
+//        }
+//        Policy result = policyService.save(policy);
+//        return ResponseEntity.created(new URI("/api/policies/" + result.getId()))
+//            .headers(HeaderUtil.createEntityCreationAlert("policy", result.getId().toString()))
+//            .body(result);
+//    }
+
 
     /**
      * PUT  /policies : Updates an existing policy.
      *
-     * @param policy the policy to update
+     * @param policyVM the policy to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated policy,
      * or with status 400 (Bad Request) if the policy is not valid,
      * or with status 500 (Internal Server Error) if the policy couldnt be updated
@@ -61,17 +73,26 @@ public class PolicyResource {
      */
     @PutMapping("/policies")
     @Timed
-    public ResponseEntity<Policy> updatePolicy(@Valid @RequestBody Policy policy) throws URISyntaxException {
-        log.debug("REST request to update Policy : {}", policy);
-        if (policy.getId() == null) {
-            return createPolicy(policy);
+    public ResponseEntity<Policy> updatePolicy(@Valid @RequestBody PolicyVM policyVM) throws URISyntaxException {
+        log.debug("REST request to update Policy : {}", policyVM);
+        if (policyVM.getId() == null) {
+            return createPolicy(policyVM);
         }
-        Policy result = policyService.save(policy);
+        Policy result = policyService.createPolicy(policyVM);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("policy", policy.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert("policy", policyVM.getId().toString()))
             .body(result);
     }
-
+//    public ResponseEntity<Policy> updatePolicy(@Valid @RequestBody Policy policy) throws URISyntaxException {
+//        log.debug("REST request to update Policy : {}", policy);
+//        if (policy.getId() == null) {
+//            return createPolicy(policy);
+//        }
+//        Policy result = policyService.save(policy);
+//        return ResponseEntity.ok()
+//            .headers(HeaderUtil.createEntityUpdateAlert("policy", policy.getId().toString()))
+//            .body(result);
+//    }
     /**
      * GET  /policies : get all the policies.
      *

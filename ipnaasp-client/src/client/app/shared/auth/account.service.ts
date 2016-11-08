@@ -3,7 +3,6 @@ import { Response} from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { MockCfg } from '../../mock';
-// import {AuthHttp} from '../http/index';
 import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
@@ -13,7 +12,7 @@ export class AccountService  {
     ) { }
 
     get(): Observable<any> {
-      return this.authHttp.get('api/account').map((res: Response) => res.json());
+      return this.authHttp.get(MockCfg.baseUrl+MockCfg.accountUrl).map((res: Response) => res.json());
     }
 
     save(account: any): Observable<Response> {

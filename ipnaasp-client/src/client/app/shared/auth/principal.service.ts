@@ -1,6 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
 import { AccountService } from './account.service';
-import { Account } from '../model/account.model';
 
 @Injectable()
 export class Principal {

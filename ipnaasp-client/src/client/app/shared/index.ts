@@ -1,7 +1,7 @@
 /**
  * This barrel file provides the exports for the shared resources (services, components).
  */
-export * from './http/index';
+
 export * from './config/env.config';
 // export * from './services/user/user.service';
 export * from './services/policy/policy.service';
@@ -30,7 +30,7 @@ export * from './auth/has-authority.directive';
 // export * from './directive/show-validation.directive';
 // export * from './directive/sort-by.directive';
 // export * from './directive/sort.directive';
-export * from './model/account.model';
+export * from './model/policyType.model';
 // export * from './pipe/capitalize.pipe';
 // export * from './pipe/filter.pipe';
 // export * from './pipe/keys.pipe';

@@ -6,7 +6,7 @@
         <li>{{_policyService.policyType}}</li>
         <li *ngIf = "_policyService._curTypeFlag" style="display: inline-block;">{{_policyService.curType}}</li>
         <li class="active">
-          <a data-toggle="modal" data-target="#myAddPolicyModal" class="btn btn-success btn-banner-oper">新建投资策略</a>
+          <a data-toggle="modal" data-target="#myAddPolicyModal" class="btn btn-success btn-banner-oper" (click)="beforeClickCreatePolicyBtn()">新建投资策略</a>
         </li>
       </ol>
     </div>
@@ -30,8 +30,8 @@
           <button type="button" class="form-control"><i class="fa fa-search" title="过滤"></i></button>
         </div>
       </div>
-      <!--<div class="alarm-list" *ngFor="let alarmInfo of alarmsInfo">-->
-      <div class="alarm-list">
+      <div class="alarm-list" *ngFor="let policyData of _policyService.policyDatas">
+      <!--<div class="alarm-list">-->
         <div class="alarm-query-item itemBorder">
           <div class="list-item clearfix" (click)="clickStrategyList(StrategyInfo)">
             <div class="warn-topLine">
@@ -135,13 +135,13 @@
               <label class="col-sm-2 control-label">策略类别</label>
               <div class="col-sm-4">
                 <select name="policyType" [(ngModel)]="policyType" class="form-control">
-                  <option *ngFor="let type of policyTypes" [value]="type">{{type}}</option>
+                  <option *ngFor="let type of policyTypesArray" [value]="type">{{type}}</option>
                 </select>
               </div>
               <label class="col-sm-2 control-label">策略周期</label>
               <div class="col-sm-4">
                 <select name="policyCycle" [(ngModel)]="policyCycle" class="form-control">
-                  <option *ngFor="let cycle of PolicyCycles" [value]="cycle">{{cycle}}</option>
+                  <option *ngFor="let cycle of policyCyclesArray" [value]="cycle">{{cycle}}</option>
                 </select>
               </div>
             </div>
@@ -149,13 +149,13 @@
               <label class="col-sm-2 control-label">策略方向</label>
               <div class="col-sm-4">
                 <select name="policyDirection" [(ngModel)]="policyDirection" class="form-control">
-                  <option *ngFor="let pdirection of policyDirections" [value]="pdirection">{{pdirection}}</option>
+                  <option *ngFor="let pdirection of policyDirectionsArray" [value]="pdirection">{{pdirection}}</option>
                 </select>
               </div>
               <label class="col-sm-2 control-label">策略状态</label>
               <div class="col-sm-4">
                 <select name="policyStatus" [(ngModel)]="policyStatus" class="form-control">
-                  <option *ngFor="let status of PolicyStatuses" [value]="status">{{status}}</option>
+                  <option *ngFor="let status of PolicyStatusesArray" [value]="status">{{status}}</option>
                 </select>
               </div>
             </div>
@@ -183,7 +183,7 @@
               </div>
             </div>
             <div class="form-group" style="margin-top:35px;">
-                  <button type="submit" class="modal-btn-confirm" (click)="clickCreatePolicyBtn()">创建</button>
+                  <button type="submit" class="modal-btn-confirm" (click)="clickCreatePolicyBtn()" *ngIf="principal.authenticated">创建</button>
                   <button class="modal-btn-confirm" data-dismiss="modal">取消</button>
             </div>
           </form>
