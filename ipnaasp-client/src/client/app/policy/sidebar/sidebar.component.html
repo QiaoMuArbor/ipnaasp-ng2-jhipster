@@ -5,24 +5,24 @@
   </div>
   <ul class="menu">
       <li [ngClass]="{active: isOn[0], disabled: false}" (click)="clickToMyAllPolicy()"><a>
-        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;我的策略 (1)</a></li>
+        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;我的策略 ({{_policyService.policyNumList[0]}})</a></li>
       <li class="divider"></li>
       <li [ngClass]="{active: isOn[1], disabled: false}" (click)="clickToMyWaitPolicy()"><a>
-        &nbsp;&nbsp;待入场&nbsp;<span class="alarm_span">1</span></a></li>
+        &nbsp;&nbsp;待入场&nbsp;<span class="alarm_span">{{_policyService.policyNumList[1]}}</span></a></li>
       <li [ngClass]="{active: isOn[2], disabled: false}" (click)="clickToMyEnterPolicy()"><a>
-        &nbsp;&nbsp;已入场&nbsp;<span class="alarm_span">1</span></a></li>
+        &nbsp;&nbsp;已入场&nbsp;<span class="alarm_span">{{_policyService.policyNumList[2]}}</span></a></li>
       <li [ngClass]="{active: isOn[3], disabled: false}" (click)="clickToMyExitPolicy()"><a>
-        &nbsp;&nbsp;已出场&nbsp;<span class="alarm_span">1</span></a></li>
+        &nbsp;&nbsp;已出场&nbsp;<span class="alarm_span">{{_policyService.policyNumList[3]}}</span></a></li>
       <li class="divider"></li>
       <li [ngClass]="{active: isOn[4], disabled: false}" (click)="clickToSubAllPolicy()"><a>
-        <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;订阅的策略 (2)</a></li>
+        <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;订阅的策略 ({{_policyService.policyNumList[4]}})</a></li>
       <li class="divider"></li>
       <li [ngClass]="{active: isOn[5], disabled: false}" (click)="clickToSubWaitPolicy()"><a>
-        &nbsp;&nbsp;待入场&nbsp;<span class="alarm_span">1</span></a></li>
+        &nbsp;&nbsp;待入场&nbsp;<span class="alarm_span">{{_policyService.policyNumList[5]}}</span></a></li>
       <li [ngClass]="{active: isOn[6], disabled: false}" (click)="clickToSubEnterPolicy()"><a>
-        &nbsp;&nbsp;已入场&nbsp;<span class="alarm_span">1</span></a></li>
+        &nbsp;&nbsp;已入场&nbsp;<span class="alarm_span">{{_policyService.policyNumList[6]}}</span></a></li>
       <li [ngClass]="{active: isOn[7], disabled: false}" (click)="clickToSubExitPolicy()"><a>
-        &nbsp;&nbsp;已出场&nbsp;<span class="alarm_span">1</span></a></li>
+        &nbsp;&nbsp;已出场&nbsp;<span class="alarm_span">{{_policyService.policyNumList[7]}}</span></a></li>
       <li class="divider"></li>
   </ul>
 </div>

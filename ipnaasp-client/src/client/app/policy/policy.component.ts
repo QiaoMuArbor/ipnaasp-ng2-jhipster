@@ -13,27 +13,16 @@ import { AuthHttp } from 'angular2-jwt';
 
 export class PolicyComponent {
 
-  policyTypesArray: Array<string> = ["黄金", "白银"];
-  policyTypes: Array<string> = ["gold", "silver"];
   policyType:string = "黄金";
-  // 策略周期
-  policyCyclesArray: Array<string> = ["超短线", "短线", "中线", "长线"];
-  policyCycles: Array<string> = ["UshortTermO", "ShortTermO", "CenterlineO", "LongTermO"];
   policyCycle:string = "短线";
-  // 策略方向
-  policyDirectionsArray: Array<string> = ["空", "多"];
-  policyDirections: Array<string> = ["false", "true"];
   policyDirection:string = "空";
-  // 策略状态
-  PolicyStatusesArray:Array<string> = ["待入场", "已入场"];
-  PolicyStatuses:Array<string> = ["waitPolicy", "enterPolicy"];
   policyStatus:string = "待入场";
 
   policyEntryPointValue: string;
   policyEixtPointValue: string;
   policyReasonValue: string;
   pushPolicyFlag: boolean;
-  private freshTimersInfo = new Map<string,any>();
+
   constructor(
     private _policyService: PolicyService,
     public authHttp: AuthHttp,
@@ -87,30 +76,30 @@ export class PolicyComponent {
     this.principal.identity().then((account) => {
       if(account != null && account != undefined){
         let _policyType = this.policyType;
-        for(let i=0;i<this.policyTypesArray.length;i++){
-          if(this.policyType === this.policyTypesArray[i]){
-            _policyType = this.policyTypes[i];
+        for(let i=0;i<this._policyService.policyTypesArray.length;i++){
+          if(this.policyType === this._policyService.policyTypesArray[i]){
+            _policyType = this._policyService.policyTypes[i];
             break;
           }
         }
         let _policyCycle = this.policyCycle;
-        for(let i=0;i<this.policyCyclesArray.length;i++){
-          if(this.policyCycle === this.policyCyclesArray[i]){
-            _policyCycle = this.policyCycles[i];
+        for(let i=0;i<this._policyService.policyCyclesArray.length;i++){
+          if(this.policyCycle === this._policyService.policyCyclesArray[i]){
+            _policyCycle = this._policyService.policyCycles[i];
             break;
           }
         }
         let _policyDirection = this.policyDirection;
-        for(let i=0;i<this.policyDirectionsArray.length;i++){
-          if(this.policyDirection === this.policyDirectionsArray[i]){
-            _policyDirection = this.policyDirections[i];
+        for(let i=0;i<this._policyService.policyDirectionsArray.length;i++){
+          if(this.policyDirection === this._policyService.policyDirectionsArray[i]){
+            _policyDirection = this._policyService.policyDirections[i];
             break;
           }
         }
         let _policyStatus = this.policyStatus;
-        for(let i=0;i<this.PolicyStatusesArray.length;i++){
-          if(this.policyStatus === this.PolicyStatusesArray[i]){
-            _policyStatus = this.PolicyStatuses[i];
+        for(let i=0;i<this._policyService.policyStatusesArray.length;i++){
+          if(this.policyStatus === this._policyService.policyStatusesArray[i]){
+            _policyStatus = this._policyService.policyStatuses[i];
             break;
           }
         }

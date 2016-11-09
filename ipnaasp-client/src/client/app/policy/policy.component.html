@@ -135,13 +135,13 @@
               <label class="col-sm-2 control-label">策略类别</label>
               <div class="col-sm-4">
                 <select name="policyType" [(ngModel)]="policyType" class="form-control">
-                  <option *ngFor="let type of policyTypesArray" [value]="type">{{type}}</option>
+                  <option *ngFor="let type of _policyService.policyTypesArray" [value]="type">{{type}}</option>
                 </select>
               </div>
               <label class="col-sm-2 control-label">策略周期</label>
               <div class="col-sm-4">
                 <select name="policyCycle" [(ngModel)]="policyCycle" class="form-control">
-                  <option *ngFor="let cycle of policyCyclesArray" [value]="cycle">{{cycle}}</option>
+                  <option *ngFor="let cycle of _policyService.policyCyclesArray" [value]="cycle">{{cycle}}</option>
                 </select>
               </div>
             </div>
@@ -149,13 +149,13 @@
               <label class="col-sm-2 control-label">策略方向</label>
               <div class="col-sm-4">
                 <select name="policyDirection" [(ngModel)]="policyDirection" class="form-control">
-                  <option *ngFor="let pdirection of policyDirectionsArray" [value]="pdirection">{{pdirection}}</option>
+                  <option *ngFor="let pdirection of _policyService.policyDirectionsArray" [value]="pdirection">{{pdirection}}</option>
                 </select>
               </div>
               <label class="col-sm-2 control-label">策略状态</label>
               <div class="col-sm-4">
                 <select name="policyStatus" [(ngModel)]="policyStatus" class="form-control">
-                  <option *ngFor="let status of PolicyStatusesArray" [value]="status">{{status}}</option>
+                  <option *ngFor="let status of _policyService.policyStatusesArray" [value]="status">{{status}}</option>
                 </select>
               </div>
             </div>

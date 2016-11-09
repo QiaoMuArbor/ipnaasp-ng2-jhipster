@@ -40,7 +40,7 @@ public class PolicyResource {
      */
     @PostMapping("/policies")
     @Timed
-    public ResponseEntity<Policy> createPolicy(@Valid @RequestBody PolicyVM policyVM) throws URISyntaxException {
+    public ResponseEntity<Policy> createMyPolicy(@Valid @RequestBody PolicyVM policyVM) throws URISyntaxException {
         log.debug("REST request to save Policy : {}", policyVM);
         if (policyVM.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("policy", "idexists", "A new policy cannot already have an ID")).body(null);
@@ -50,16 +50,19 @@ public class PolicyResource {
             .headers(HeaderUtil.createEntityCreationAlert("policy", result.getId().toString()))
             .body(result);
     }
-//    public ResponseEntity<Policy> createPolicy(@Valid @RequestBody Policy policy) throws URISyntaxException {
-//        log.debug("REST request to save Policy : {}", policy);
-//        if (policy.getId() != null) {
-//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("policy", "idexists", "A new policy cannot already have an ID")).body(null);
-//        }
-//        Policy result = policyService.save(policy);
-//        return ResponseEntity.created(new URI("/api/policies/" + result.getId()))
-//            .headers(HeaderUtil.createEntityCreationAlert("policy", result.getId().toString()))
-//            .body(result);
-//    }
+
+    @PostMapping("/myPolicies")
+    @Timed
+    public ResponseEntity<Policy> createPolicy(@Valid @RequestBody Policy policy) throws URISyntaxException {
+        log.debug("REST request to save Policy : {}", policy);
+        if (policy.getId() != null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("policy", "idexists", "A new policy cannot already have an ID")).body(null);
+        }
+        Policy result = policyService.save(policy);
+        return ResponseEntity.created(new URI("/api/policies/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("policy", result.getId().toString()))
+            .body(result);
+    }
 
 
     /**
@@ -71,28 +74,31 @@ public class PolicyResource {
      * or with status 500 (Internal Server Error) if the policy couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/policies")
+    @PutMapping("/myPolicies")
     @Timed
     public ResponseEntity<Policy> updatePolicy(@Valid @RequestBody PolicyVM policyVM) throws URISyntaxException {
         log.debug("REST request to update Policy : {}", policyVM);
         if (policyVM.getId() == null) {
-            return createPolicy(policyVM);
+            return createMyPolicy(policyVM);
         }
         Policy result = policyService.createPolicy(policyVM);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("policy", policyVM.getId().toString()))
             .body(result);
     }
-//    public ResponseEntity<Policy> updatePolicy(@Valid @RequestBody Policy policy) throws URISyntaxException {
-//        log.debug("REST request to update Policy : {}", policy);
-//        if (policy.getId() == null) {
-//            return createPolicy(policy);
-//        }
-//        Policy result = policyService.save(policy);
-//        return ResponseEntity.ok()
-//            .headers(HeaderUtil.createEntityUpdateAlert("policy", policy.getId().toString()))
-//            .body(result);
-//    }
+
+    @PutMapping("/policies")
+    @Timed
+    public ResponseEntity<Policy> updatePolicy(@Valid @RequestBody Policy policy) throws URISyntaxException {
+        log.debug("REST request to update Policy : {}", policy);
+        if (policy.getId() == null) {
+            return createPolicy(policy);
+        }
+        Policy result = policyService.save(policy);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert("policy", policy.getId().toString()))
+            .body(result);
+    }
     /**
      * GET  /policies : get all the policies.
      *
