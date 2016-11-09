@@ -1,6 +1,6 @@
 import {Directive, ElementRef,Component,Input,Output} from '@angular/core';
 import {Router} from '@angular/router';
-import { AuthServerProvider, Principal } from '../shared/index';
+import { AuthServerProvider, Principal,PolicyService } from '../shared/index';
 import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
 import { LoginService } from '../login/login.service';
@@ -32,6 +32,7 @@ export class HeaderMenuComponent {
       private principal: Principal,
       private $localStorage: LocalStorageService,
       private $sessionStorage: SessionStorageService,
+      private _policyService: PolicyService
     ) {}
 
     ngOnInit() {
@@ -46,6 +47,8 @@ export class HeaderMenuComponent {
     }
     logout(){
       console.log("logout");
+      this._policyService.closePolicyFresh();
+      this._policyService.policyDatas = [];
       this.principal.authenticated = false;
       this.$localStorage.clear('authenticationToken');
       this.$sessionStorage.clear('authenticationToken');

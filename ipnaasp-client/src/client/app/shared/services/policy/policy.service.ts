@@ -16,32 +16,26 @@ export class PolicyService {
   constructor (
     public authHttp: AuthHttp,
   ) {
-    this.ngOnInit();
-  }
-  ngOnInit() {
-    console.log("ngOnInit");
-    let freshTimer = setInterval(() => {
-      console.log("my-alarms 定时器正在运行....");
-      this.queryMyPolicies();
-    }, 5000);
-    this.freshTimersInfo.set('my-policy', freshTimer);
-    console.log("my-policy 定时器启动");
+
   }
 
-  private closeFresh(type:string) {
-    if (this.freshTimersInfo.get(type)) {
-      clearInterval(this.freshTimersInfo.get(type));
-      console.log(type + " 定时器关闭");
-    }
+  public startPolicyFresh(){
+    let freshTimer = setInterval(() => {
+      console.log("policy定时器正在运行....");
+      this.queryMyPolicies();
+    }, 5000);
+    this.freshTimersInfo.set("policy", freshTimer);
+    console.log("policy定时器启动");
   }
-  ngOnDestroy() {
-    console.log("ngOnDestroy");
-    this.closeFresh("my-policy");
+  public closePolicyFresh() {
+    if (this.freshTimersInfo.get("policy")) {
+      clearInterval(this.freshTimersInfo.get("policy"));
+      console.log("policy定时器关闭");
+    }
   }
 
   queryMyPolicies(){
-    this.authHttp.get(MockCfg.baseUrl + MockCfg.policiesUrl).subscribe(data => {
-      console.log(data.json());
+    this.authHttp.get(MockCfg.baseUrl + MockCfg.myPoliciesUrl).subscribe(data => {
       this.policyDatas = data.json();
       console.log(this.policyDatas);
       // 提示创建成功;

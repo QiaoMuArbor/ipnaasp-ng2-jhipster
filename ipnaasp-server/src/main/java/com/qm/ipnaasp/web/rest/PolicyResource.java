@@ -105,6 +105,13 @@ public class PolicyResource {
         return policyService.findAll();
     }
 
+    @GetMapping("/myPolicies")
+    @Timed
+    public List<Policy> getMyPolicies() {
+        log.debug("REST request to get all Policies");
+        return policyService.findMyPolicies();
+    }
+
     /**
      * GET  /policies/:id : get the "id" policy.
      *

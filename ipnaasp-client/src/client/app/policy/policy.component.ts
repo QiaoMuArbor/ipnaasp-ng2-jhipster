@@ -46,9 +46,15 @@ export class PolicyComponent {
   }
   ngOnInit() {
     this._policyService.isClickPolicyFlag = true;
+    this.principal.identity().then((account) => {
+      if(account != null && account != undefined){
+        this._policyService.startPolicyFresh();
+      }
+    });
   }
   ngOnDestroy() {
     this._policyService.isClickPolicyFlag = false;
+    this._policyService.closePolicyFresh();
   }
 
   policyEntryPointOnKey(event: any) {

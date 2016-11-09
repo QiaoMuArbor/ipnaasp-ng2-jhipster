@@ -4,4 +4,6 @@ export class MockCfg {
   public static authenticateUrl:String = '/api/authenticate';
   public static accountUrl:String = '/api/account';
   public static policiesUrl:String = '/api/policies';
+  public static myPoliciesUrl:String = '/api/myPolicies';
+
 }

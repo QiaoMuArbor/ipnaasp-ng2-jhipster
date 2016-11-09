@@ -43,6 +43,7 @@ public class PolicyService {
         return result;
     }
 
+    @Transactional(readOnly = true)
     public Policy createPolicy(PolicyVM PolicyVM) {
         Policy policy = new Policy();
         policy.setType(PolicyVM.getPolicyType());
@@ -71,6 +72,14 @@ public class PolicyService {
     public List<Policy> findAll() {
         log.debug("Request to get all Policies");
         List<Policy> result = policyRepository.findAll();
+
+        return result;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Policy> findMyPolicies() {
+        log.debug("Request to get my Policies");
+        List<Policy> result = policyRepository.findByCreatorIsCurrentUser();
 
         return result;
     }
