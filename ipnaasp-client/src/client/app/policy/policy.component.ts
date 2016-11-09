@@ -75,13 +75,13 @@ export class PolicyComponent {
     let createFlag:boolean = false;
     this.principal.identity().then((account) => {
       if(account != null && account != undefined){
-        let _policyType = this.policyType;
-        for(let i=0;i<this._policyService.policyTypesArray.length;i++){
-          if(this.policyType === this._policyService.policyTypesArray[i]){
-            _policyType = this._policyService.policyTypes[i];
-            break;
-          }
-        }
+        // let _policyType = this.policyType;
+        // for(let i=0;i<this._policyService.policyTypesArray.length;i++){
+        //   if(this.policyType === this._policyService.policyTypesArray[i]){
+        //     _policyType = this._policyService.policyTypes[i];
+        //     break;
+        //   }
+        // }
         let _policyCycle = this.policyCycle;
         for(let i=0;i<this._policyService.policyCyclesArray.length;i++){
           if(this.policyCycle === this._policyService.policyCyclesArray[i]){
@@ -104,7 +104,7 @@ export class PolicyComponent {
           }
         }
         let policyVM:any = {
-          policyType: _policyType,
+          policyType: this.policyType,
           policyCycle: _policyCycle,
           policyDirection: _policyDirection,
           policyStatus: _policyStatus,

@@ -28,7 +28,7 @@
         {
             "fieldName": "type",
             "fieldType": "PolicyType",
-            "fieldValues": "gold,silver",
+            "fieldValues": "黄金,白银",
             "fieldValidateRules": [
                 "required"
             ]
@@ -43,7 +43,7 @@
         {
             "fieldName": "status",
             "fieldType": "PolicyStatus",
-            "fieldValues": "waitPolicy,enterPolicy,exitPolicy",
+            "fieldValues": "待入场,已入场,已退场",
             "fieldValidateRules": [
                 "required"
             ]

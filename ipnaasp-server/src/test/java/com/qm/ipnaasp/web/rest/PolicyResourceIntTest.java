@@ -47,8 +47,8 @@ import com.qm.ipnaasp.domain.enumeration.PolicyCycle;
 @SpringBootTest(classes = IpnaaspApp.class)
 public class PolicyResourceIntTest {
 
-    private static final PolicyType DEFAULT_TYPE = PolicyType.gold;
-    private static final PolicyType UPDATED_TYPE = PolicyType.silver;
+    private static final PolicyType DEFAULT_TYPE = PolicyType.黄金;
+    private static final PolicyType UPDATED_TYPE = PolicyType.白银;
 
     private static final Boolean DEFAULT_DIRECTION = false;
     private static final Boolean UPDATED_DIRECTION = true;

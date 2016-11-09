@@ -16,8 +16,8 @@
         <div class="form-group">
             <label class="control-label" for="field_type">Type</label>
             <select class="form-control" name="type" ng-model="vm.policy.type" id="field_type" required>
-                <option value="gold">gold</option>
-                <option value="silver">silver</option>
+                <option value="黄金" data-translate="ipnaaspApp.PolicyType.黄金">黄金</option>
+                <option value="白银" data-translate="ipnaaspApp.PolicyType.白银">白银</option>
             </select>
             <div ng-show="editForm.type.$invalid">
                 <p class="help-block"
