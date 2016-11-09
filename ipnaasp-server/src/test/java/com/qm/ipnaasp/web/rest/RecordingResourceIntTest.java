@@ -46,8 +46,8 @@ import com.qm.ipnaasp.domain.enumeration.RecordingType;
 @SpringBootTest(classes = IpnaaspApp.class)
 public class RecordingResourceIntTest {
 
-    private static final RecordingType DEFAULT_TYPE = RecordingType.other;
-    private static final RecordingType UPDATED_TYPE = RecordingType.addPolicy;
+    private static final RecordingType DEFAULT_TYPE = RecordingType.其他;
+    private static final RecordingType UPDATED_TYPE = RecordingType.新建策略;
 
     private static final String DEFAULT_CONTENT = "AAAAA";
     private static final String UPDATED_CONTENT = "BBBBB";

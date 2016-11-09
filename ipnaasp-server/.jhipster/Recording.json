@@ -25,7 +25,7 @@
         {
             "fieldName": "type",
             "fieldType": "RecordingType",
-            "fieldValues": "other,addPolicy,entryPolicy,exitPolicy,sysClosePolicy",
+            "fieldValues": "其他,新建策略,入场策略,退场策略,系统自动关闭策略",
             "fieldValidateRules": [
                 "required"
             ]

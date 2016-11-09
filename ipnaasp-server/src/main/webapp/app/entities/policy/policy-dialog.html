@@ -41,9 +41,9 @@
         <div class="form-group">
             <label class="control-label" for="field_status">Status</label>
             <select class="form-control" name="status" ng-model="vm.policy.status" id="field_status" required>
-                <option value="waitPolicy">waitPolicy</option>
-                <option value="enterPolicy">enterPolicy</option>
-                <option value="exitPolicy">exitPolicy</option>
+                <option value="待入场" data-translate="ipnaaspApp.PolicyStatus.待入场">待入场</option>
+                <option value="已入场" data-translate="ipnaaspApp.PolicyStatus.已入场">已入场</option>
+                <option value="已退场" data-translate="ipnaaspApp.PolicyStatus.已退场">已退场</option>
             </select>
             <div ng-show="editForm.status.$invalid">
                 <p class="help-block"
@@ -145,10 +145,10 @@
         <div class="form-group">
             <label class="control-label" for="field_cycle">Cycle</label>
             <select class="form-control" name="cycle" ng-model="vm.policy.cycle" id="field_cycle" required>
-                <option value="UshortTermO">UshortTermO</option>
-                <option value="ShortTermO">ShortTermO</option>
-                <option value="CenterlineO">CenterlineO</option>
-                <option value="LongTermO">LongTermO</option>
+                <option value="超短线" data-translate="ipnaaspApp.PolicyCycle.超短线">超短线</option>
+                <option value="短线" data-translate="ipnaaspApp.PolicyCycle.短线">短线</option>
+                <option value="中线" data-translate="ipnaaspApp.PolicyCycle.中线">中线</option>
+                <option value="长线" data-translate="ipnaaspApp.PolicyCycle.长线">长线</option>
             </select>
             <div ng-show="editForm.cycle.$invalid">
                 <p class="help-block"

@@ -53,8 +53,8 @@ public class PolicyResourceIntTest {
     private static final Boolean DEFAULT_DIRECTION = false;
     private static final Boolean UPDATED_DIRECTION = true;
 
-    private static final PolicyStatus DEFAULT_STATUS = PolicyStatus.waitPolicy;
-    private static final PolicyStatus UPDATED_STATUS = PolicyStatus.enterPolicy;
+    private static final PolicyStatus DEFAULT_STATUS = PolicyStatus.待入场;
+    private static final PolicyStatus UPDATED_STATUS = PolicyStatus.已入场;
 
     private static final ZonedDateTime DEFAULT_CREATE_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_CREATE_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
@@ -80,8 +80,8 @@ public class PolicyResourceIntTest {
     private static final Boolean DEFAULT_PUSH = false;
     private static final Boolean UPDATED_PUSH = true;
 
-    private static final PolicyCycle DEFAULT_CYCLE = PolicyCycle.UshortTermO;
-    private static final PolicyCycle UPDATED_CYCLE = PolicyCycle.ShortTermO;
+    private static final PolicyCycle DEFAULT_CYCLE = PolicyCycle.超短线;
+    private static final PolicyCycle UPDATED_CYCLE = PolicyCycle.短线;
 
     @Inject
     private PolicyRepository policyRepository;

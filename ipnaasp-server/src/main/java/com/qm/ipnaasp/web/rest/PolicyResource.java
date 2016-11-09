@@ -38,7 +38,7 @@ public class PolicyResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new policy, or with status 400 (Bad Request) if the policy has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/policies")
+    @PostMapping("/myPolicies")
     @Timed
     public ResponseEntity<Policy> createMyPolicy(@Valid @RequestBody PolicyVM policyVM) throws URISyntaxException {
         log.debug("REST request to save Policy : {}", policyVM);
@@ -51,7 +51,7 @@ public class PolicyResource {
             .body(result);
     }
 
-    @PostMapping("/myPolicies")
+    @PostMapping("/policies")
     @Timed
     public ResponseEntity<Policy> createPolicy(@Valid @RequestBody Policy policy) throws URISyntaxException {
         log.debug("REST request to save Policy : {}", policy);

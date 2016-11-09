@@ -16,11 +16,11 @@
         <div class="form-group">
             <label class="control-label" for="field_type">Type</label>
             <select class="form-control" name="type" ng-model="vm.recording.type" id="field_type" required>
-                <option value="other">other</option>
-                <option value="addPolicy">addPolicy</option>
-                <option value="entryPolicy">entryPolicy</option>
-                <option value="exitPolicy">exitPolicy</option>
-                <option value="sysClosePolicy">sysClosePolicy</option>
+                <option value="其他" data-translate="ipnaaspApp.RecordingType.其他">其他</option>
+                <option value="新建策略" data-translate="ipnaaspApp.RecordingType.新建策略">新建策略</option>
+                <option value="入场策略" data-translate="ipnaaspApp.RecordingType.入场策略">入场策略</option>
+                <option value="退场策略" data-translate="ipnaaspApp.RecordingType.退场策略">退场策略</option>
+                <option value="系统自动关闭策略" data-translate="ipnaaspApp.RecordingType.系统自动关闭策略">系统自动关闭策略</option>
             </select>
             <div ng-show="editForm.type.$invalid">
                 <p class="help-block"

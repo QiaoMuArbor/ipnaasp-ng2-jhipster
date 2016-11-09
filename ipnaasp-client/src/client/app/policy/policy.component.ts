@@ -75,45 +75,18 @@ export class PolicyComponent {
     let createFlag:boolean = false;
     this.principal.identity().then((account) => {
       if(account != null && account != undefined){
-        // let _policyType = this.policyType;
-        // for(let i=0;i<this._policyService.policyTypesArray.length;i++){
-        //   if(this.policyType === this._policyService.policyTypesArray[i]){
-        //     _policyType = this._policyService.policyTypes[i];
-        //     break;
-        //   }
-        // }
-        let _policyCycle = this.policyCycle;
-        for(let i=0;i<this._policyService.policyCyclesArray.length;i++){
-          if(this.policyCycle === this._policyService.policyCyclesArray[i]){
-            _policyCycle = this._policyService.policyCycles[i];
-            break;
-          }
-        }
-        let _policyDirection = this.policyDirection;
-        for(let i=0;i<this._policyService.policyDirectionsArray.length;i++){
-          if(this.policyDirection === this._policyService.policyDirectionsArray[i]){
-            _policyDirection = this._policyService.policyDirections[i];
-            break;
-          }
-        }
-        let _policyStatus = this.policyStatus;
-        for(let i=0;i<this._policyService.policyStatusesArray.length;i++){
-          if(this.policyStatus === this._policyService.policyStatusesArray[i]){
-            _policyStatus = this._policyService.policyStatuses[i];
-            break;
-          }
-        }
         let policyVM:any = {
           policyType: this.policyType,
-          policyCycle: _policyCycle,
-          policyDirection: _policyDirection,
-          policyStatus: _policyStatus,
+          policyCycle: this.policyCycle,
+          policyDirection: true,
+          policyStatus: this.policyStatus,
           entryPoint: this.policyEntryPointValue,
           exitPoint: this.policyEixtPointValue,
           reason: this.policyReasonValue,
           pushPolicyFlag: this.pushPolicyFlag
         };
-        this.authHttp.post(MockCfg.baseUrl + MockCfg.policiesUrl, policyVM).subscribe(data => {
+        console.log(policyVM);
+        this.authHttp.post(MockCfg.baseUrl + MockCfg.myPoliciesUrl, policyVM).subscribe(data => {
           console.log(data);
           createFlag = true;
           // 提示创建成功;

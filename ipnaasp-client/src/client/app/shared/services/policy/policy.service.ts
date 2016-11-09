@@ -17,16 +17,12 @@ export class PolicyService {
 
   // 策略类别
   public policyTypesArray: Array<string> = ["黄金", "白银"];
-  public policyTypes: Array<string> = ["gold", "silver"];
   // 策略周期
   public policyCyclesArray: Array<string> = ["超短线", "短线", "中线", "长线"];
-  public policyCycles: Array<string> = ["UshortTermO", "ShortTermO", "CenterlineO", "LongTermO"];
   // 策略方向
   public policyDirectionsArray: Array<string> = ["空", "多"];
-  public policyDirections: Array<string> = ["false", "true"];
   // 策略状态
   public policyStatusesArray:Array<string> = ["待入场", "已入场"];
-  public policyStatuses:Array<string> = ["waitPolicy", "enterPolicy"];  //exitPolicy
   constructor (
     public authHttp: AuthHttp,
   ) {
@@ -61,13 +57,13 @@ export class PolicyService {
       let enterPolicyNum = 0;
       let exitPolicyNum = 0;
       for(let i=0;i<this.policyDatas.length;i++){
-        if(this.policyDatas[i].status === this.policyStatuses[0]){
+        if(this.policyDatas[i].status === this.policyStatusesArray[0]){
           waitPolicyNum++;
         }
-        if(this.policyDatas[i].status === this.policyStatuses[1]){
+        if(this.policyDatas[i].status === this.policyStatusesArray[1]){
           enterPolicyNum++;
         }
-        if(this.policyDatas[i].status === "exitPolicy"){
+        if(this.policyDatas[i].status === "已退场"){
           exitPolicyNum++;
         }
       }

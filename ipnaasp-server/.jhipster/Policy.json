@@ -91,7 +91,7 @@
         {
             "fieldName": "cycle",
             "fieldType": "PolicyCycle",
-            "fieldValues": "UshortTermO,ShortTermO,CenterlineO,LongTermO",
+            "fieldValues": "超短线,短线,中线,长线",
             "fieldValidateRules": [
                 "required"
             ]

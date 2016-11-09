@@ -4,5 +4,5 @@ package com.qm.ipnaasp.domain.enumeration;
  * The PolicyStatus enumeration.
  */
 public enum PolicyStatus {
-    waitPolicy,enterPolicy,exitPolicy
+    待入场,已入场,已退场
 }
