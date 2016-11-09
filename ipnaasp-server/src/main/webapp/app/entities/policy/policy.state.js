@@ -96,7 +96,6 @@
                         entity: function () {
                             return {
                                 type: null,
-                                direction: false,
                                 status: null,
                                 createTime: null,
                                 entryTime: null,
@@ -106,6 +105,7 @@
                                 reason: null,
                                 push: false,
                                 cycle: null,
+                                direction: null,
                                 id: null
                             };
                         }

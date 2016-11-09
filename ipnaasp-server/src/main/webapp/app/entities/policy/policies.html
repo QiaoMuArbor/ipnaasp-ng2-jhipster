@@ -20,7 +20,6 @@
                 <tr>
                     <th><span>ID</span></th>
                     <th><span>Type</span></th>
-                    <th><span>Direction</span></th>
                     <th><span>Status</span></th>
                     <th><span>Create Time</span></th>
                     <th><span>Entry Time</span></th>
@@ -30,6 +29,7 @@
                     <th><span>Reason</span></th>
                     <th><span>Push</span></th>
                     <th><span>Cycle</span></th>
+                    <th><span>Direction</span></th>
                     <th><span>Creator</span></th>
                     <th><span>Team</span></th>
                     <th></th>
@@ -39,7 +39,6 @@
                 <tr ng-repeat="policy in vm.policies track by policy.id">
                     <td><a ui-sref="policy-detail({id:policy.id})">{{policy.id}}</a></td>
                     <td>{{policy.type}}</td>
-                    <td>{{policy.direction}}</td>
                     <td>{{policy.status}}</td>
                     <td>{{policy.createTime | date:'medium'}}</td>
                     <td>{{policy.entryTime | date:'medium'}}</td>
@@ -49,6 +48,7 @@
                     <td>{{policy.reason}}</td>
                     <td>{{policy.push}}</td>
                     <td>{{policy.cycle}}</td>
+                    <td>{{policy.direction}}</td>
                     <td>
                         {{policy.creator.id}}
                     </td>

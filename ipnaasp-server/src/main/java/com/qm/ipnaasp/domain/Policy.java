@@ -18,6 +18,8 @@ import com.qm.ipnaasp.domain.enumeration.PolicyStatus;
 
 import com.qm.ipnaasp.domain.enumeration.PolicyCycle;
 
+import com.qm.ipnaasp.domain.enumeration.PolicyDirection;
+
 /**
  * A Policy.
  */
@@ -36,10 +38,6 @@ public class Policy implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private PolicyType type;
-
-    @NotNull
-    @Column(name = "direction", nullable = false)
-    private Boolean direction;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -76,6 +74,11 @@ public class Policy implements Serializable {
     @Column(name = "cycle", nullable = false)
     private PolicyCycle cycle;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "direction", nullable = false)
+    private PolicyDirection direction;
+
     @ManyToOne
     @NotNull
     private User creator;
@@ -107,19 +110,6 @@ public class Policy implements Serializable {
 
     public void setType(PolicyType type) {
         this.type = type;
-    }
-
-    public Boolean isDirection() {
-        return direction;
-    }
-
-    public Policy direction(Boolean direction) {
-        this.direction = direction;
-        return this;
-    }
-
-    public void setDirection(Boolean direction) {
-        this.direction = direction;
     }
 
     public PolicyStatus getStatus() {
@@ -239,6 +229,19 @@ public class Policy implements Serializable {
         this.cycle = cycle;
     }
 
+    public PolicyDirection getDirection() {
+        return direction;
+    }
+
+    public Policy direction(PolicyDirection direction) {
+        this.direction = direction;
+        return this;
+    }
+
+    public void setDirection(PolicyDirection direction) {
+        this.direction = direction;
+    }
+
     public User getCreator() {
         return creator;
     }
@@ -315,7 +318,6 @@ public class Policy implements Serializable {
         return "Policy{" +
             "id=" + id +
             ", type='" + type + "'" +
-            ", direction='" + direction + "'" +
             ", status='" + status + "'" +
             ", createTime='" + createTime + "'" +
             ", entryTime='" + entryTime + "'" +
@@ -325,6 +327,7 @@ public class Policy implements Serializable {
             ", reason='" + reason + "'" +
             ", push='" + push + "'" +
             ", cycle='" + cycle + "'" +
+            ", direction='" + direction + "'" +
             '}';
     }
 }

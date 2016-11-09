@@ -78,7 +78,7 @@ export class PolicyComponent {
         let policyVM:any = {
           policyType: this.policyType,
           policyCycle: this.policyCycle,
-          policyDirection: true,
+          policyDirection: this.policyDirection,
           policyStatus: this.policyStatus,
           entryPoint: this.policyEntryPointValue,
           exitPoint: this.policyEixtPointValue,

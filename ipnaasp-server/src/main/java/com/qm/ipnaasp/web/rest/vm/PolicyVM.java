@@ -3,6 +3,7 @@ package com.qm.ipnaasp.web.rest.vm;
 import com.qm.ipnaasp.domain.Team;
 import com.qm.ipnaasp.domain.User;
 import com.qm.ipnaasp.domain.enumeration.PolicyCycle;
+import com.qm.ipnaasp.domain.enumeration.PolicyDirection;
 import com.qm.ipnaasp.domain.enumeration.PolicyStatus;
 import com.qm.ipnaasp.domain.enumeration.PolicyType;
 
@@ -21,7 +22,7 @@ public class PolicyVM {
     private Long id;
     private PolicyType policyType;
     private PolicyCycle policyCycle;
-    private Boolean policyDirection;
+    private PolicyDirection policyDirection;
     private PolicyStatus policyStatus;
     private ZonedDateTime createTime;
     private ZonedDateTime entryTime;
@@ -57,11 +58,11 @@ public class PolicyVM {
         this.policyCycle = policyCycle;
     }
 
-    public Boolean getPolicyDirection() {
+    public PolicyDirection getPolicyDirection() {
         return policyDirection;
     }
 
-    public void setPolicyDirection(Boolean policyDirection) {
+    public void setPolicyDirection(PolicyDirection policyDirection) {
         this.policyDirection = policyDirection;
     }
 
@@ -151,7 +152,7 @@ public class PolicyVM {
             "id=" + id +
             ", policyType=" + policyType +
             ", policyCycle=" + policyCycle +
-            ", policyDirection=" + policyDirection +
+            ", policyDirection='" + policyDirection + '\'' +
             ", policyStatus=" + policyStatus +
             ", createTime=" + createTime +
             ", entryTime=" + entryTime +

@@ -27,18 +27,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_direction">Direction</label>
-            <input type="checkbox" class="form-control" name="direction" id="field_direction"
-                    ng-model="vm.policy.direction"
-                     />
-            <div ng-show="editForm.direction.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.direction.$error.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="control-label" for="field_status">Status</label>
             <select class="form-control" name="status" ng-model="vm.policy.status" id="field_status" required>
                 <option value="待入场" data-translate="ipnaaspApp.PolicyStatus.待入场">待入场</option>
@@ -153,6 +141,19 @@
             <div ng-show="editForm.cycle.$invalid">
                 <p class="help-block"
                     ng-show="editForm.cycle.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_direction">Direction</label>
+            <select class="form-control" name="direction" ng-model="vm.policy.direction" id="field_direction" required>
+                <option value="多" data-translate="ipnaaspApp.PolicyDirection.多">多</option>
+                <option value="空" data-translate="ipnaaspApp.PolicyDirection.空">空</option>
+            </select>
+            <div ng-show="editForm.direction.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.direction.$error.required">
                     This field is required.
                 </p>
             </div>

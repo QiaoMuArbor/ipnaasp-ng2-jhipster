@@ -34,13 +34,6 @@
             ]
         },
         {
-            "fieldName": "direction",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "status",
             "fieldType": "PolicyStatus",
             "fieldValues": "待入场,已入场,已退场",
@@ -92,6 +85,14 @@
             "fieldName": "cycle",
             "fieldType": "PolicyCycle",
             "fieldValues": "超短线,短线,中线,长线",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "direction",
+            "fieldType": "PolicyDirection",
+            "fieldValues": "多,空",
             "fieldValidateRules": [
                 "required"
             ]

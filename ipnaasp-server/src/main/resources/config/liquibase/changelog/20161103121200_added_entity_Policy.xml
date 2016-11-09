@@ -25,10 +25,6 @@
                 <constraints nullable="false" />
             </column>
             
-            <column name="direction" type="bit">
-                <constraints nullable="false" />
-            </column>
-            
             <column name="status" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
@@ -62,6 +58,10 @@
             </column>
             
             <column name="cycle" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="direction" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             

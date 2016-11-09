@@ -38,6 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.qm.ipnaasp.domain.enumeration.PolicyType;
 import com.qm.ipnaasp.domain.enumeration.PolicyStatus;
 import com.qm.ipnaasp.domain.enumeration.PolicyCycle;
+import com.qm.ipnaasp.domain.enumeration.PolicyDirection;
 /**
  * Test class for the PolicyResource REST controller.
  *
@@ -49,9 +50,6 @@ public class PolicyResourceIntTest {
 
     private static final PolicyType DEFAULT_TYPE = PolicyType.黄金;
     private static final PolicyType UPDATED_TYPE = PolicyType.白银;
-
-    private static final Boolean DEFAULT_DIRECTION = false;
-    private static final Boolean UPDATED_DIRECTION = true;
 
     private static final PolicyStatus DEFAULT_STATUS = PolicyStatus.待入场;
     private static final PolicyStatus UPDATED_STATUS = PolicyStatus.已入场;
@@ -82,6 +80,9 @@ public class PolicyResourceIntTest {
 
     private static final PolicyCycle DEFAULT_CYCLE = PolicyCycle.超短线;
     private static final PolicyCycle UPDATED_CYCLE = PolicyCycle.短线;
+
+    private static final PolicyDirection DEFAULT_DIRECTION = PolicyDirection.多;
+    private static final PolicyDirection UPDATED_DIRECTION = PolicyDirection.空;
 
     @Inject
     private PolicyRepository policyRepository;
@@ -121,7 +122,6 @@ public class PolicyResourceIntTest {
     public static Policy createEntity(EntityManager em) {
         Policy policy = new Policy()
                 .type(DEFAULT_TYPE)
-                .direction(DEFAULT_DIRECTION)
                 .status(DEFAULT_STATUS)
                 .createTime(DEFAULT_CREATE_TIME)
                 .entryTime(DEFAULT_ENTRY_TIME)
@@ -130,7 +130,8 @@ public class PolicyResourceIntTest {
                 .exitPoint(DEFAULT_EXIT_POINT)
                 .reason(DEFAULT_REASON)
                 .push(DEFAULT_PUSH)
-                .cycle(DEFAULT_CYCLE);
+                .cycle(DEFAULT_CYCLE)
+                .direction(DEFAULT_DIRECTION);
         // Add required entity
         User creator = UserResourceIntTest.createEntity(em);
         em.persist(creator);
@@ -161,7 +162,6 @@ public class PolicyResourceIntTest {
         assertThat(policies).hasSize(databaseSizeBeforeCreate + 1);
         Policy testPolicy = policies.get(policies.size() - 1);
         assertThat(testPolicy.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testPolicy.isDirection()).isEqualTo(DEFAULT_DIRECTION);
         assertThat(testPolicy.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testPolicy.getCreateTime()).isEqualTo(DEFAULT_CREATE_TIME);
         assertThat(testPolicy.getEntryTime()).isEqualTo(DEFAULT_ENTRY_TIME);
@@ -171,6 +171,7 @@ public class PolicyResourceIntTest {
         assertThat(testPolicy.getReason()).isEqualTo(DEFAULT_REASON);
         assertThat(testPolicy.isPush()).isEqualTo(DEFAULT_PUSH);
         assertThat(testPolicy.getCycle()).isEqualTo(DEFAULT_CYCLE);
+        assertThat(testPolicy.getDirection()).isEqualTo(DEFAULT_DIRECTION);
     }
 
     @Test
@@ -179,24 +180,6 @@ public class PolicyResourceIntTest {
         int databaseSizeBeforeTest = policyRepository.findAll().size();
         // set the field null
         policy.setType(null);
-
-        // Create the Policy, which fails.
-
-        restPolicyMockMvc.perform(post("/api/policies")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(policy)))
-                .andExpect(status().isBadRequest());
-
-        List<Policy> policies = policyRepository.findAll();
-        assertThat(policies).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDirectionIsRequired() throws Exception {
-        int databaseSizeBeforeTest = policyRepository.findAll().size();
-        // set the field null
-        policy.setDirection(null);
 
         // Create the Policy, which fails.
 
@@ -319,6 +302,24 @@ public class PolicyResourceIntTest {
 
     @Test
     @Transactional
+    public void checkDirectionIsRequired() throws Exception {
+        int databaseSizeBeforeTest = policyRepository.findAll().size();
+        // set the field null
+        policy.setDirection(null);
+
+        // Create the Policy, which fails.
+
+        restPolicyMockMvc.perform(post("/api/policies")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(policy)))
+                .andExpect(status().isBadRequest());
+
+        List<Policy> policies = policyRepository.findAll();
+        assertThat(policies).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPolicies() throws Exception {
         // Initialize the database
         policyRepository.saveAndFlush(policy);
@@ -329,7 +330,6 @@ public class PolicyResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(policy.getId().intValue())))
                 .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-                .andExpect(jsonPath("$.[*].direction").value(hasItem(DEFAULT_DIRECTION.booleanValue())))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
                 .andExpect(jsonPath("$.[*].createTime").value(hasItem(DEFAULT_CREATE_TIME_STR)))
                 .andExpect(jsonPath("$.[*].entryTime").value(hasItem(DEFAULT_ENTRY_TIME_STR)))
@@ -338,7 +338,8 @@ public class PolicyResourceIntTest {
                 .andExpect(jsonPath("$.[*].exitPoint").value(hasItem(DEFAULT_EXIT_POINT.doubleValue())))
                 .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON.toString())))
                 .andExpect(jsonPath("$.[*].push").value(hasItem(DEFAULT_PUSH.booleanValue())))
-                .andExpect(jsonPath("$.[*].cycle").value(hasItem(DEFAULT_CYCLE.toString())));
+                .andExpect(jsonPath("$.[*].cycle").value(hasItem(DEFAULT_CYCLE.toString())))
+                .andExpect(jsonPath("$.[*].direction").value(hasItem(DEFAULT_DIRECTION.toString())));
     }
 
     @Test
@@ -353,7 +354,6 @@ public class PolicyResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(policy.getId().intValue()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
-            .andExpect(jsonPath("$.direction").value(DEFAULT_DIRECTION.booleanValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.createTime").value(DEFAULT_CREATE_TIME_STR))
             .andExpect(jsonPath("$.entryTime").value(DEFAULT_ENTRY_TIME_STR))
@@ -362,7 +362,8 @@ public class PolicyResourceIntTest {
             .andExpect(jsonPath("$.exitPoint").value(DEFAULT_EXIT_POINT.doubleValue()))
             .andExpect(jsonPath("$.reason").value(DEFAULT_REASON.toString()))
             .andExpect(jsonPath("$.push").value(DEFAULT_PUSH.booleanValue()))
-            .andExpect(jsonPath("$.cycle").value(DEFAULT_CYCLE.toString()));
+            .andExpect(jsonPath("$.cycle").value(DEFAULT_CYCLE.toString()))
+            .andExpect(jsonPath("$.direction").value(DEFAULT_DIRECTION.toString()));
     }
 
     @Test
@@ -385,7 +386,6 @@ public class PolicyResourceIntTest {
         Policy updatedPolicy = policyRepository.findOne(policy.getId());
         updatedPolicy
                 .type(UPDATED_TYPE)
-                .direction(UPDATED_DIRECTION)
                 .status(UPDATED_STATUS)
                 .createTime(UPDATED_CREATE_TIME)
                 .entryTime(UPDATED_ENTRY_TIME)
@@ -394,7 +394,8 @@ public class PolicyResourceIntTest {
                 .exitPoint(UPDATED_EXIT_POINT)
                 .reason(UPDATED_REASON)
                 .push(UPDATED_PUSH)
-                .cycle(UPDATED_CYCLE);
+                .cycle(UPDATED_CYCLE)
+                .direction(UPDATED_DIRECTION);
 
         restPolicyMockMvc.perform(put("/api/policies")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -406,7 +407,6 @@ public class PolicyResourceIntTest {
         assertThat(policies).hasSize(databaseSizeBeforeUpdate);
         Policy testPolicy = policies.get(policies.size() - 1);
         assertThat(testPolicy.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testPolicy.isDirection()).isEqualTo(UPDATED_DIRECTION);
         assertThat(testPolicy.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testPolicy.getCreateTime()).isEqualTo(UPDATED_CREATE_TIME);
         assertThat(testPolicy.getEntryTime()).isEqualTo(UPDATED_ENTRY_TIME);
@@ -416,6 +416,7 @@ public class PolicyResourceIntTest {
         assertThat(testPolicy.getReason()).isEqualTo(UPDATED_REASON);
         assertThat(testPolicy.isPush()).isEqualTo(UPDATED_PUSH);
         assertThat(testPolicy.getCycle()).isEqualTo(UPDATED_CYCLE);
+        assertThat(testPolicy.getDirection()).isEqualTo(UPDATED_DIRECTION);
     }
 
     @Test
