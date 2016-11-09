@@ -21,6 +21,7 @@ export class PolicyComponent {
   policyEntryPointValue: string;
   policyEixtPointValue: string;
   policyReasonValue: string;
+  currentPolicyRecordingInfo:string = "";
   pushPolicyFlag: boolean;
 
   constructor(
@@ -44,6 +45,18 @@ export class PolicyComponent {
   ngOnDestroy() {
     this._policyService.isClickPolicyFlag = false;
     this._policyService.closePolicyFresh();
+  }
+
+  clickPolicyList(policyData:any){
+    for(let i=0;i<this._policyService.policyDatas.length;i++){
+      if(policyData.id === this._policyService.policyDatas[i].id) {
+        this._policyService.currentPolicyDatas = this._policyService.policyDatas[i];
+      }
+    }
+  }
+  curentPolicyOnKey(event: any) {
+    this.currentPolicyRecordingInfo = event.target.value;
+    console.log(this.currentPolicyRecordingInfo);
   }
 
   policyEntryPointOnKey(event: any) {

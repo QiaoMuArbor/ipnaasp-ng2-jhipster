@@ -31,24 +31,23 @@
         </div>
       </div>
       <div class="alarm-list" *ngFor="let policyData of _policyService.policyDatas">
-      <!--<div class="alarm-list">-->
         <div class="alarm-query-item itemBorder">
-          <div class="list-item clearfix" (click)="clickStrategyList(StrategyInfo)">
+          <div class="list-item clearfix" (click)="clickPolicyList(policyData)">
             <div class="warn-topLine">
               <div class="pull-right warn-inline">
                 <span>
-                  <label style="background-color: #42a8ef;font-size: 16px;color: black">policyData.type</label>
-                  <label style="background-color: #42a8ef;font-size: 16px;color: black">多</label>
-                  <label style="background-color: #42a8ef;font-size: 16px;color: black">12分钟前</label>
+                  <label style="background-color: #42a8ef;font-size: 16px;color: black">{{policyData.type}}</label>
+                  <label style="background-color: #42a8ef;font-size: 16px;color: black">{{policyData.direction}}</label>
+                  <label style="background-color: #42a8ef;font-size: 16px;color: black">{{policyData.createTime}}</label>
                 </span>
               </div>
             </div>
             <div class="item-left">
-              <div class="activePolicy">策略单号: 11</div>
-              <div class="activePolicy">策略周期: 短线交易</div>
-              <div class="activePolicy">入场点位: 11</div>
-              <div class="activePolicy">出场点位: 111</div>
-              <div class="activePolicy">所属团队: 111</div>
+              <div class="activePolicy">策略单号: {{policyData.id}}</div>
+              <div class="activePolicy">策略周期: {{policyData.cycle}}</div>
+              <div class="activePolicy">入场点位: {{policyData.entryPoint}}</div>
+              <div class="activePolicy">出场点位: {{policyData.exitPoint}}</div>
+              <div class="activePolicy">所属团队: {{policyData.team}}</div>
             </div>
             <div class="item-right" ngSwitch="待入场">
               <template ngSwitchCase="待入场">
@@ -75,7 +74,7 @@
       </div>
     </div>
     <div class="col-lg-7">
-      <div class="whitebg" style="min-height: 763px;">
+      <div class="whitebg" style="min-height: 763px;" *ngIf="_policyService.hasPolicyFlag">
         <table class="qm-table">
           <thead>
           <th>策略单号</th>
@@ -88,24 +87,26 @@
           </thead>
           <tbody>
           <tr>
-            <td style="text-align:center ">1</td>
-            <td style="text-align:center ">1/1</td>
-            <td style="text-align:center ">1/1</td>
-            <td style="text-align:center ">1/1</td>
-            <td style="text-align:center ">1/1</td>
+            <td style="text-align:center ">{{_policyService.currentPolicyDatas.id}}</td>
+            <td style="text-align:center ">{{_policyService.currentPolicyDatas.type}}</td>
+            <td style="text-align:center ">{{_policyService.currentPolicyDatas.cycle}}</td>
+            <td style="text-align:center ">{{_policyService.currentPolicyDatas.entryPoint}}</td>
+            <td style="text-align:center ">{{_policyService.currentPolicyDatas.exitPoint}}</td>
+            <td style="text-align:center ">{{_policyService.currentPolicyDatas.creator.login}}</td>
+            <td style="text-align:center ">{{_policyService.currentPolicyDatas.team}}</td>
           </tr>
           </tbody>
         </table>
         <div class="escalation-wrap">
           <p>策略理由</p>
           <div class="escalation-list">
-            <div class="escalation-item">111</div>
+            <div class="escalation-item">{{_policyService.currentPolicyDatas.reason}}</div>
           </div>
         </div>
         <div class="history-wrap">
           <p>记录</p>
           <div class="form-group clearfix">
-            <input type="text" class="form-control" placeholder="填写记录信息(0-100)" (keyup)="curentAlarmOnKey($event)" [value]="currentRecordingInfo">
+            <input type="text" class="form-control" placeholder="填写记录信息(0-100)" (keyup)="curentPolicyOnKey($event)" [value]="currentPolicyRecordingInfo">
             <button class="modal-btn-confirm pull-right" (click)="currentAlarmRecordingInfo()">记录</button>
             <button class="modal-btn-confirm pull-right" (click)="clearCurrentAlarmRecordingInfo()">清除</button>
           </div>
@@ -183,7 +184,7 @@
               </div>
             </div>
             <div class="form-group" style="margin-top:35px;">
-                  <button type="submit" class="modal-btn-confirm" (click)="clickCreatePolicyBtn()" *ngIf="principal.authenticated">创建</button>
+                  <button type="submit" class="modal-btn-confirm" data-dismiss="modal" (click)="clickCreatePolicyBtn()" *ngIf="principal.authenticated">创建</button>
                   <button class="modal-btn-confirm" data-dismiss="modal">取消</button>
             </div>
           </form>

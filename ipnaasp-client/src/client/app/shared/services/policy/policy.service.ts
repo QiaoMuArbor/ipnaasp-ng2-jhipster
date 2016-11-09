@@ -12,6 +12,8 @@ export class PolicyService {
   curType:string = "已入场";
   _curTypeFlag:boolean = true;
   policyDatas:any;
+  currentPolicyDatas:any;
+  hasPolicyFlag:boolean;
   private freshTimersInfo = new Map<string,any>();
   public policyNumList:Array<number> = [0,0,0,0,0,0,0,0];
 
@@ -26,6 +28,8 @@ export class PolicyService {
   constructor (
     public authHttp: AuthHttp,
   ) {
+    this.hasPolicyFlag = false;
+    this.queryMyPolicies(true);
 
   }
 
@@ -33,7 +37,7 @@ export class PolicyService {
     let freshTimer = setInterval(() => {
       console.log("policy定时器正在运行....");
       // 获取自己创建的policy,后期需要添加自己订阅的policy
-      this.queryMyPolicies();
+      this.queryMyPolicies(false);
 
     }, 5000);
     this.freshTimersInfo.set("policy", freshTimer);
@@ -46,10 +50,20 @@ export class PolicyService {
     }
   }
 
-  queryMyPolicies(){
+  queryMyPolicies(firstFlag:boolean){
     this.authHttp.get(MockCfg.baseUrl + MockCfg.myPoliciesUrl).subscribe(data => {
       this.policyDatas = data.json();
       console.log(this.policyDatas);
+      if(firstFlag){
+        if(this.policyDatas.length > 0) {
+          this.hasPolicyFlag = true;
+          this.currentPolicyDatas = this.policyDatas[0];
+        }
+      }
+      if(this.policyDatas.length == 0) {
+        this.hasPolicyFlag = false;
+        this.currentPolicyDatas = null;
+      }
       // 提示创建成功;
       // 对获取到的数据进行处理;
       this.policyNumList[0] = this.policyDatas.length;
@@ -70,6 +84,7 @@ export class PolicyService {
       this.policyNumList[1] = waitPolicyNum;
       this.policyNumList[2] = enterPolicyNum;
       this.policyNumList[3] = exitPolicyNum;
+
     }, err => {
       console.log(err);
       // 提示创建失败;
