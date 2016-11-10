@@ -64,6 +64,20 @@ export class PolicyService {
         this.hasPolicyFlag = false;
         this.currentPolicyDatas = null;
       }
+      else {
+        // 判断当前policy在列表中是否存在，存在则取列表中的信息，不存在则取列表的第一个，
+        let currentPolicyExit:boolean = false;
+        for(let i=0;i<this.policyDatas.length;i++){
+          if(this.currentPolicyDatas && this.currentPolicyDatas.id === this.policyDatas[i].id){
+            this.currentPolicyDatas = this.policyDatas[i];
+            currentPolicyExit = true;
+            break;
+          }
+        }
+        if(!currentPolicyExit)
+        this.hasPolicyFlag = true;
+        this.currentPolicyDatas = this.policyDatas[0];
+      }
       // 提示创建成功;
       // 对获取到的数据进行处理;
       this.policyNumList[0] = this.policyDatas.length;
