@@ -7,6 +7,7 @@ export * from './config/env.config';
 export * from './services/policy/policy.service';
 export * from './services/common/localstorage.service';
 
+export * from './pipes/iso-local.pipe';
 
 // export * from './alert/alert.component';
 // export * from './alert/alert-error.component';

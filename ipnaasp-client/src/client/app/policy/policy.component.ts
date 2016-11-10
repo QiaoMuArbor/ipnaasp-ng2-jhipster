@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PolicyService,Principal } from '../shared/index';
+import { PolicyService,Principal,ISOLocalPipe } from '../shared/index';
 import { MockCfg } from '../mock';
 import { AuthHttp } from 'angular2-jwt';
 
@@ -9,6 +9,8 @@ import { AuthHttp } from 'angular2-jwt';
   selector: 'sd-policy',
   templateUrl: 'policy.component.html',
   styleUrls: ['policy.component.css'],
+  pipes: [ ISOLocalPipe ]
+
 })
 
 export class PolicyComponent {
