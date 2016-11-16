@@ -12,7 +12,7 @@ export class PolicyService {
   policyType:string = "我的策略";
   curType:string = "已入场";
   _curTypeFlag:boolean = true;
-  policyDatas:any;
+  policyDatas:any = [];
   currentPolicyDatas:any;
   hasPolicyFlag:boolean;
   private freshTimersInfo = new Map<string,any>();
@@ -26,47 +26,31 @@ export class PolicyService {
   public policyDirectionsArray: Array<string> = ["空", "多"];
   // 策略状态
   public policyStatusesArray:Array<string> = ["待入场", "已入场"];
+  public policyStatuse = "";
+
   constructor (
     public authHttp: AuthHttp,
   ) {
     this.hasPolicyFlag = false;
-    this.queryMyPolicies(true);
-    this. gridOptions();
   }
 
-  public gridOptions() {
-    var evens = _.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
-    console.log("evens:"+evens);
-  };
-
-  public startPolicyFresh(){
-    let freshTimer = setInterval(() => {
-      console.log("policy定时器正在运行....");
-      // 获取自己创建的policy,后期需要添加自己订阅的policy
-      this.queryMyPolicies(false);
-
-    }, 5000);
-    this.freshTimersInfo.set("policy", freshTimer);
-    console.log("policy定时器启动");
-  }
-  public closePolicyFresh() {
-    if (this.freshTimersInfo.get("policy")) {
-      clearInterval(this.freshTimersInfo.get("policy"));
-      console.log("policy定时器关闭");
-    }
-  }
-
-  queryMyPolicies(firstFlag:boolean){
+  queryMyPolicies(type:string,policyIDValue:string,policyTypeValue:string,policyDirectionValue:string,policyCycleValue:string){
     this.authHttp.get(MockCfg.baseUrl + MockCfg.myPoliciesUrl).subscribe(data => {
-      this.policyDatas = data.json();
-      console.log(this.policyDatas);
-      if(firstFlag){
-        if(this.policyDatas.length > 0) {
-          this.hasPolicyFlag = true;
-          this.currentPolicyDatas = this.policyDatas[0];
+      let datas = data.json();
+      this.showMyPolicyNum(datas);
+      console.log(datas);
+      this.policyDatas = _.filter(datas, function(data){
+        if(data.status === type || type === "All"){
+          if( null === policyIDValue && null === policyTypeValue && null === policyDirectionValue  && null === policyCycleValue) {
+            return true;
+          }
+          if(data.id.toString().indexOf(policyIDValue)!=-1 && data.type.indexOf(policyTypeValue)!=-1 && data.direction.indexOf(policyDirectionValue)!=-1 && data.cycle.indexOf(policyCycleValue)!=-1) {
+            return true;
+          }
         }
-      }
-      if(this.policyDatas.length == 0) {
+        return false;
+      });
+      if(this.policyDatas && this.policyDatas.length == 0) {
         this.hasPolicyFlag = false;
         this.currentPolicyDatas = null;
       }
@@ -85,29 +69,32 @@ export class PolicyService {
         this.currentPolicyDatas = this.policyDatas[0];
       }
       // 提示创建成功;
-      // 对获取到的数据进行处理;
-      this.policyNumList[0] = this.policyDatas.length;
-      let waitPolicyNum = 0;
-      let enterPolicyNum = 0;
-      let exitPolicyNum = 0;
-      for(let i=0;i<this.policyDatas.length;i++){
-        if(this.policyDatas[i].status === this.policyStatusesArray[0]){
-          waitPolicyNum++;
-        }
-        if(this.policyDatas[i].status === this.policyStatusesArray[1]){
-          enterPolicyNum++;
-        }
-        if(this.policyDatas[i].status === "已退场"){
-          exitPolicyNum++;
-        }
-      }
-      this.policyNumList[1] = waitPolicyNum;
-      this.policyNumList[2] = enterPolicyNum;
-      this.policyNumList[3] = exitPolicyNum;
 
     }, err => {
       console.log(err);
       // 提示创建失败;
     });
+
+  }
+  showMyPolicyNum(data:any) {
+    // 对获取到的数据进行处理;
+    this.policyNumList[0] = data.length;
+    let waitPolicyNum = 0;
+    let enterPolicyNum = 0;
+    let exitPolicyNum = 0;
+    for(let i=0;i<data.length;i++){
+      if(data[i].status === this.policyStatusesArray[0]){
+        waitPolicyNum++;
+      }
+      if(data[i].status === this.policyStatusesArray[1]){
+        enterPolicyNum++;
+      }
+      if(data[i].status === "已退场"){
+        exitPolicyNum++;
+      }
+    }
+    this.policyNumList[1] = waitPolicyNum;
+    this.policyNumList[2] = enterPolicyNum;
+    this.policyNumList[3] = exitPolicyNum;
   }
 }

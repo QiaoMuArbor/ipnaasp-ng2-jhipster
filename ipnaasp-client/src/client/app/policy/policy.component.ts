@@ -26,6 +26,11 @@ export class PolicyComponent {
   currentPolicyRecordingInfo:string = "";
   pushPolicyFlag: boolean;
 
+  public policyStatuse = "";
+  policyIDValue:string = "";
+  policyTypeValue:string = "";
+  policyDirectionValue:string = "";
+  policyCycleValue:string = "";
   constructor(
     private _policyService: PolicyService,
     public authHttp: AuthHttp,
@@ -40,15 +45,19 @@ export class PolicyComponent {
     this._policyService.isClickPolicyFlag = true;
     this.principal.identity().then((account) => {
       if(account != null && account != undefined){
-        this._policyService.startPolicyFresh();
+        // 初始化时是我的策略，已入场
+        this._policyService.policyStatuse = "已入场";
+        this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
       }
     });
   }
   ngOnDestroy() {
     this._policyService.isClickPolicyFlag = false;
-    this._policyService.closePolicyFresh();
   }
 
+  filterMyPolicyList(){
+    this._policyService.queryMyPolicies(this._policyService.policyStatuse,this.policyIDValue,this.policyTypeValue,this.policyDirectionValue,this.policyCycleValue);
+  }
   clickPolicyList(policyData:any){
     for(let i=0;i<this._policyService.policyDatas.length;i++){
       if(policyData.id === this._policyService.policyDatas[i].id) {

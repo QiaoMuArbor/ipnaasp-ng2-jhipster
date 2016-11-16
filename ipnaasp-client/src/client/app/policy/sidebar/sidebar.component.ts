@@ -29,6 +29,8 @@ export class SideBarComponent {
     this._policyService.policyType = "我的策略";
     this._policyService.curType = "";
     this._policyService._curTypeFlag = false;
+    this._policyService.policyStatuse = "All";
+    this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
   }
 
   clickToMyWaitPolicy(){
@@ -36,6 +38,8 @@ export class SideBarComponent {
     this._policyService.policyType = "我的策略";
     this._policyService.curType = "待入场";
     this._policyService._curTypeFlag = true;
+    this._policyService.policyStatuse = "待入场";
+    this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
   }
 
   clickToMyEnterPolicy(){
@@ -43,6 +47,8 @@ export class SideBarComponent {
     this._policyService.policyType = "我的策略";
     this._policyService.curType = "已入场";
     this._policyService._curTypeFlag = true;
+    this._policyService.policyStatuse = "已入场";
+    this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
   }
 
   clickToMyExitPolicy(){
@@ -50,11 +56,13 @@ export class SideBarComponent {
     this._policyService.policyType = "我的策略";
     this._policyService.curType = "已出场";
     this._policyService._curTypeFlag = true;
+    this._policyService.policyStatuse = "已退场";
+    this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
   }
 
   clickToSubAllPolicy(){
     this.changeSideBar(this.sidebarTypeArray[4]);
-    this._policyService.policyType = "我的策略";
+    this._policyService.policyType = "订阅的策略";
     this._policyService.curType = "";
     this._policyService._curTypeFlag = false;
   }
@@ -76,7 +84,7 @@ export class SideBarComponent {
   clickToSubExitPolicy(){
     this.changeSideBar(this.sidebarTypeArray[7]);
     this._policyService.policyType = "订阅的策略";
-    this._policyService.curType = "已出场";
+    this._policyService.curType = "已退场";
     this._policyService._curTypeFlag = true;
   }
 }
