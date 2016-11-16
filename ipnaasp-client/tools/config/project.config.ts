@@ -42,8 +42,8 @@ export class ProjectConfig extends SeedConfig {
       {src: 'font-awesome/css/font-awesome.css', inject: true, vendor: false},
       {src: 'bootstrap/dist/css/bootstrap-theme.min.css', inject: true, vendor: false},
       {src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs'},
-      {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true, vendor: false},
-      {src: 'underscore/underscore.js', inject: 'libs'}
+      {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true, vendor: false}
+      // {src: 'underscore/underscore.js', inject: 'libs'}
       // {src: 'angular2-jwt/angular2-jwt.js', inject: 'libs'}
     ];
 
@@ -87,6 +87,13 @@ export class ProjectConfig extends SeedConfig {
 
     this.SYSTEM_BUILDER_CONFIG.packages['angular2-jwt'] = {
       main: 'angular2-jwt.js',
+      defaultExtension : 'js'
+    }
+    this.SYSTEM_CONFIG_DEV.paths['underscore'] =
+      `${this.APP_BASE}node_modules/underscore/underscore`;
+
+    this.SYSTEM_BUILDER_CONFIG.packages['underscore'] = {
+      main: 'underscore.js',
       defaultExtension : 'js'
     }
   }

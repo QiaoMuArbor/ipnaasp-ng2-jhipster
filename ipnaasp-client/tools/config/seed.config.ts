@@ -364,7 +364,6 @@ export class SeedConfig {
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*',
-
       'ng2-webstorage': 'node_modules/ng2-webstorage/bundles/core.umd.js'
     },
     packages: {

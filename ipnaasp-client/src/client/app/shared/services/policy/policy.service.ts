@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/observable/throw';
 import { MockCfg } from '../../../mock';
 import { AuthHttp } from 'angular2-jwt';
+import * as _ from 'underscore/underscore'
 
 @Injectable()
 export class PolicyService {
@@ -30,8 +31,13 @@ export class PolicyService {
   ) {
     this.hasPolicyFlag = false;
     this.queryMyPolicies(true);
-
+    this. gridOptions();
   }
+
+  public gridOptions() {
+    var evens = _.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+    console.log("evens:"+evens);
+  };
 
   public startPolicyFresh(){
     let freshTimer = setInterval(() => {
