@@ -48,21 +48,30 @@
               <div class="activePolicy">入场点位: {{policyData.entryPoint}}</div>
               <div class="activePolicy">出场点位: {{policyData.exitPoint}}</div>
             </div>
-            <div class="item-right" ngSwitch="待入场">
+            <div class="item-right" ngSwitch={{policyData.status}}>
               <template ngSwitchCase="待入场">
-                <a (click) ="enter('入场')"><i class="fa fa-fw fa-user grey" title="入场"
+                <a (click) ="changePolicyStatus('入场',policyData)"><i class="fa fa-fw fa-user grey" title="入场"
                                                    data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
-                <a (click) ="exit('退场')"><i class="fa fa-share-square-o grey"  title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                <a (click) ="changePolicyStatus('退场',policyData)"><i class="fa fa-share-square-o grey"
+                                            title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                <a (click) ="changePolicyStatus('订阅',policyData)"><i class="fa fa-arrow-down grey"
+                                            title="订阅" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+
               </template>
               <template ngSwitchCase="已入场">
-                <a (click) ="enter('入场')"><i class="fa fa-fw fa-user grey" title="入场"
-                                                   data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
-                <a (click) ="exit('退场')"><i class="fa fa-share-square-o grey"  title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                <a (click) ="changePolicyStatus('入场',policyData)"><i class="fa fa-fw fa-user grey"
+                                            title="入场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                <a (click) ="changePolicyStatus('退场',policyData)"><i class="fa fa-share-square-o grey"
+                                            title="退场" data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
+                <a (click) ="changePolicyStatus('订阅',policyData)"><i class="fa fa-arrow-down grey"
+                                            title="订阅" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
               </template>
               <template ngSwitchCase="已退场">
-                <a (click) ="enter('入场')"><i class="fa fa-fw fa-user grey" title="入场"
-                                                   data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
-                <a (click) ="exit('退场')"><i class="fa fa-share-square-o grey"  title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                <a (click) ="changePolicyStatus('入场',policyData)"><i class="fa fa-fw fa-user grey" title="入场"
+                                             style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                <a (click) ="changePolicyStatus('退场',policyData)"><i class="fa fa-share-square-o grey"  title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                <a (click) ="changePolicyStatus('订阅',policyData)"><i class="fa fa-arrow-down grey"
+                                            title="订阅" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
               </template>
               <template ngSwitchDefault>
                 <p style="font-size: 12px;color:red">状态？</p>
@@ -175,13 +184,13 @@
                 <input type="text" (keyup)="policyReasonOnKey($event)" class="form-control" placeholder="请输入策略理由!">
               </div>
             </div>
-            <div class="form-group">
-              <div class="col-sm-12">
-                <label >
-                  <input type="checkbox" id="pushPolicyFlag" [(ngModel)]="pushPolicyFlag" name="pushPolicyFlag"> 推送策略
-                </label>
-              </div>
-            </div>
+            <!--<div class="form-group">-->
+              <!--<div class="col-sm-12">-->
+                <!--<label >-->
+                  <!--<input type="checkbox" id="pushPolicyFlag" [(ngModel)]="pushPolicyFlag" name="pushPolicyFlag"> 推送策略-->
+                <!--</label>-->
+              <!--</div>-->
+            <!--</div>-->
             <div class="form-group" style="margin-top:35px;">
                   <button type="submit" class="modal-btn-confirm" data-dismiss="modal" (click)="clickCreatePolicyBtn()" *ngIf="principal.authenticated">创建</button>
                   <button class="modal-btn-confirm" data-dismiss="modal">取消</button>
@@ -198,20 +207,57 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">记录信息 | {{clickButtonType}}</h4>
+          <h4 class="modal-title">策略状态切换</h4>
         </div>
         <div class="modal-body">
 
-          <label style="margin: 10px 10px;">接收人员: </label>
-          <input type="text" style="height:30px;width:250px;margin: 10px 10px;" placeholder="填写接收人" (keyup)="onReciveMemberKey($event)" [value]="reciveMember">
-          <input type="text" class="form-control" style="padding-top: 15px;" placeholder="填写记录信息(0-100)" (keyup)="onKey($event)" [value]="recordingInfo">
-          <button class="modal-btn-confirm pull-right" (click)="clearRecordingInfo()">清除</button>
+          <form class="form-horizontal" role="form" style="width:60%;margin: auto">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">策略类别</label>
+              <div class="col-sm-4">
+
+                <select name="policyType" [(ngModel)]="policyType" class="form-control" disabled>
+                  <option *ngFor="let type of _policyService.policyTypesArray" [value]="type">{{type}}</option>
+                </select>
+              </div>
+              <label class="col-sm-2 control-label">策略周期</label>
+              <div class="col-sm-4">
+                <select name="policyCycle" [(ngModel)]="policyCycle" class="form-control" disabled>
+                  <option *ngFor="let cycle of _policyService.policyCyclesArray" [value]="cycle">{{cycle}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">策略方向</label>
+              <div class="col-sm-4">
+                <select name="policyDirection" [(ngModel)]="policyDirection" class="form-control" disabled>
+                  <option *ngFor="let pdirection of _policyService.policyDirectionsArray" [value]="pdirection">{{pdirection}}</option>
+                </select>
+              </div>
+              <label class="col-sm-2 control-label">策略状态</label>
+              <div class="col-sm-4">
+                <select name="policyStatus" [(ngModel)]="policyStatus" class="form-control" disabled>
+                  <option *ngFor="let status of _policyService.policyStatusesArray" [value]="status">{{status}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">修正入场点位</label>
+              <div class="col-sm-4">
+                <input type="text" #box5 (keyup.enter)="policyCycleValue=box4.value" (blur)="policyCycleValue=box4.value" (keyup)="policyEntryPointOnKey($event)" class="form-control" placeholder="请输入实际入场点">
+              </div>
+              <label class="col-sm-2 control-label">修正出场点位</label>
+              <div class="col-sm-4">
+                <input type="text" (keyup)="policyExitPointOnKey($event)" class="form-control" placeholder="请输入实际出场点">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top:35px;">
+              <button type="submit" class="modal-btn-confirm" data-dismiss="modal" (click)="clickCreatePolicyBtn()" *ngIf="principal.authenticated">确定</button>
+              <button class="modal-btn-cancel" data-dismiss="modal">关闭</button>
+            </div>
+          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="confirm(clickButtonType)">确定</button>
-          <button class="modal-btn-cancel" data-dismiss="modal" >关闭</button>
-        </div>
-      </div>
     </div>
   </div>
 </div>

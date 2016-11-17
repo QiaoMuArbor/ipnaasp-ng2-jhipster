@@ -31,6 +31,7 @@ export class PolicyComponent {
   policyTypeValue:string = "";
   policyDirectionValue:string = "";
   policyCycleValue:string = "";
+
   constructor(
     private _policyService: PolicyService,
     public authHttp: AuthHttp,
@@ -40,6 +41,7 @@ export class PolicyComponent {
     this.policyEixtPointValue = "";
     this.policyReasonValue = "";
     this.pushPolicyFlag = false;
+
   }
   ngOnInit() {
     this._policyService.isClickPolicyFlag = true;
@@ -55,6 +57,16 @@ export class PolicyComponent {
     this._policyService.isClickPolicyFlag = false;
   }
 
+  changePolicyStatus(status:string,data:any){
+    console.log(status);
+    console.log(data);
+    this.policyType = data.type;
+    this.policyCycle = data.cycle;
+    this.policyDirection = data.direction;
+    this.policyStatus = data.status;
+    this.policyEntryPointValue = data.entryPoint;
+    this.policyEixtPointValue = data.exitPoint;
+  }
   filterMyPolicyList(){
     this._policyService.queryMyPolicies(this._policyService.policyStatuse,this.policyIDValue,this.policyTypeValue,this.policyDirectionValue,this.policyCycleValue);
   }
@@ -113,6 +125,7 @@ export class PolicyComponent {
         this.authHttp.post(MockCfg.baseUrl + MockCfg.myPoliciesUrl, policyVM).subscribe(data => {
           console.log(data);
           createFlag = true;
+          this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
           // 提示创建成功;
         }, err => {
           console.log(err);
