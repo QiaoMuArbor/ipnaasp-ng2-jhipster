@@ -29,10 +29,28 @@ public class PolicyVM {
     private ZonedDateTime exitTime;
     private Float entryPoint;
     private Float exitPoint;
+    private Float realEntryPoint;
+    private Float realExitPoint;
     private String reason;
     private Boolean pushPolicyFlag;
     private String creator;
     private String team;
+
+    public Float getRealEntryPoint() {
+        return realEntryPoint;
+    }
+
+    public void setRealEntryPoint(Float realEntryPoint) {
+        this.realEntryPoint = realEntryPoint;
+    }
+
+    public Float getRealExitPoint() {
+        return realExitPoint;
+    }
+
+    public void setRealExitPoint(Float realExitPoint) {
+        this.realExitPoint = realExitPoint;
+    }
 
     public Long getId() {
         return id;
@@ -152,13 +170,15 @@ public class PolicyVM {
             "id=" + id +
             ", policyType=" + policyType +
             ", policyCycle=" + policyCycle +
-            ", policyDirection='" + policyDirection + '\'' +
+            ", policyDirection=" + policyDirection +
             ", policyStatus=" + policyStatus +
             ", createTime=" + createTime +
             ", entryTime=" + entryTime +
             ", exitTime=" + exitTime +
             ", entryPoint=" + entryPoint +
             ", exitPoint=" + exitPoint +
+            ", realEntryPoint=" + realEntryPoint +
+            ", realExitPoint=" + realExitPoint +
             ", reason='" + reason + '\'' +
             ", pushPolicyFlag=" + pushPolicyFlag +
             ", creator='" + creator + '\'' +

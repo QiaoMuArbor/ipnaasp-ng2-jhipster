@@ -79,6 +79,12 @@ public class Policy implements Serializable {
     @Column(name = "direction", nullable = false)
     private PolicyDirection direction;
 
+    @Column(name = "real_entry_point")
+    private Float realEntryPoint;
+
+    @Column(name = "real_exit_point")
+    private Float realExitPoint;
+
     @ManyToOne
     @NotNull
     private User creator;
@@ -242,6 +248,32 @@ public class Policy implements Serializable {
         this.direction = direction;
     }
 
+    public Float getRealEntryPoint() {
+        return realEntryPoint;
+    }
+
+    public Policy realEntryPoint(Float realEntryPoint) {
+        this.realEntryPoint = realEntryPoint;
+        return this;
+    }
+
+    public void setRealEntryPoint(Float realEntryPoint) {
+        this.realEntryPoint = realEntryPoint;
+    }
+
+    public Float getRealExitPoint() {
+        return realExitPoint;
+    }
+
+    public Policy realExitPoint(Float realExitPoint) {
+        this.realExitPoint = realExitPoint;
+        return this;
+    }
+
+    public void setRealExitPoint(Float realExitPoint) {
+        this.realExitPoint = realExitPoint;
+    }
+
     public User getCreator() {
         return creator;
     }
@@ -328,6 +360,8 @@ public class Policy implements Serializable {
             ", push='" + push + "'" +
             ", cycle='" + cycle + "'" +
             ", direction='" + direction + "'" +
+            ", realEntryPoint='" + realEntryPoint + "'" +
+            ", realExitPoint='" + realExitPoint + "'" +
             '}';
     }
 }

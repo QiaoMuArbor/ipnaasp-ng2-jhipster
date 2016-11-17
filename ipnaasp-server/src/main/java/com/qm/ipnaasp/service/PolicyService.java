@@ -52,6 +52,8 @@ public class PolicyService {
         policy.setStatus(PolicyVM.getPolicyStatus());
         policy.setEntryPoint(PolicyVM.getEntryPoint());
         policy.setExitPoint(PolicyVM.getExitPoint());
+        policy.setRealEntryPoint(PolicyVM.getRealEntryPoint());
+        policy.setRealEntryPoint(PolicyVM.getRealExitPoint());
         policy.setReason(PolicyVM.getReason());
         policy.setPush(PolicyVM.getPushPolicyFlag());
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
@@ -61,6 +63,23 @@ public class PolicyService {
         policy.setCreateTime(ZonedDateTime.now());
         Policy result = policyRepository.save(policy);
         log.debug("Created Information for User: {}", policy);
+        return result;
+    }
+
+    @Transactional(readOnly = true)
+    public Policy updateMyPolicy(PolicyVM PolicyVM) {
+        Policy policy = findOne(PolicyVM.getId());
+        policy.setStatus(PolicyVM.getPolicyStatus());
+        policy.setRealEntryPoint(PolicyVM.getRealEntryPoint());
+        policy.setRealExitPoint(PolicyVM.getRealExitPoint());
+        Policy result = policyRepository.save(policy);
+        policyRepository.flush();
+
+        log.debug("---------------------------------------------");
+        log.debug("PolicyVM Information for User: {}", PolicyVM);
+        log.debug("updata Policy Information for User: {}", policy);
+        log.debug("updata Policy Information for User: {}", result);
+        log.debug("---------------------------------------------");
         return result;
     }
     /**

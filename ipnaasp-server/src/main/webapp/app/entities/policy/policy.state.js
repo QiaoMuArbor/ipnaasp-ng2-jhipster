@@ -106,6 +106,8 @@
                                 push: false,
                                 cycle: null,
                                 direction: null,
+                                realEntryPoint: null,
+                                realExitPoint: null,
                                 id: null
                             };
                         }

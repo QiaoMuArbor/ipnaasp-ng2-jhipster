@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.qm.ipnaasp.domain.Policy;
 import com.qm.ipnaasp.service.PolicyService;
 import com.qm.ipnaasp.web.rest.util.HeaderUtil;
+import com.qm.ipnaasp.web.rest.vm.ManagedUserVM;
 import com.qm.ipnaasp.web.rest.vm.PolicyVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +65,6 @@ public class PolicyResource {
             .body(result);
     }
 
-
     /**
      * PUT  /policies : Updates an existing policy.
      *
@@ -76,12 +76,13 @@ public class PolicyResource {
      */
     @PutMapping("/myPolicies")
     @Timed
-    public ResponseEntity<Policy> updatePolicy(@Valid @RequestBody PolicyVM policyVM) throws URISyntaxException {
+    public ResponseEntity<Policy> updateMyPolicy(@Valid @RequestBody PolicyVM policyVM) throws URISyntaxException {
         log.debug("REST request to update Policy : {}", policyVM);
         if (policyVM.getId() == null) {
-            return createMyPolicy(policyVM);
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("policy", "idexists", "updata a policy must have an ID")).body(null);
         }
-        Policy result = policyService.createPolicy(policyVM);
+
+        Policy result = policyService.updateMyPolicy(policyVM);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("policy", policyVM.getId().toString()))
             .body(result);
@@ -99,6 +100,7 @@ public class PolicyResource {
             .headers(HeaderUtil.createEntityUpdateAlert("policy", policy.getId().toString()))
             .body(result);
     }
+
     /**
      * GET  /policies : get all the policies.
      *

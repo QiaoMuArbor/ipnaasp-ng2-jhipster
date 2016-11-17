@@ -96,6 +96,14 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "realEntryPoint",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "realExitPoint",
+            "fieldType": "Float"
         }
     ],
     "changelogDate": "20161103121200",

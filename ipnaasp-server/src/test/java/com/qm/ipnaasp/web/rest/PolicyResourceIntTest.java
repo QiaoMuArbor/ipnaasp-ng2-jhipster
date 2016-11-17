@@ -84,6 +84,12 @@ public class PolicyResourceIntTest {
     private static final PolicyDirection DEFAULT_DIRECTION = PolicyDirection.多;
     private static final PolicyDirection UPDATED_DIRECTION = PolicyDirection.空;
 
+    private static final Float DEFAULT_REAL_ENTRY_POINT = 1F;
+    private static final Float UPDATED_REAL_ENTRY_POINT = 2F;
+
+    private static final Float DEFAULT_REAL_EXIT_POINT = 1F;
+    private static final Float UPDATED_REAL_EXIT_POINT = 2F;
+
     @Inject
     private PolicyRepository policyRepository;
 
@@ -131,7 +137,9 @@ public class PolicyResourceIntTest {
                 .reason(DEFAULT_REASON)
                 .push(DEFAULT_PUSH)
                 .cycle(DEFAULT_CYCLE)
-                .direction(DEFAULT_DIRECTION);
+                .direction(DEFAULT_DIRECTION)
+                .realEntryPoint(DEFAULT_REAL_ENTRY_POINT)
+                .realExitPoint(DEFAULT_REAL_EXIT_POINT);
         // Add required entity
         User creator = UserResourceIntTest.createEntity(em);
         em.persist(creator);
@@ -172,6 +180,8 @@ public class PolicyResourceIntTest {
         assertThat(testPolicy.isPush()).isEqualTo(DEFAULT_PUSH);
         assertThat(testPolicy.getCycle()).isEqualTo(DEFAULT_CYCLE);
         assertThat(testPolicy.getDirection()).isEqualTo(DEFAULT_DIRECTION);
+        assertThat(testPolicy.getRealEntryPoint()).isEqualTo(DEFAULT_REAL_ENTRY_POINT);
+        assertThat(testPolicy.getRealExitPoint()).isEqualTo(DEFAULT_REAL_EXIT_POINT);
     }
 
     @Test
@@ -339,7 +349,9 @@ public class PolicyResourceIntTest {
                 .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON.toString())))
                 .andExpect(jsonPath("$.[*].push").value(hasItem(DEFAULT_PUSH.booleanValue())))
                 .andExpect(jsonPath("$.[*].cycle").value(hasItem(DEFAULT_CYCLE.toString())))
-                .andExpect(jsonPath("$.[*].direction").value(hasItem(DEFAULT_DIRECTION.toString())));
+                .andExpect(jsonPath("$.[*].direction").value(hasItem(DEFAULT_DIRECTION.toString())))
+                .andExpect(jsonPath("$.[*].realEntryPoint").value(hasItem(DEFAULT_REAL_ENTRY_POINT.doubleValue())))
+                .andExpect(jsonPath("$.[*].realExitPoint").value(hasItem(DEFAULT_REAL_EXIT_POINT.doubleValue())));
     }
 
     @Test
@@ -363,7 +375,9 @@ public class PolicyResourceIntTest {
             .andExpect(jsonPath("$.reason").value(DEFAULT_REASON.toString()))
             .andExpect(jsonPath("$.push").value(DEFAULT_PUSH.booleanValue()))
             .andExpect(jsonPath("$.cycle").value(DEFAULT_CYCLE.toString()))
-            .andExpect(jsonPath("$.direction").value(DEFAULT_DIRECTION.toString()));
+            .andExpect(jsonPath("$.direction").value(DEFAULT_DIRECTION.toString()))
+            .andExpect(jsonPath("$.realEntryPoint").value(DEFAULT_REAL_ENTRY_POINT.doubleValue()))
+            .andExpect(jsonPath("$.realExitPoint").value(DEFAULT_REAL_EXIT_POINT.doubleValue()));
     }
 
     @Test
@@ -395,7 +409,9 @@ public class PolicyResourceIntTest {
                 .reason(UPDATED_REASON)
                 .push(UPDATED_PUSH)
                 .cycle(UPDATED_CYCLE)
-                .direction(UPDATED_DIRECTION);
+                .direction(UPDATED_DIRECTION)
+                .realEntryPoint(UPDATED_REAL_ENTRY_POINT)
+                .realExitPoint(UPDATED_REAL_EXIT_POINT);
 
         restPolicyMockMvc.perform(put("/api/policies")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -417,6 +433,8 @@ public class PolicyResourceIntTest {
         assertThat(testPolicy.isPush()).isEqualTo(UPDATED_PUSH);
         assertThat(testPolicy.getCycle()).isEqualTo(UPDATED_CYCLE);
         assertThat(testPolicy.getDirection()).isEqualTo(UPDATED_DIRECTION);
+        assertThat(testPolicy.getRealEntryPoint()).isEqualTo(UPDATED_REAL_ENTRY_POINT);
+        assertThat(testPolicy.getRealExitPoint()).isEqualTo(UPDATED_REAL_EXIT_POINT);
     }
 
     @Test

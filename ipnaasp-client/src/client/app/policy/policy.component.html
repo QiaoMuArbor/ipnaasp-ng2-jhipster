@@ -114,7 +114,7 @@
         <div class="history-wrap">
           <p>记录</p>
           <div class="form-group clearfix">
-            <input type="text" class="form-control" placeholder="填写记录信息(0-100)" (keyup)="curentPolicyOnKey($event)" [value]="currentPolicyRecordingInfo">
+            <input type="text" class="form-control" placeholder="填写记录信息(0-100)" [value]="currentPolicyRecordingInfo">
             <button class="modal-btn-confirm pull-right" (click)="currentAlarmRecordingInfo()">记录</button>
             <button class="modal-btn-confirm pull-right" (click)="clearCurrentAlarmRecordingInfo()">清除</button>
           </div>
@@ -171,17 +171,17 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">入场点位</label>
               <div class="col-sm-4">
-                <input type="text" (keyup)="policyEntryPointOnKey($event)" class="form-control" placeholder="请输入入场点">
+                <input type="text" #box5 (keyup.enter)="policyEntryPointValue=box5.value" (blur)="policyEntryPointValue=box5.value" class="form-control" placeholder="请输入入场点">
               </div>
               <label class="col-sm-2 control-label">出场点位</label>
               <div class="col-sm-4">
-                <input type="text" (keyup)="policyExitPointOnKey($event)" class="form-control" placeholder="请输入出场点">
+                <input type="text" #box6 (keyup.enter)="policyEixtPointValue=box6.value" (blur)="policyEixtPointValue=box6.value" class="form-control" placeholder="请输入出场点">
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">策略理由</label>
               <div class="col-sm-10">
-                <input type="text" (keyup)="policyReasonOnKey($event)" class="form-control" placeholder="请输入策略理由!">
+                <input type="text" #box7 (keyup.enter)="policyReasonValue=box7.value" (blur)="policyReasonValue=box7.value" class="form-control" placeholder="请输入策略理由!">
               </div>
             </div>
             <!--<div class="form-group">-->
@@ -244,16 +244,16 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">修正入场点位</label>
               <div class="col-sm-4">
-                <input type="text" #box5 (keyup.enter)="policyCycleValue=box4.value" (blur)="policyCycleValue=box4.value" (keyup)="policyEntryPointOnKey($event)" class="form-control" placeholder="请输入实际入场点">
+                <input type="text" #box8 (keyup.enter)="policyRealEntryPointValue=box8.value" (blur)="policyRealEntryPointValue=box8.value" class="form-control" placeholder="请输入实际入场点">
               </div>
               <label class="col-sm-2 control-label">修正出场点位</label>
               <div class="col-sm-4">
-                <input type="text" (keyup)="policyExitPointOnKey($event)" class="form-control" placeholder="请输入实际出场点">
+                <input type="text" #box9 (keyup.enter)="policyRealEixtPointValue=box9.value" (blur)="policyRealEixtPointValue=box9.value" class="form-control" placeholder="请输入实际出场点">
               </div>
             </div>
 
             <div class="form-group" style="margin-top:35px;">
-              <button type="submit" class="modal-btn-confirm" data-dismiss="modal" (click)="clickCreatePolicyBtn()" *ngIf="principal.authenticated">确定</button>
+              <button type="submit" class="modal-btn-confirm" data-dismiss="modal" (click)="configChangePolicyStatusBtn()" *ngIf="principal.authenticated">确定</button>
               <button class="modal-btn-cancel" data-dismiss="modal">关闭</button>
             </div>
           </form>

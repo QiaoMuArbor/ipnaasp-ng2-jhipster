@@ -65,6 +65,14 @@
                 <constraints nullable="false" />
             </column>
             
+            <column name="real_entry_point" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="real_exit_point" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+            
             <column name="creator_id" type="bigint">
                 <constraints nullable="false" />
             </column>

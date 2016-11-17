@@ -35,6 +35,7 @@ export class PolicyService {
   }
 
   queryMyPolicies(type:string,policyIDValue:string,policyTypeValue:string,policyDirectionValue:string,policyCycleValue:string){
+    console.log("start query policy");
     this.authHttp.get(MockCfg.baseUrl + MockCfg.myPoliciesUrl).subscribe(data => {
       let datas = data.json();
       this.showMyPolicyNum(datas);
@@ -69,9 +70,11 @@ export class PolicyService {
         this.currentPolicyDatas = this.policyDatas[0];
       }
       // 提示创建成功;
+      console.log("query policy ok");
 
     }, err => {
       console.log(err);
+      console.log("query policy fail");
       // 提示创建失败;
     });
 
