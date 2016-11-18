@@ -1,5 +1,6 @@
 package com.qm.ipnaasp.web.rest.vm;
 
+import com.qm.ipnaasp.domain.Recording;
 import com.qm.ipnaasp.domain.Team;
 import com.qm.ipnaasp.domain.User;
 import com.qm.ipnaasp.domain.enumeration.PolicyCycle;
@@ -13,6 +14,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2016/11/7.
@@ -35,6 +38,7 @@ public class PolicyVM {
     private Boolean pushPolicyFlag;
     private String creator;
     private String team;
+
 
     public Float getRealEntryPoint() {
         return realEntryPoint;

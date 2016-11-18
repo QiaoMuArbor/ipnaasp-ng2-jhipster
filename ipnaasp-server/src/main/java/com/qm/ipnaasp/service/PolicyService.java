@@ -1,8 +1,11 @@
 package com.qm.ipnaasp.service;
 
 import com.qm.ipnaasp.domain.Policy;
+import com.qm.ipnaasp.domain.Recording;
 import com.qm.ipnaasp.domain.User;
+import com.qm.ipnaasp.domain.enumeration.RecordingType;
 import com.qm.ipnaasp.repository.PolicyRepository;
+import com.qm.ipnaasp.repository.RecordingRepository;
 import com.qm.ipnaasp.repository.UserRepository;
 import com.qm.ipnaasp.security.SecurityUtils;
 import com.qm.ipnaasp.web.rest.vm.PolicyVM;
@@ -13,9 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Service Implementation for managing Policy.
@@ -31,6 +32,8 @@ public class PolicyService {
 
     @Inject
     private UserRepository userRepository;
+
+
     /**
      * Save a policy.
      *

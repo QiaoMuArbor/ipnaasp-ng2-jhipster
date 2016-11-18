@@ -141,6 +141,7 @@ export class PolicyComponent {
         console.log(policyVM);
         this.authHttp.post(MockCfg.baseUrl + MockCfg.myPoliciesUrl, policyVM).subscribe(data => {
           createFlag = true;
+          console.log(data);
           this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
           // 提示创建成功;
         }, err => {

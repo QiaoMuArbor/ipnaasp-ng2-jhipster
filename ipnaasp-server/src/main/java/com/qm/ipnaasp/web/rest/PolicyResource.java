@@ -2,7 +2,12 @@ package com.qm.ipnaasp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.qm.ipnaasp.domain.Policy;
+import com.qm.ipnaasp.domain.Recording;
+import com.qm.ipnaasp.domain.enumeration.RecordingType;
+import com.qm.ipnaasp.repository.PolicyRepository;
+import com.qm.ipnaasp.repository.RecordingRepository;
 import com.qm.ipnaasp.service.PolicyService;
+import com.qm.ipnaasp.service.RecordingService;
 import com.qm.ipnaasp.web.rest.util.HeaderUtil;
 import com.qm.ipnaasp.web.rest.vm.ManagedUserVM;
 import com.qm.ipnaasp.web.rest.vm.PolicyVM;
@@ -17,6 +22,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +38,11 @@ public class PolicyResource {
     @Inject
     private PolicyService policyService;
 
+    @Inject
+    private RecordingRepository recordingRepository;
+
+    @Inject
+    private PolicyRepository policyRepository;
     /**
      * POST  /policies : Create a new policy.
      *
@@ -47,6 +58,14 @@ public class PolicyResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("policy", "idexists", "A new policy cannot already have an ID")).body(null);
         }
         Policy result = policyService.createPolicy(policyVM);
+        Recording record = new Recording();
+        record.setPolicy(result);
+        record.setRecorder(result.getCreator());
+        record.setRecordingTime(ZonedDateTime.now());
+        record.setType(RecordingType.新建策略);
+        result.addRecordings(record);
+        Recording recording = recordingRepository.save(record);
+        policyRepository.flush();
         return ResponseEntity.created(new URI("/api/policies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("policy", result.getId().toString()))
             .body(result);
