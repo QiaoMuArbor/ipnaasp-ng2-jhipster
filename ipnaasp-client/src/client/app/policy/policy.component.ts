@@ -75,8 +75,17 @@ export class PolicyComponent {
     for(let i=0;i<this._policyService.policyDatas.length;i++){
       if(policyData.id === this._policyService.policyDatas[i].id) {
         this._policyService.currentPolicyDatas = this._policyService.policyDatas[i];
+        break;
       }
     }
+    this.authHttp.get(MockCfg.baseUrl + MockCfg.myPoliciesRecordingUrl + "/"+this._policyService.currentPolicyDatas.id).subscribe(data => {
+      let datas = data.json();
+      console.log(datas);
+      // 提示创建成功;
+    }, err => {
+      console.log(err);
+      // 提示创建失败;
+    });
   }
 
   beforeClickCreatePolicyBtn(){

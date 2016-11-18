@@ -15,7 +15,6 @@ export class PolicyService {
   policyDatas:any = [];
   currentPolicyDatas:any;
   hasPolicyFlag:boolean;
-  private freshTimersInfo = new Map<string,any>();
   public policyNumList:Array<number> = [0,0,0,0,0,0,0,0];
 
   // 策略类别
@@ -69,8 +68,6 @@ export class PolicyService {
         if(!currentPolicyExit)
         this.hasPolicyFlag = true;
         this.currentPolicyDatas = this.policyDatas[0];
-
-
       }
       console.log(this.policyDatas.length);
       if(this.policyDatas.length > 0){

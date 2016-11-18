@@ -18,7 +18,7 @@ import java.util.List;
 public class RecordingService {
 
     private final Logger log = LoggerFactory.getLogger(RecordingService.class);
-    
+
     @Inject
     private RecordingRepository recordingRepository;
 
@@ -36,10 +36,10 @@ public class RecordingService {
 
     /**
      *  Get all the recordings.
-     *  
+     *
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Recording> findAll() {
         log.debug("Request to get all Recordings");
         List<Recording> result = recordingRepository.findAll();
@@ -53,11 +53,18 @@ public class RecordingService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Recording findOne(Long id) {
         log.debug("Request to get Recording : {}", id);
         Recording recording = recordingRepository.findOne(id);
         return recording;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Recording> findRecordingByCurrentPolicyID(Long id) {
+        log.debug("Request to get Recording : {}", id);
+        List<Recording> recordings = recordingRepository.findRecordingByCurrentPolicyID(id);
+        return recordings;
     }
 
     /**

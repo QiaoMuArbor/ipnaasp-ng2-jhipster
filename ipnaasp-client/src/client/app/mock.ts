@@ -5,5 +5,7 @@ export class MockCfg {
   public static accountUrl:String = '/api/account';
   public static policiesUrl:String = '/api/policies';
   public static myPoliciesUrl:String = '/api/myPolicies';
-  public static myPoliciesRecordingUrl:String = '/api/recordings';
+  public static myPoliciesRecordingUrl:String = '/api/record';
+
+
 }

@@ -63,9 +63,11 @@ public class PolicyResource {
         record.setRecorder(result.getCreator());
         record.setRecordingTime(ZonedDateTime.now());
         record.setType(RecordingType.新建策略);
-        result.addRecordings(record);
+
         Recording recording = recordingRepository.save(record);
-        policyRepository.flush();
+        result.addRecordings(recording);
+        result = policyRepository.save(result);
+
         return ResponseEntity.created(new URI("/api/policies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("policy", result.getId().toString()))
             .body(result);

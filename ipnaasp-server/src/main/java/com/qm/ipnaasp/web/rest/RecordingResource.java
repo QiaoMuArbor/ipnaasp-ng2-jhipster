@@ -2,6 +2,7 @@ package com.qm.ipnaasp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.qm.ipnaasp.domain.Recording;
+import com.qm.ipnaasp.domain.Team;
 import com.qm.ipnaasp.service.RecordingService;
 import com.qm.ipnaasp.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -26,7 +27,7 @@ import java.util.Optional;
 public class RecordingResource {
 
     private final Logger log = LoggerFactory.getLogger(RecordingResource.class);
-        
+
     @Inject
     private RecordingService recordingService;
 
@@ -100,6 +101,14 @@ public class RecordingResource {
                 result,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/record/{id}")
+    @Timed
+    public List<Recording> getTheRecordings(@PathVariable Long id) {
+        log.debug("REST request to get Recording Of Policy ID: {}", id);
+        return recordingService.findRecordingByCurrentPolicyID(id);
+
     }
 
     /**
