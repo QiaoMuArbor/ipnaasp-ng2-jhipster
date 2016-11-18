@@ -11,124 +11,131 @@
       </ol>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-5">
-      <div class="row-query">
-        <div>
-          <input  #box1 (keyup.enter)="policyIDValue=box1.value" (blur)="policyIDValue=box1.value" type="text" class="form-control" placeholder="策略单号">
-        </div>
-        <div>
-          <input #box2 (keyup.enter)="policyTypeValue=box2.value" (blur)="policyTypeValue=box2.value" type="text" class="form-control" placeholder="策略类别">
-        </div>
-        <div>
-          <input #box3 (keyup.enter)="policyDirectionValue=box3.value" (blur)="policyDirectionValue=box3.value" type="text" class="form-control" placeholder="策略方向">
-        </div>
-        <div>
-          <input #box4 (keyup.enter)="policyCycleValue=box4.value" (blur)="policyCycleValue=box4.value" type="text" class="form-control" placeholder="策略周期">
-        </div>
-        <div>
-          <button type="button" class="form-control" (click)="filterMyPolicyList()"><i class="fa fa-search" title="过滤"></i></button>
-        </div>
-      </div>
-      <div class="alarm-list" *ngFor="let policyData of _policyService.policyDatas">
-        <div class="alarm-query-item itemBorder">
-          <div class="list-item clearfix" (click)="clickPolicyList(policyData)">
-            <div class="warn-topLine">
-              <div class="pull-right warn-inline">
+  <div [(ngSwitch)]="_policyService.showPolicyData">
+    <template ngSwitchCase="show">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="row-query">
+            <div>
+              <input  #box1 (keyup.enter)="policyIDValue=box1.value" (blur)="policyIDValue=box1.value" type="text" class="form-control" placeholder="策略单号">
+            </div>
+            <div>
+              <input #box2 (keyup.enter)="policyTypeValue=box2.value" (blur)="policyTypeValue=box2.value" type="text" class="form-control" placeholder="策略类别">
+            </div>
+            <div>
+              <input #box3 (keyup.enter)="policyDirectionValue=box3.value" (blur)="policyDirectionValue=box3.value" type="text" class="form-control" placeholder="策略方向">
+            </div>
+            <div>
+              <input #box4 (keyup.enter)="policyCycleValue=box4.value" (blur)="policyCycleValue=box4.value" type="text" class="form-control" placeholder="策略周期">
+            </div>
+            <div>
+              <button type="button" class="form-control" (click)="filterMyPolicyList()"><i class="fa fa-search" title="过滤"></i></button>
+            </div>
+          </div>
+          <div class="alarm-list" *ngFor="let policyData of _policyService.policyDatas">
+            <div class="alarm-query-item itemBorder">
+              <div class="list-item clearfix" (click)="clickPolicyList(policyData)">
+                <div class="warn-topLine">
+                  <div class="pull-right warn-inline">
                 <span>
                   <label style="background-color: #42a8ef;font-size: 16px;color: black">{{policyData.type}}</label>
                   <label style="background-color: #42a8ef;font-size: 16px;color: black">{{policyData.direction}}</label>
                   <label style="background-color: #42a8ef;font-size: 16px;color: black">{{policyData.createTime}}</label>
                 </span>
+                  </div>
+                </div>
+                <div class="item-left">
+                  <div class="activePolicy">策略单号: {{policyData.id}}</div>
+                  <div class="activePolicy">策略周期: {{policyData.cycle}}</div>
+                  <div class="activePolicy">入场点位: {{policyData.entryPoint}}</div>
+                  <div class="activePolicy">出场点位: {{policyData.exitPoint}}</div>
+                </div>
+                <div class="item-right" ngSwitch={{policyData.status}}>
+                  <template ngSwitchCase="待入场">
+                    <a (click) ="changePolicyStatus('入场',policyData)"><i class="fa fa-fw fa-user grey" title="入场"
+                                                                         data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
+                    <a (click) ="changePolicyStatus('退场',policyData)"><i class="fa fa-share-square-o grey"
+                                                                         title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                    <a (click) ="changePolicyStatus('订阅',policyData)"><i class="fa fa-arrow-down grey"
+                                                                         title="订阅" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+
+                  </template>
+                  <template ngSwitchCase="已入场">
+                    <a (click) ="changePolicyStatus('入场',policyData)"><i class="fa fa-fw fa-user grey"
+                                                                         title="入场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                    <a (click) ="changePolicyStatus('退场',policyData)"><i class="fa fa-share-square-o grey"
+                                                                         title="退场" data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
+                    <a (click) ="changePolicyStatus('订阅',policyData)"><i class="fa fa-arrow-down grey"
+                                                                         title="订阅" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                  </template>
+                  <template ngSwitchCase="已退场">
+                    <a (click) ="changePolicyStatus('入场',policyData)"><i class="fa fa-fw fa-user grey" title="入场"
+                                                                         style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                    <a (click) ="changePolicyStatus('退场',policyData)"><i class="fa fa-share-square-o grey"  title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                    <a (click) ="changePolicyStatus('订阅',policyData)"><i class="fa fa-arrow-down grey"
+                                                                         title="订阅" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
+                  </template>
+                  <template ngSwitchDefault>
+                    <p style="font-size: 12px;color:red">状态？</p>
+                  </template>
+                </div>
               </div>
             </div>
-            <div class="item-left">
-              <div class="activePolicy">策略单号: {{policyData.id}}</div>
-              <div class="activePolicy">策略周期: {{policyData.cycle}}</div>
-              <div class="activePolicy">入场点位: {{policyData.entryPoint}}</div>
-              <div class="activePolicy">出场点位: {{policyData.exitPoint}}</div>
-            </div>
-            <div class="item-right" ngSwitch={{policyData.status}}>
-              <template ngSwitchCase="待入场">
-                <a (click) ="changePolicyStatus('入场',policyData)"><i class="fa fa-fw fa-user grey" title="入场"
-                                                   data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
-                <a (click) ="changePolicyStatus('退场',policyData)"><i class="fa fa-share-square-o grey"
-                                            title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
-                <a (click) ="changePolicyStatus('订阅',policyData)"><i class="fa fa-arrow-down grey"
-                                            title="订阅" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
-
-              </template>
-              <template ngSwitchCase="已入场">
-                <a (click) ="changePolicyStatus('入场',policyData)"><i class="fa fa-fw fa-user grey"
-                                            title="入场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
-                <a (click) ="changePolicyStatus('退场',policyData)"><i class="fa fa-share-square-o grey"
-                                            title="退场" data-toggle="modal" data-target="#enterPolicyInfoModal"></i></a>
-                <a (click) ="changePolicyStatus('订阅',policyData)"><i class="fa fa-arrow-down grey"
-                                            title="订阅" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
-              </template>
-              <template ngSwitchCase="已退场">
-                <a (click) ="changePolicyStatus('入场',policyData)"><i class="fa fa-fw fa-user grey" title="入场"
-                                             style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
-                <a (click) ="changePolicyStatus('退场',policyData)"><i class="fa fa-share-square-o grey"  title="退场" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
-                <a (click) ="changePolicyStatus('订阅',policyData)"><i class="fa fa-arrow-down grey"
-                                            title="订阅" style="margin-left:3px;color: red;cursor:not-allowed;"></i></a>
-              </template>
-              <template ngSwitchDefault>
-                <p style="font-size: 12px;color:red">状态？</p>
-              </template>
-            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-lg-7">
-      <div class="whitebg" style="min-height: 763px;" *ngIf="_policyService.hasPolicyFlag">
-        <table class="qm-table">
-          <thead>
-          <th>策略单号</th>
-          <th>策略类别</th>
-          <th>策略周期</th>
-          <th>入场点位</th>
-          <th>出场点位</th>
-          <th>所属老师</th>
-          <th>所属团队</th>
-          </thead>
-          <tbody>
-          <tr>
-            <td style="text-align:center ">{{_policyService.currentPolicyDatas.id}}</td>
-            <td style="text-align:center ">{{_policyService.currentPolicyDatas.type}}</td>
-            <td style="text-align:center ">{{_policyService.currentPolicyDatas.cycle}}</td>
-            <td style="text-align:center ">{{_policyService.currentPolicyDatas.entryPoint}}</td>
-            <td style="text-align:center ">{{_policyService.currentPolicyDatas.exitPoint}}</td>
-            <td style="text-align:center ">{{_policyService.currentPolicyDatas.creator.login}}</td>
-            <td style="text-align:center ">{{_policyService.currentPolicyDatas.team}}</td>
-          </tr>
-          </tbody>
-        </table>
-        <div class="escalation-wrap">
-          <p>策略理由</p>
-          <div class="escalation-list">
-            <div class="escalation-item">{{_policyService.currentPolicyDatas.reason}}</div>
-          </div>
-        </div>
-        <div class="history-wrap">
-          <p>记录</p>
-          <div class="form-group clearfix">
-            <input type="text" class="form-control" placeholder="填写记录信息(0-100)" [value]="currentPolicyRecordingInfo">
-            <button class="modal-btn-confirm pull-right" (click)="currentAlarmRecordingInfo()">记录</button>
-            <button class="modal-btn-confirm pull-right" (click)="clearCurrentAlarmRecordingInfo()">清除</button>
-          </div>
-          <!--<div class="historyList" *ngFor="let recordInfo of currentClickAlarmInfo.recording">-->
-          <div class="historyList">
-            <div class="history-item"><span style="margin-right:20px;">111</span>
-              <span>111，并记录：111</span>
-              <span class="time pull-right">1111</span>
+        <div class="col-lg-7">
+          <div class="whitebg" style="min-height: 763px;" *ngIf="_policyService.hasPolicyFlag">
+            <table class="qm-table">
+              <thead>
+              <th>策略单号</th>
+              <th>策略类别</th>
+              <th>策略方向</th>
+              <th>实际入场点位</th>
+              <th>实际出场点位</th>
+              <th>所属老师</th>
+              <th>所属团队</th>
+              </thead>
+              <tbody>
+              <tr>
+                <td style="text-align:center ">{{_policyService.currentPolicyDatas.id}}</td>
+                <td style="text-align:center ">{{_policyService.currentPolicyDatas.type}}</td>
+                <td style="text-align:center ">{{_policyService.currentPolicyDatas.direction}}</td>
+                <td style="text-align:center ">{{_policyService.currentPolicyDatas.realEntryPoint}}</td>
+                <td style="text-align:center ">{{_policyService.currentPolicyDatas.realExitPoint}}</td>
+                <td style="text-align:center ">{{_policyService.currentPolicyDatas.creator.login}}</td>
+                <td style="text-align:center ">{{_policyService.currentPolicyDatas.team}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="escalation-wrap">
+              <p>策略理由</p>
+              <div class="escalation-list">
+                <div class="escalation-item">{{_policyService.currentPolicyDatas.reason}}</div>
+              </div>
+            </div>
+            <div class="history-wrap">
+              <p>记录</p>
+              <div class="form-group clearfix">
+                <input type="text" class="form-control" placeholder="填写记录信息(0-100)" [value]="currentPolicyRecordingInfo">
+                <button class="modal-btn-confirm pull-right" (click)="currentAlarmRecordingInfo()">记录</button>
+                <button class="modal-btn-confirm pull-right" (click)="clearCurrentAlarmRecordingInfo()">清除</button>
+              </div>
+              <!--<div class="historyList" *ngFor="let recordInfo of currentClickAlarmInfo.recording">-->
+              <div class="historyList">
+                <div class="history-item"><span style="margin-right:20px;">111</span>
+                  <span>111，并记录：111</span>
+                  <span class="time pull-right">1111</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </template>
+    <template ngSwitchCase="hide">hide</template>
+    <template ngSwitchDefault>hide</template>
   </div>
+
 </div>
 <div class="row">
   <div class="modal fade" id="myAddPolicyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

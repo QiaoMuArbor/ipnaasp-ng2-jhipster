@@ -27,11 +27,12 @@ export class PolicyService {
   // 策略状态
   public policyStatusesArray:Array<string> = ["待入场", "已入场"];
   public policyStatuse = "";
-
+  showPolicyData:string;
   constructor (
     public authHttp: AuthHttp,
   ) {
     this.hasPolicyFlag = false;
+    this.showPolicyData = "hide";
   }
 
   queryMyPolicies(type:string,policyIDValue:string,policyTypeValue:string,policyDirectionValue:string,policyCycleValue:string){
@@ -68,6 +69,17 @@ export class PolicyService {
         if(!currentPolicyExit)
         this.hasPolicyFlag = true;
         this.currentPolicyDatas = this.policyDatas[0];
+
+
+      }
+      console.log(this.policyDatas.length);
+      if(this.policyDatas.length > 0){
+        this.showPolicyData = "show";
+        console.log(this.showPolicyData);
+      }
+      else {
+        this.showPolicyData = "hide";
+        console.log(this.showPolicyData);
       }
       // 提示创建成功;
       console.log("query policy ok");
