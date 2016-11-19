@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/observable/throw';
 import { MockCfg } from '../../../mock';
 import { AuthHttp } from 'angular2-jwt';
-import * as _ from 'underscore/underscore'
+import * as _ from 'underscore/underscore';
 
 @Injectable()
 export class PolicyService {
