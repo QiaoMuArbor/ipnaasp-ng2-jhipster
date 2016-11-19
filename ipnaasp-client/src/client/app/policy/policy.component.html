@@ -17,16 +17,16 @@
         <div class="col-lg-5">
           <div class="row-query">
             <div>
-              <input  #box1 (keyup.enter)="policyIDValue=box1.value" (blur)="policyIDValue=box1.value" type="text" class="form-control" placeholder="策略单号">
+              <input  #box1 (keyup.enter)="_policyService.policyIDValue=box1.value" (blur)="_policyService.policyIDValue=box1.value" [value]="_policyService.policyIDValue" type="text" class="form-control" placeholder="策略单号">
             </div>
             <div>
-              <input #box2 (keyup.enter)="policyTypeValue=box2.value" (blur)="policyTypeValue=box2.value" type="text" class="form-control" placeholder="策略类别">
+              <input #box2 (keyup.enter)="_policyService.policyTypeValue=box2.value" (blur)="_policyService.policyTypeValue=box2.value" [value]="_policyService.policyTypeValue"  type="text" class="form-control" placeholder="策略类别">
             </div>
             <div>
-              <input #box3 (keyup.enter)="policyDirectionValue=box3.value" (blur)="policyDirectionValue=box3.value" type="text" class="form-control" placeholder="策略方向">
+              <input #box3 (keyup.enter)="_policyService.policyDirectionValue=box3.value" (blur)="_policyService.policyDirectionValue=box3.value" [value]="_policyService.policyDirectionValue"  type="text" class="form-control" placeholder="策略方向">
             </div>
             <div>
-              <input #box4 (keyup.enter)="policyCycleValue=box4.value" (blur)="policyCycleValue=box4.value" type="text" class="form-control" placeholder="策略周期">
+              <input #box4 (keyup.enter)="_policyService.policyCycleValue=box4.value" (blur)="_policyService.policyCycleValue=box4.value" [value]="_policyService.policyCycleValue"  type="text" class="form-control" placeholder="策略周期">
             </div>
             <div>
               <button type="button" class="form-control" (click)="filterMyPolicyList()"><i class="fa fa-search" title="过滤"></i></button>

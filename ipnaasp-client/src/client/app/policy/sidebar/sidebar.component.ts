@@ -30,6 +30,11 @@ export class SideBarComponent {
     this._policyService.curType = "";
     this._policyService._curTypeFlag = false;
     this._policyService.policyStatuse = "All";
+    this._policyService.policyIDValue = "";
+    this._policyService.policyTypeValue = "";
+    this._policyService.policyDirectionValue = "";
+    this._policyService.policyCycleValue = "";
+
     this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
   }
 
@@ -39,6 +44,11 @@ export class SideBarComponent {
     this._policyService.curType = "待入场";
     this._policyService._curTypeFlag = true;
     this._policyService.policyStatuse = "待入场";
+
+    this._policyService.policyIDValue = "";
+    this._policyService.policyTypeValue = "";
+    this._policyService.policyDirectionValue = "";
+    this._policyService.policyCycleValue = "";
     this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
   }
 
@@ -48,6 +58,11 @@ export class SideBarComponent {
     this._policyService.curType = "已入场";
     this._policyService._curTypeFlag = true;
     this._policyService.policyStatuse = "已入场";
+
+    this._policyService.policyIDValue = "";
+    this._policyService.policyTypeValue = "";
+    this._policyService.policyDirectionValue = "";
+    this._policyService.policyCycleValue = "";
     this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
   }
 
@@ -57,6 +72,10 @@ export class SideBarComponent {
     this._policyService.curType = "已出场";
     this._policyService._curTypeFlag = true;
     this._policyService.policyStatuse = "已退场";
+    this._policyService.policyIDValue = "";
+    this._policyService.policyTypeValue = "";
+    this._policyService.policyDirectionValue = "";
+    this._policyService.policyCycleValue = "";
     this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
   }
 

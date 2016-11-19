@@ -27,12 +27,7 @@ export class PolicyComponent {
   policyReasonValue: string;
   currentPolicyRecordingInfo:string = "";
   pushPolicyFlag: boolean;
-
   public policyStatuse = "";
-  policyIDValue:string = "";
-  policyTypeValue:string = "";
-  policyDirectionValue:string = "";
-  policyCycleValue:string = "";
 
   constructor(
     private _policyService: PolicyService,
@@ -73,7 +68,7 @@ export class PolicyComponent {
     this.policyEixtPointValue = data.exitPoint;
   }
   filterMyPolicyList(){
-    this._policyService.queryMyPolicies(this._policyService.policyStatuse,this.policyIDValue,this.policyTypeValue,this.policyDirectionValue,this.policyCycleValue);
+    this._policyService.queryMyPolicies(this._policyService.policyStatuse,this._policyService.policyIDValue,this._policyService.policyTypeValue,this._policyService.policyDirectionValue,this._policyService.policyCycleValue);
   }
   clickPolicyList(policyData:any){
     for(let i=0;i<this._policyService.policyDatas.length;i++){

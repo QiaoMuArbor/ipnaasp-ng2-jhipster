@@ -30,6 +30,11 @@ export class PolicyService {
   public policyStatuse = "";
   showPolicyData:string;
   public currentClickRecordingInfos:string;
+
+  policyIDValue:string = "";
+  policyTypeValue:string = "";
+  policyDirectionValue:string = "";
+  policyCycleValue:string = "";
   constructor (
     public authHttp: AuthHttp,
   ) {
@@ -41,6 +46,14 @@ export class PolicyService {
     console.log("start query policy");
     this.authHttp.get(MockCfg.baseUrl + MockCfg.myPoliciesUrl).subscribe(data => {
       let datas = data.json();
+      if(datas.length > 0){
+        this.showPolicyData = "show";
+        console.log(datas);
+      }
+      else {
+        this.showPolicyData = "hide";
+        console.log(datas);
+      }
       this.showMyPolicyNum(datas);
       console.log(datas);
       this.policyDatas = _.filter(datas, function(data){
@@ -82,14 +95,6 @@ export class PolicyService {
         });
       }
       console.log(this.policyDatas.length);
-      if(this.policyDatas.length > 0){
-        this.showPolicyData = "show";
-        console.log(this.showPolicyData);
-      }
-      else {
-        this.showPolicyData = "hide";
-        console.log(this.showPolicyData);
-      }
       // 提示创建成功;
       console.log("query policy ok");
 
