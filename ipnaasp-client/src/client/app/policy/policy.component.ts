@@ -53,7 +53,11 @@ export class PolicyComponent {
         this._policyService.policyStatuse = "已入场";
         this._policyService.queryMyPolicies(this._policyService.policyStatuse,null,null,null,null);
       }
+      else {
+        this._policyService.logoutOrNoLoginThenHideAllPolicyInfo();
+      }
     });
+
   }
   ngOnDestroy() {
     this._policyService.isClickPolicyFlag = false;
@@ -137,9 +141,11 @@ export class PolicyComponent {
         let status:string = "";
         if(this.policyStatus === "待入场") {
           status = "已入场";
+          this.addCurrentPolicyRecordingInfo(this._policyService.recordingType[1],this.currentPolicyRecordingInfo,this._policyService.currentPolicyDatas.id);
         }
         else if (this.policyStatus === "已入场") {
           status = "已退场";
+          this.addCurrentPolicyRecordingInfo(this._policyService.recordingType[2],this.currentPolicyRecordingInfo,this._policyService.currentPolicyDatas.id);
         }
         let policyVM:any = {
           id: this._policyService.currentPolicyDatas.id,
@@ -149,6 +155,7 @@ export class PolicyComponent {
         };
         console.log(policyVM);
         console.log("start modify policy");
+
         this.authHttp.put(MockCfg.baseUrl + MockCfg.myPoliciesUrl, policyVM).subscribe(data => {
           changeFlag = true;
           console.log(data);

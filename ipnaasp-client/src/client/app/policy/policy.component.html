@@ -93,7 +93,7 @@
               <th>实际入场点位</th>
               <th>实际出场点位</th>
               <th>所属老师</th>
-              <th>所属团队</th>
+              <!--<th>所属团队</th>-->
               </thead>
               <tbody>
               <tr>
@@ -103,7 +103,7 @@
                 <td style="text-align:center ">{{_policyService.currentPolicyDatas.realEntryPoint}}</td>
                 <td style="text-align:center ">{{_policyService.currentPolicyDatas.realExitPoint}}</td>
                 <td style="text-align:center ">{{_policyService.currentPolicyDatas.creator.login}}</td>
-                <td style="text-align:center ">{{_policyService.currentPolicyDatas.team}}</td>
+                <!--<td style="text-align:center ">{{_policyService.currentPolicyDatas.team}}</td>-->
               </tr>
               </tbody>
             </table>
@@ -131,6 +131,7 @@
       </div>
     </template>
     <template ngSwitchCase="hide">hide</template>
+    <template ngSwitchCase="logout">logout</template>
     <template ngSwitchDefault>hide</template>
   </div>
 
@@ -257,6 +258,12 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <label class="col-sm-2 control-label">记录信息</label>
+              <div class="col-sm-10">
+                <input #recordingBox (keyup.enter)="currentPolicyRecordingInfo=recordingBox.value" (blur)="currentPolicyRecordingInfo=recordingBox.value" type="text" class="form-control" placeholder="填写记录信息(0-100)" [value]="currentPolicyRecordingInfo">
+              </div>
+            </div>
             <div class="form-group" style="margin-top:35px;">
               <button type="submit" class="modal-btn-confirm" data-dismiss="modal" (click)="configChangePolicyStatusBtn()" *ngIf="principal.authenticated">确定</button>
               <button class="modal-btn-cancel" data-dismiss="modal">关闭</button>

@@ -47,8 +47,7 @@ export class HeaderMenuComponent {
     }
     logout(){
       console.log("logout");
-      this._policyService.closePolicyFresh();
-      this._policyService.policyDatas = [];
+      this._policyService.logoutOrNoLoginThenHideAllPolicyInfo();
       this.principal.authenticated = false;
       this.$localStorage.clear('authenticationToken');
       this.$sessionStorage.clear('authenticationToken');

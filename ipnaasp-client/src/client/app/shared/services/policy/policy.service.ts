@@ -121,4 +121,14 @@ export class PolicyService {
     this.policyNumList[2] = enterPolicyNum;
     this.policyNumList[3] = exitPolicyNum;
   }
+
+  // 退出或者未登录，显示策略信息;
+  logoutOrNoLoginThenHideAllPolicyInfo(){
+    this.policyDatas = [];
+    this.showPolicyData = "logout";
+    this.policyNumList[0] = 0;
+    this.policyNumList[1] = 0;
+    this.policyNumList[2] = 0;
+    this.policyNumList[3] = 0;
+  }
 }
