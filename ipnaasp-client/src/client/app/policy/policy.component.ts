@@ -33,7 +33,7 @@ export class PolicyComponent {
   policyTypeValue:string = "";
   policyDirectionValue:string = "";
   policyCycleValue:string = "";
-
+  currentClickPolicyInfos:string;
   constructor(
     private _policyService: PolicyService,
     public authHttp: AuthHttp,
@@ -79,8 +79,9 @@ export class PolicyComponent {
       }
     }
     this.authHttp.get(MockCfg.baseUrl + MockCfg.myPoliciesRecordingUrl + "/"+this._policyService.currentPolicyDatas.id).subscribe(data => {
-      let datas = data.json();
-      console.log(datas);
+      // let datas = data.json();
+      this.currentClickPolicyInfos = data.json();
+      console.log(this.currentClickPolicyInfos);
       // 提示创建成功;
     }, err => {
       console.log(err);
