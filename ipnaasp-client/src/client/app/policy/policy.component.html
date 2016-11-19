@@ -116,12 +116,12 @@
             <div class="history-wrap">
               <p>记录</p>
               <div class="form-group clearfix">
-                <input type="text" class="form-control" placeholder="填写记录信息(0-100)" [value]="currentPolicyRecordingInfo">
-                <button class="modal-btn-confirm pull-right" (click)="addCurrentPolicyRecordingInfo()">记录</button>
+                <input #recordingBox (keyup.enter)="currentPolicyRecordingInfo=recordingBox.value" (blur)="currentPolicyRecordingInfo=recordingBox.value" type="text" class="form-control" placeholder="填写记录信息(0-100)" [value]="currentPolicyRecordingInfo">
+                <button class="modal-btn-confirm pull-right" (click)="addCurrentPolicyRecordingInfo(this._policyService.recordingType[0],currentPolicyRecordingInfo,this._policyService.currentPolicyDatas.id)">记录</button>
               </div>
               <div class="historyList" *ngFor="let record of _policyService.currentClickRecordingInfos">
                 <div class="history-item"><span style="margin-right:20px;">{{record.recorder.login}}</span>
-                  <span>{{record.type}}，并记录：{{record.recorder.content}}</span>
+                  <span>{{record.type}}，并记录：{{record.content}}</span>
                   <span class="time pull-right">{{record.recordingTime}}</span>
                 </div>
               </div>

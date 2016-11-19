@@ -33,7 +33,8 @@ public class PolicyService {
     @Inject
     private UserRepository userRepository;
 
-
+    @Inject
+    private RecordingRepository recordingRepository;
     /**
      * Save a policy.
      *
@@ -76,6 +77,17 @@ public class PolicyService {
         policy.setRealEntryPoint(PolicyVM.getRealEntryPoint());
         policy.setRealExitPoint(PolicyVM.getRealExitPoint());
         Policy result = policyRepository.save(policy);
+
+//        Recording record = new Recording();
+//        record.setPolicy(result);
+//        record.setRecorder(result.getCreator());
+//        record.setRecordingTime(ZonedDateTime.now());
+//        record.setType(PolicyVM);
+//        Recording recording = recordingRepository.save(record);
+//        result.addRecordings(recording);
+
+        result = policyRepository.save(result);
+
         policyRepository.flush();
         log.debug("---------------------------------------------");
         log.debug("updata Policy Information for User: {}", result);

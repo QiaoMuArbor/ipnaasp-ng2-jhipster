@@ -89,11 +89,12 @@ export class PolicyComponent {
     });
   }
 
-  addCurrentPolicyRecordingInfo(){
+  // 增加一条policy的记录
+  addCurrentPolicyRecordingInfo(type:string,content:string,id:number){
     let recordingVM:any = {
-      type: this._policyService.recordingType[0],
-      content:"",
-      policyID:this._policyService.currentPolicyDatas.id,
+      type: type,
+      content:content,
+      policyID:id,
     };
     console.log(recordingVM);
     this.authHttp.post(MockCfg.baseUrl + MockCfg.addRecordingUrl,recordingVM).subscribe(data => {
@@ -109,10 +110,15 @@ export class PolicyComponent {
       });
 
       // 提示创建成功;
+      // 增加记录之后清楚input框内容
+      this.currentPolicyRecordingInfo = "";
     }, err => {
       console.log(err);
       // 提示创建失败;
+      // 增加记录之后清楚input框内容
+      this.currentPolicyRecordingInfo = "";
     });
+
   }
   beforeClickCreatePolicyBtn(){
     let createFlag:boolean = false;
@@ -144,7 +150,6 @@ export class PolicyComponent {
         console.log(policyVM);
         console.log("start modify policy");
         this.authHttp.put(MockCfg.baseUrl + MockCfg.myPoliciesUrl, policyVM).subscribe(data => {
-
           changeFlag = true;
           console.log(data);
           console.log("modify policy ok");

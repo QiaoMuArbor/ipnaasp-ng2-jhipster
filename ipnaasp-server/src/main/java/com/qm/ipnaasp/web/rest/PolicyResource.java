@@ -101,7 +101,6 @@ public class PolicyResource {
         if (policyVM.getId() == null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("policy", "idexists", "updata a policy must have an ID")).body(null);
         }
-
         Policy result = policyService.updateMyPolicy(policyVM);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("policy", policyVM.getId().toString()))
