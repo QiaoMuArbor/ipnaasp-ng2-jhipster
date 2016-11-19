@@ -5,6 +5,7 @@ import com.qm.ipnaasp.domain.Recording;
 import com.qm.ipnaasp.domain.Team;
 import com.qm.ipnaasp.service.RecordingService;
 import com.qm.ipnaasp.web.rest.util.HeaderUtil;
+import com.qm.ipnaasp.web.rest.vm.RecordingVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -34,18 +35,19 @@ public class RecordingResource {
     /**
      * POST  /recordings : Create a new recording.
      *
-     * @param recording the recording to create
+     * @param recordingVM the recording to create
      * @return the ResponseEntity with status 201 (Created) and with body the new recording, or with status 400 (Bad Request) if the recording has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/recordings")
     @Timed
-    public ResponseEntity<Recording> createRecording(@Valid @RequestBody Recording recording) throws URISyntaxException {
-        log.debug("REST request to save Recording : {}", recording);
-        if (recording.getId() != null) {
+    public ResponseEntity<Recording> createRecording(@Valid @RequestBody RecordingVM recordingVM) throws URISyntaxException {
+        log.debug("REST request to save Recording : {}", recordingVM);
+        if (recordingVM.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("recording", "idexists", "A new recording cannot already have an ID")).body(null);
         }
-        Recording result = recordingService.save(recording);
+        Recording result = recordingService.createRecording(recordingVM);
+
         return ResponseEntity.created(new URI("/api/recordings/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("recording", result.getId().toString()))
             .body(result);
@@ -54,7 +56,7 @@ public class RecordingResource {
     /**
      * PUT  /recordings : Updates an existing recording.
      *
-     * @param recording the recording to update
+     * @param recordingVM the recording to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated recording,
      * or with status 400 (Bad Request) if the recording is not valid,
      * or with status 500 (Internal Server Error) if the recording couldnt be updated
@@ -62,14 +64,14 @@ public class RecordingResource {
      */
     @PutMapping("/recordings")
     @Timed
-    public ResponseEntity<Recording> updateRecording(@Valid @RequestBody Recording recording) throws URISyntaxException {
-        log.debug("REST request to update Recording : {}", recording);
-        if (recording.getId() == null) {
-            return createRecording(recording);
+    public ResponseEntity<Recording> updateRecording(@Valid @RequestBody RecordingVM recordingVM) throws URISyntaxException {
+        log.debug("REST request to update Recording : {}", recordingVM);
+        if (recordingVM.getId() == null) {
+            return createRecording(recordingVM);
         }
-        Recording result = recordingService.save(recording);
+        Recording result = recordingService.createRecording(recordingVM);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("recording", recording.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert("recording", recordingVM.getId().toString()))
             .body(result);
     }
 

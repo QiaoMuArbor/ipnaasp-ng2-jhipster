@@ -77,10 +77,7 @@ public class PolicyService {
         policy.setRealExitPoint(PolicyVM.getRealExitPoint());
         Policy result = policyRepository.save(policy);
         policyRepository.flush();
-
         log.debug("---------------------------------------------");
-        log.debug("PolicyVM Information for User: {}", PolicyVM);
-        log.debug("updata Policy Information for User: {}", policy);
         log.debug("updata Policy Information for User: {}", result);
         log.debug("---------------------------------------------");
         return result;

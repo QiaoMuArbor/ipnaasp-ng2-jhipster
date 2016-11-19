@@ -58,15 +58,14 @@ public class PolicyResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("policy", "idexists", "A new policy cannot already have an ID")).body(null);
         }
         Policy result = policyService.createPolicy(policyVM);
-        Recording record = new Recording();
-        record.setPolicy(result);
-        record.setRecorder(result.getCreator());
-        record.setRecordingTime(ZonedDateTime.now());
-        record.setType(RecordingType.新建策略);
-
-        Recording recording = recordingRepository.save(record);
-        result.addRecordings(recording);
-        result = policyRepository.save(result);
+//        Recording record = new Recording();
+//        record.setPolicy(result);
+//        record.setRecorder(result.getCreator());
+//        record.setRecordingTime(ZonedDateTime.now());
+//        record.setType(RecordingType.新建策略);
+//        Recording recording = recordingRepository.save(record);
+//        result.addRecordings(recording);
+//        result = policyRepository.save(result);
 
         return ResponseEntity.created(new URI("/api/policies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("policy", result.getId().toString()))

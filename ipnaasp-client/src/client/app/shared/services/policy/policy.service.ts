@@ -25,8 +25,11 @@ export class PolicyService {
   public policyDirectionsArray: Array<string> = ["空", "多"];
   // 策略状态
   public policyStatusesArray:Array<string> = ["待入场", "已入场"];
+ // 策略类型
+  public recordingType:Array<string> = ["已备注策略", "已入场策略","已退场策略","系统自动关闭策略"];
   public policyStatuse = "";
   showPolicyData:string;
+  public currentClickRecordingInfos:string;
   constructor (
     public authHttp: AuthHttp,
   ) {
@@ -65,9 +68,18 @@ export class PolicyService {
             break;
           }
         }
-        if(!currentPolicyExit)
-        this.hasPolicyFlag = true;
-        this.currentPolicyDatas = this.policyDatas[0];
+        if(!currentPolicyExit) {
+          this.hasPolicyFlag = true;
+          this.currentPolicyDatas = this.policyDatas[0];
+        }
+        this.authHttp.get(MockCfg.baseUrl + MockCfg.myPoliciesRecordingUrl + "/"+this.currentPolicyDatas.id).subscribe(data => {
+          // let datas = data.json();
+          this.currentClickRecordingInfos = data.json();
+          // 提示创建成功;
+        }, err => {
+          console.log(err);
+          // 提示创建失败;
+        });
       }
       console.log(this.policyDatas.length);
       if(this.policyDatas.length > 0){

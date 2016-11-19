@@ -33,7 +33,7 @@ export class PolicyComponent {
   policyTypeValue:string = "";
   policyDirectionValue:string = "";
   policyCycleValue:string = "";
-  currentClickPolicyInfos:string;
+
   constructor(
     private _policyService: PolicyService,
     public authHttp: AuthHttp,
@@ -80,8 +80,8 @@ export class PolicyComponent {
     }
     this.authHttp.get(MockCfg.baseUrl + MockCfg.myPoliciesRecordingUrl + "/"+this._policyService.currentPolicyDatas.id).subscribe(data => {
       // let datas = data.json();
-      this.currentClickPolicyInfos = data.json();
-      console.log(this.currentClickPolicyInfos);
+      this._policyService.currentClickRecordingInfos = data.json();
+      console.log(this._policyService.currentClickRecordingInfos);
       // 提示创建成功;
     }, err => {
       console.log(err);
@@ -89,6 +89,31 @@ export class PolicyComponent {
     });
   }
 
+  addCurrentPolicyRecordingInfo(){
+    let recordingVM:any = {
+      type: this._policyService.recordingType[0],
+      content:"",
+      policyID:this._policyService.currentPolicyDatas.id,
+    };
+    console.log(recordingVM);
+    this.authHttp.post(MockCfg.baseUrl + MockCfg.addRecordingUrl,recordingVM).subscribe(data => {
+      let datas = data.json();
+      this.authHttp.get(MockCfg.baseUrl + MockCfg.myPoliciesRecordingUrl + "/"+this._policyService.currentPolicyDatas.id).subscribe(data => {
+        // let datas = data.json();
+        this._policyService.currentClickRecordingInfos = data.json();
+        console.log(this._policyService.currentClickRecordingInfos);
+        // 提示创建成功;
+      }, err => {
+        console.log(err);
+        // 提示创建失败;
+      });
+
+      // 提示创建成功;
+    }, err => {
+      console.log(err);
+      // 提示创建失败;
+    });
+  }
   beforeClickCreatePolicyBtn(){
     let createFlag:boolean = false;
     if(!this.principal.authenticated){

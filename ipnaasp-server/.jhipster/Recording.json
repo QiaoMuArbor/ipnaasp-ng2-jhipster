@@ -25,7 +25,7 @@
         {
             "fieldName": "type",
             "fieldType": "RecordingType",
-            "fieldValues": "其他,新建策略,入场策略,退场策略,系统自动关闭策略",
+            "fieldValues": "已备注策略,已入场策略,已退场策略,系统自动关闭策略",
             "fieldValidateRules": [
                 "required"
             ]
